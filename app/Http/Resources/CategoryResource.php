@@ -19,7 +19,7 @@ class CategoryResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'image'=>$this->image,
-            'companies'=> CompanyResource::collection($this?->companies),
+            // 'companies'=> CompanyResource::collection($this?->companies),
         ];
     }
 }

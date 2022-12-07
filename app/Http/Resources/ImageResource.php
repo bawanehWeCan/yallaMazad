@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class IntroductionResource extends JsonResource
+class ImageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,10 @@ class IntroductionResource extends JsonResource
         return [
 
             'id'=>$this->id,
-            'title'=>$this->title,
-            'body'=>$this->body,
+            'image'=>$this->image,
+            'advertisement'=>$this->advertisement->id,
+            // 'advertisement'=>AdvertisementResource::make($this->advertisement),
+
         ];
     }
 }

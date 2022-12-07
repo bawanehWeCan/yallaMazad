@@ -47,6 +47,17 @@ class ApiController extends Controller
 
     }
 
+
+    public function listWithOrder($key,$value)
+    {
+
+        $data =  $this->repositry->allWithOrder($key,$value);
+
+        return $this->returnData( 'data' , $this->resource::collection( $data ), __('Succesfully'));
+
+
+    }
+
     public function pagination( $lenght = 10 )
     {
 

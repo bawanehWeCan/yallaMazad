@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Introduction;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 use App\Repositories\Repository;
-use App\Http\Requests\IntroductionRequest;
-use App\Http\Resources\IntroductionResource;
+use App\Http\Requests\PlanRequest;
+use App\Http\Resources\PlanResource;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ApiController;
 
-class IntroductionController extends ApiController
+class PlanController extends ApiController
 {
     public function __construct()
     {
-        $this->resource = IntroductionResource::class;
-        $this->model = app(Introduction::class);
+        $this->resource = PlanResource::class;
+        $this->model = app(Plan::class);
         $this->repositry =  new Repository($this->model);
     }
 

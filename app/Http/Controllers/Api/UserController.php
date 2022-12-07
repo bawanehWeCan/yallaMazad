@@ -11,6 +11,7 @@ use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Resources\AdvertisementResource;
 
 class UserController extends ApiController
 {
@@ -71,4 +72,21 @@ class UserController extends ApiController
         }
     }
 
+
+    public function myFavorites()
+    {
+
+        $favorites = Auth::user()->favorites;
+        return $this->returnData('data',  AdvertisementResource::collection( $favorites ), __('Get  succesfully'));
+
+    }
+
+
+    public function myAdvertisement()
+    {
+
+        $advertisements = Auth::user()->advertisements;
+        return $this->returnData('data',  AdvertisementResource::collection( $advertisements ), __('Get  succesfully'));
+
+    }
 }

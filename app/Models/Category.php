@@ -22,8 +22,13 @@ class Category extends Model
         }
     }
 
-    public function companies(){
-        return $this->hasMany(Company::class);
+
+    public function advertisements(){
+        return $this->hasMany(Advertisement::class);
+    }
+
+    public function users(){
+        return $this->belongsToMany(User::class);
     }
 
 }

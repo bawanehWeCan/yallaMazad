@@ -42,6 +42,13 @@ class Repository{
         return $data;
     }
 
+
+    public function allWithOrder($key, $value){
+        $data = $this->model->orderBy( $key,$value)->get();
+        return $data;
+    }
+
+
         /**
      * @return void
      */

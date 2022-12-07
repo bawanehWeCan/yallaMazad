@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class IntroductionResource extends JsonResource
+class SliderResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,11 @@ class IntroductionResource extends JsonResource
         return [
 
             'id'=>$this->id,
-            'title'=>$this->title,
-            'body'=>$this->body,
+            'name'=>$this->name,
+            'image'=>$this->image,
+            'route_type'=>$this->route_type,
+            'route_id'=>$this->route_id,
+
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class IntroductionResource extends JsonResource
+class FavoriteResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,12 @@ class IntroductionResource extends JsonResource
         return [
 
             'id'=>$this->id,
-            'title'=>$this->title,
-            'body'=>$this->body,
-        ];
+            // 'user'=>$this->user->id,
+            // 'advertisement'=>$this->advertisement->id,
+            'user'=>new UserResource($this->user),
+            'advertisement'=>new AdvertisementResource($this->advertisement)
+        ]
+
+        ;
     }
 }
