@@ -33,11 +33,11 @@ class SubscriptionController extends ApiController
 
     }
 
-    public function mySubscription(){
+    public function mySubscription($user_id){
 
 
        // $user_id = Auth::user()->id;
-        $user=Auth::user();
+        $user=User::find($user_id)->first();
         return $this->returnData('data',  MySubscriptionResource::collection( $user->subscriptions ), __('Get  succesfully'));
 
     }

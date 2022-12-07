@@ -32,7 +32,7 @@ Route::middleware(['auth:api','changeLang'])->group(function () {
 
     Route::post('/user-update', [AuthController::class, 'updateProfile']);
 
-    Route::get('my-subscriptions', [SubscriptionController::class, 'mySubscription']);
+
 
     Route::get('my-favorites', [UserController::class, 'myFavorites']);
 
@@ -107,6 +107,7 @@ Route::get('subscription/{id}', [SubscriptionController::class, 'view']);
 Route::get('subscription/delete/{id}', [SubscriptionController::class, 'delete']);
 Route::post('subscription/edit/{id}', [SubscriptionController::class, 'edit']);
 
+Route::get('my-subscriptions/{user_id}', [SubscriptionController::class, 'mySubscription']);
 
 
 //Advertisement
