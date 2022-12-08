@@ -12,12 +12,13 @@ use App\Http\Resources\myFavoriteResource;
 use App\Http\Resources\AdvertisementResource;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ApiController;
+use App\Models\Advertisement;
 
 class FavoriteController extends ApiController
 {
     public function __construct()
     {
-        $this->resource = FavoriteResource::class;
+        $this->resource = AdvertisementResource::class;
         $this->model = app(Favorite::class);
         $this->repositry =  new Repository($this->model);
     }
@@ -26,12 +27,20 @@ class FavoriteController extends ApiController
         return $this->store( $request->all() );
     }
 
-    public function edit($id,Request $request){
+    public function store( $data )
+    {
+        $model = $this->repositry->save( $data );
 
 
-        return $this->update($id,$request->all());
+        if ($model) {
+            return $this->returnData( 'data' , new $this->resource( $model->advertisement ), __('Succesfully'));
+        }
 
+        return $this->returnError(__('Sorry! Failed to create !'));
     }
+
+
+
 
     public function getFavoritesAdv($user_id)
     {
