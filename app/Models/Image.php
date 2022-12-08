@@ -20,12 +20,7 @@ class Image extends Model
         }
     }
 
-    public function address(){
-        return $this->belongsTo(Address::class);
-    }
-
-
-    public function company(){
-        return $this->belongsTo(Company::class);
+    public function advertisement(){
+        return $this->belongsTo(Advertisement::class);
     }
 }

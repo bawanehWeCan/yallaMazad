@@ -5,22 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Code extends Model
+class Bid extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
 
     public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function address(){
-        return $this->hasOne(Address::class);
-    }
 
-    public function getNameAttribute(){
-        return $this->address->first()->name;
+    public function advertisement(){
+        return $this->belongsTo(Advertisement::class);
     }
-    // $object->name with out key in data base
-
 }
