@@ -41,7 +41,7 @@ Route::post('resend-otp/{id}', [AuthController::class, 'resendOTP']);
 
 
 Route::post('add-badge', [UserController::class, 'addBadge']);
-Route::get('add-badge/{id}', [UserController::class, 'deleteBadge']);
+Route::get('delete-badge/{id}', [UserController::class, 'deleteBadge']);
 
 
 
