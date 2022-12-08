@@ -66,10 +66,12 @@ class AuthController extends Controller
             DB::beginTransaction();
             $user = $this->userRepositry->save($request);
 
-            $otp = $this->sendOTP($request->phone);
+            if (isset($request->phone)) {
+                $otp = $this->sendOTP($request->phone);
 
-            $user->otp = $otp;
-            $user->save();
+                $user->otp = $otp;
+                $user->save();
+            }
 
             DB::commit();
             Auth::login($user);
@@ -240,7 +242,7 @@ class AuthController extends Controller
     }
 
 
-    public function updatePhone(Request $request,$id)
+    public function updatePhone(Request $request, $id)
     {
         $user = User::find($id);
         $user->phone = $request->phone;
@@ -249,7 +251,7 @@ class AuthController extends Controller
         $otp = $this->sendOTP($request->phone);
 
         $user->otp = $otp;
-            $user->save();
+        $user->save();
 
 
 
@@ -257,7 +259,7 @@ class AuthController extends Controller
     }
 
 
-    public function resendOTP(Request $request,$id)
+    public function resendOTP(Request $request, $id)
     {
         $user = User::find($id);
 
