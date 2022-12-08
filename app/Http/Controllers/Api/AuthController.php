@@ -200,13 +200,15 @@ class AuthController extends Controller
                     }
                 }
 
+                if ($request->has('image')) {
+                    $image = $this->userRepositry->insertImage($request->image, $user, true);
+                }
+
                 $this->userRepositry->edit($request, $user);
                 return $this->returnData('user', new UserResource($user), 'User updated successfully');
             }
 
-            if ($request->has('image')) {
-                $image = $this->userRepositry->insertImage($request->image, $user, true);
-            }
+
 
             DB::commit();
             // unset($user->image);
