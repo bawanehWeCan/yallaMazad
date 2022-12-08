@@ -46,6 +46,23 @@ class AdvertisementController extends ApiController
 
     }
 
+    public function view($id)
+    {
+        $model = $this->repositry->getByID($id);
+
+        $views = $model->view + 1;
+
+        $model->update([
+            'views'=>$views
+        ]);
+
+        if ($model) {
+            return $this->returnData('data', new $this->resource( $model ), __('Get  succesfully'));
+        }
+
+        return $this->returnError(__('Sorry! Failed to get !'));
+    }
+
     public function lookfor(Request $request){
 
         return $this->search('name',$request->value);
