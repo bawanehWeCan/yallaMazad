@@ -27,6 +27,21 @@ use App\Http\Controllers\Api\UserController;
 */
 
 
+Route::post('sociallogin', [AuthController::class, 'sociallogin']);
+
+Route::post('/otb-check', [AuthController::class, 'check']);
+
+Route::post('/password-otb', [AuthController::class, 'password']);
+
+Route::post('change-password', [AuthController::class, 'changePassword']);
+
+Route::post('delete-user/{id}', [AuthController::class, 'delete']);
+
+Route::post('phone-update/{id}', [AuthController::class, 'updatePhone']);
+
+Route::post('resend-otp/{id}', [AuthController::class, 'resendOTP']);
+
+
 //Auth
 Route::middleware(['auth:api','changeLang'])->group(function () {
 
