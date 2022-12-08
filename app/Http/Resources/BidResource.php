@@ -19,7 +19,7 @@ class BidResource extends JsonResource
             'id'=>$this->id,
             'price'=>$this->price,
             'user'=>UserResource::make($this->user),
-            'advertisement'=>AdvertisementResource::make($this->advertisement),
+            'advertisement_id'=>$this->advertisement_id,
         ];
     }
 }
