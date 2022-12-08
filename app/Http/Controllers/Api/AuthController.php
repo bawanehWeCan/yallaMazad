@@ -276,8 +276,8 @@ class AuthController extends Controller
 
     public function sendOTP($phone)
     {
-        $otp = 5555;
-        // $otp = mt_rand(1000, 9999);
+        // $otp = 5555;
+        $otp = mt_rand(1000, 9999);
 
         $curl = curl_init();
 
@@ -290,7 +290,7 @@ class AuthController extends Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "user=Wecan&pass=Suh12345&sid=YallaMazad&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json",
+            CURLOPT_POSTFIELDS => "user=Wecan&pass=Suh12345&sid=WayToDoctor&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json",
             CURLOPT_HTTPHEADER => array(
                 "Authorization: Bearer 2c1d0706b21b715ff1e5a480b8360d90"
             ),
