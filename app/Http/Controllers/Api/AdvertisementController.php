@@ -50,7 +50,7 @@ class AdvertisementController extends ApiController
     {
         $model = $this->repositry->getByID($id);
 
-        $views = $model->view + 1;
+        $views = (int)$model->views + 1;
 
         $model->update([
             'views'=>$views
