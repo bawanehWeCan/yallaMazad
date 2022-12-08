@@ -59,7 +59,7 @@ class User extends Authenticatable
     }
 
     public function badges(){
-        return $this->hasMany(badges::class);
+        return $this->hasMany(Badge::class);
     }
 
     public function favorites(){

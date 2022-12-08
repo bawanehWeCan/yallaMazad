@@ -18,7 +18,7 @@ class UserResource extends JsonResource
             'id'        => $this->id,
             'name'      => $this->name,
             'email'     => $this->email,
-            'badges'     =>BadgeResource::collection( $this->badges ),
+            'badges'     => BadgeResource::collection( $this->badges ),
         ];
     }
 }
