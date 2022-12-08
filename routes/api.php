@@ -29,9 +29,9 @@ use App\Http\Controllers\Api\UserController;
 
 Route::post('sociallogin', [AuthController::class, 'sociallogin']);
 
-Route::post('/otb-check', [AuthController::class, 'check']);
+Route::post('/otp-check', [AuthController::class, 'check']);
 
-Route::post('/password-otb', [AuthController::class, 'password']);
+Route::post('/password-otp', [AuthController::class, 'password']);
 
 Route::post('change-password', [AuthController::class, 'changePassword']);
 
@@ -105,9 +105,9 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::post('/user-reg', [AuthController::class, 'store']);
 
-Route::post('/otb-check', [AuthController::class, 'check']);
+Route::post('/otp-check', [AuthController::class, 'check']);
 
-Route::post('/password-otb', [AuthController::class, 'password']);
+Route::post('/password-otp', [AuthController::class, 'password']);
 
 Route::post('change-password', [AuthController::class, 'changePassword']);
 
