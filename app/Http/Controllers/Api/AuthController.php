@@ -259,6 +259,18 @@ class AuthController extends Controller
 
     public function resendOTP(Request $request,$id)
     {
+        $user = User::find($id);
+
+        $otp = $this->sendOTP($user->phone);
+
+        $user->otp = $otp;
+        $user->save();
+
+
+
+        return $this->returnSuccessMessage('Code was sent!');
+    }
+
 
     public function sendOTP($phone)
     {
