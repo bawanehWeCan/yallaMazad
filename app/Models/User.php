@@ -58,6 +58,10 @@ class User extends Authenticatable
         return $this->hasMany(Advertisement::class);
     }
 
+    public function badges(){
+        return $this->hasMany(badges::class);
+    }
+
     public function favorites(){
         return $this->belongsToMany(Advertisement::class,'favorites','user_id','advertisement_id');
     }

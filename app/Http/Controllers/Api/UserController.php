@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Resources\AdvertisementResource;
+use App\Models\Badge;
+use Illuminate\Http\Request;
 
 class UserController extends ApiController
 {
@@ -88,5 +90,22 @@ class UserController extends ApiController
         $advertisements = Auth::user()->advertisements;
         return $this->returnData('data',  AdvertisementResource::collection( $advertisements ), __('Get  succesfully'));
 
+    }
+
+    public function addBadge( Request $request ){
+        Badge::create( $request->all() );
+        $user = User::find( $request->user_id );
+        return $this->returnData('user', new $this->resource($user), 'User updated successfully');
+    }
+
+    public function deleteBadge( $id ){
+        $model = Badge::find($id);
+
+        if (!$model) {
+            return $this->returnError(__('Sorry! Failed to get !'));
+        }
+
+        $model->delete();
+        return $this->returnSuccessMessage(__('Delete succesfully!'));
     }
 }

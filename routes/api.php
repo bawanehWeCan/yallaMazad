@@ -13,8 +13,6 @@ use App\Http\Controllers\Api\SliderController;
 use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\UserController;
 
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,6 +38,11 @@ Route::post('delete-user/{id}', [AuthController::class, 'delete']);
 Route::post('phone-update/{id}', [AuthController::class, 'updatePhone']);
 
 Route::post('resend-otp/{id}', [AuthController::class, 'resendOTP']);
+
+
+Route::post('add-badge', [UserController::class, 'addBadge']);
+Route::get('add-badge/{id}', [UserController::class, 'deleteBadge']);
+
 
 
 //Auth
