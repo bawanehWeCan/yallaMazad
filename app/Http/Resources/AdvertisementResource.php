@@ -26,7 +26,7 @@ class AdvertisementResource extends JsonResource
             'buy_now_price'=>$this->buy_now_price,
             'views'=>$this->views,
             'number_of_bids'=>$this->number_of_bids,
-            'image'=> $this?->image,
+            'image'=>(string)$this?->image,
             'user'=>UserResource::make($this->user),
             'category'=>CategoryResource::make($this?->category),
             'images'=> ImageResource::collection($this?->images),
