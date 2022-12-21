@@ -21,7 +21,7 @@ class PlanResource extends JsonResource
             'details'=>(string)$this->details,
             'price'=>$this->price,
             'number_of_auction'=>$this->number_of_auction,
-
+            'time'=>$this->time,
 
         ];
     }
