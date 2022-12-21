@@ -32,6 +32,6 @@ class Advertisement extends Model
         return $this->hasMany(Image::class);
     }
     public function getImageAttribute(){
-        return $this->images->first()->image;
+        return (!empty( $this?->images->first()?->image))? $this->images->first()->image :'';
     }
 }
