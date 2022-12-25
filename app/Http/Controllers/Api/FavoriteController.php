@@ -18,7 +18,7 @@ class FavoriteController extends ApiController
 {
     public function __construct()
     {
-        $this->resource = AdvertisementResource::class;
+        $this->resource = FavoriteResource::class;
         $this->model = app(Favorite::class);
         $this->repositry =  new Repository($this->model);
     }
@@ -27,17 +27,17 @@ class FavoriteController extends ApiController
         return $this->store( $request->all() );
     }
 
-    public function store( $data )
-    {
-        $model = $this->repositry->save( $data );
+    // public function store( $data )
+    // {
+    //     $model = $this->repositry->save( $data );
 
 
-        if ($model) {
-            return $this->returnData( 'data' , new $this->resource( $model->advertisement ), __('Succesfully'));
-        }
+    //     if ($model) {
+    //         return $this->returnData( 'data' , new $this->resource( $model->advertisement ), __('Succesfully'));
+    //     }
 
-        return $this->returnError(__('Sorry! Failed to create !'));
-    }
+    //     return $this->returnError(__('Sorry! Failed to create !'));
+    // }
 
 
 
