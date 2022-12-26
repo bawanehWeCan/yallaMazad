@@ -160,7 +160,7 @@ Route::post('bid/edit/{id}', [BidController::class, 'edit']);
 Route::get('favorites', [FavoriteController::class, 'list']);
 Route::post('favorite-create', [FavoriteController::class, 'save']);
 Route::get('favorite/{id}', [FavoriteController::class, 'view']);
-Route::get('favorite/delete/{id}', [FavoriteController::class, 'delete']);
+Route::get('favorite/delete/{advertisement_id}/{user_id}', [FavoriteController::class, 'deletebyID']);
 Route::post('favorite/edit/{id}', [FavoriteController::class, 'edit']);
 
 Route::get( 'users/get-advertisement/{user_id}', [ FavoriteController::class, 'getFavoritesAdv' ]);

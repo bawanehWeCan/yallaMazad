@@ -24,20 +24,31 @@ class FavoriteController extends ApiController
     }
 
     public function save( Request $request ){
+
+        $model = Favorite::where('advertisement_id',$request->advertisement_id)->where('user_id',$request->user_id)->first();
+        if($model){
+            return $this->returnError(__('Sorry! Advertisement already exist !'));
+        }
         return $this->store( $request->all() );
     }
 
-    // public function store( $data )
-    // {
-    //     $model = $this->repositry->save( $data );
+    public function deletebyID( $advertisement_id, $user_id ){
 
 
-    //     if ($model) {
-    //         return $this->returnData( 'data' , new $this->resource( $model->advertisement ), __('Succesfully'));
-    //     }
+        $model = Favorite::where('advertisement_id',$advertisement_id)->where('user_id',$user_id)->first();
 
-    //     return $this->returnError(__('Sorry! Failed to create !'));
-    // }
+        if (!$model) {
+            return $this->returnError(__('Sorry! Failed to get !'));
+        }
+
+        $model->delete();
+
+
+
+        return $this->returnSuccessMessage(__('Delete succesfully!'));
+
+
+    }
 
 
 
