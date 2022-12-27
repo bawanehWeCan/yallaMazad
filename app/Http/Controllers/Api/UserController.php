@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Models\Advertisement;
 use App\Repositories\Repository;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
