@@ -37,8 +37,9 @@ class SubscriptionController extends ApiController
 
 
        // $user_id = Auth::user()->id;
-        $user=User::find($user_id)->first();
-        return $this->returnData('data',  MySubscriptionResource::collection( $user->subscriptions ), __('Get  succesfully'));
+        // $user=User::find($user_id)->first();
+        $subscriptions = Subscription::where('user_id',$user_id)->paginate(10) ;
+        return $this->returnData('data',  MySubscriptionResource::collection( $subscriptions ), __('Get  succesfully'));
 
     }
 

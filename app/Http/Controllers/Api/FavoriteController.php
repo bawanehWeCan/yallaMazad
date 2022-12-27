@@ -56,7 +56,8 @@ class FavoriteController extends ApiController
     public function getFavoritesAdv($user_id)
     {
 
-        $favorites = User::find($user_id)->favorites;
+        // $favorites = User::find($user_id)->favorites;
+        $favorites = Favorite::where('user_id',$user_id)->paginate(10) ;
         return $this->returnData('data',  AdvertisementResource::collection( $favorites ), __('Get  succesfully'));
 
     }

@@ -38,13 +38,13 @@ class Repository{
 
 
     public function allWithCondition($key, $value){
-        $data = $this->model->where( $key,$value)->get();
+        $data = $this->model->where( $key,$value)->paginate(10);
         return $data;
     }
 
 
     public function allWithOrder($key, $value){
-        $data = $this->model->orderBy( $key,$value)->get();
+        $data = $this->model->orderBy( $key,$value)->paginate(10);
         return $data;
     }
 
@@ -101,7 +101,7 @@ class Repository{
 
 
     public function searchManyByKey($key, $value){
-        $data = $this->model->where( $key, 'like', '%' . $value . '%' )->get();
+        $data = $this->model->where( $key, 'like', '%' . $value . '%' )->paginate(10);
         return $data;
     }
 

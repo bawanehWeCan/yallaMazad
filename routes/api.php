@@ -62,7 +62,7 @@ Route::middleware('changeLang')->group(function () {
 
 
     //Category
-Route::get('categories', [CategoryController::class, 'list']);
+Route::get('categories', [CategoryController::class, 'pagination']);
 Route::post('category-create', [CategoryController::class, 'save']);
 Route::get('category/{id}', [CategoryController::class, 'view']);
 Route::get('category/delete/{id}', [CategoryController::class, 'delete']);
@@ -73,7 +73,7 @@ Route::get( 'advertisement/get-advertisements/{category_id}', [ CategoryControll
 
 
 //Introduction
-Route::get('introductions', [IntroductionController::class, 'list']);
+Route::get('introductions', [IntroductionController::class, 'pagination']);
 Route::post('introduction-create', [IntroductionController::class, 'save']);
 Route::get('introduction/{id}', [IntroductionController::class, 'view']);
 Route::get('introduction/delete/{id}', [IntroductionController::class, 'delete']);
@@ -83,7 +83,7 @@ Route::post('introduction/edit/{id}', [IntroductionController::class, 'edit']);
 
 
 //Plan
-Route::get('plans', [PlanController::class, 'list']);
+Route::get('plans', [PlanController::class, 'pagination']);
 Route::post('plan-create', [PlanController::class, 'save']);
 Route::get('plan/{id}', [PlanController::class, 'view']);
 Route::get('plan/delete/{id}', [PlanController::class, 'delete']);
@@ -92,7 +92,7 @@ Route::post('plan/edit/{id}', [PlanController::class, 'edit']);
 
 
 //Slider
-Route::get('sliders', [SliderController::class, 'list']);
+Route::get('sliders', [SliderController::class, 'pagination']);
 Route::post('slider-create', [SliderController::class, 'save']);
 Route::get('slider/{id}', [SliderController::class, 'view']);
 Route::get('slider/delete/{id}', [SliderController::class, 'delete']);
@@ -119,7 +119,7 @@ Route::post('change-password', [AuthController::class, 'changePassword']);
 
 
 //Subscription
-Route::get('subscriptions', [SubscriptionController::class, 'list']);
+Route::get('subscriptions', [SubscriptionController::class, 'pagination']);
 Route::post('subscription-create', [SubscriptionController::class, 'save']);
 Route::get('subscription/{id}', [SubscriptionController::class, 'view']);
 Route::get('subscription/delete/{id}', [SubscriptionController::class, 'delete']);
@@ -129,7 +129,7 @@ Route::get('my-subscriptions/{user_id}', [SubscriptionController::class, 'mySubs
 
 
 //Advertisement
-Route::get('advertisements', [AdvertisementController::class, 'list']);
+Route::get('advertisements', [AdvertisementController::class, 'pagination']);
 Route::post('advertisement-create', [AdvertisementController::class, 'save']);
 Route::get('advertisement/{id}', [AdvertisementController::class, 'view']);
 Route::get('advertisement/delete/{id}', [AdvertisementController::class, 'delete']);
@@ -140,7 +140,7 @@ Route::get('popular-advertisements', [AdvertisementController::class, 'getPopula
 Route::post('advertisements/search', [AdvertisementController::class, 'lookfor']);
 
 //Image
-Route::get('images', [ImageController::class, 'list']);
+Route::get('images', [ImageController::class, 'pagination']);
 Route::post('image-create', [ImageController::class, 'save']);
 Route::get('image/{id}', [ImageController::class, 'view']);
 Route::get('image/delete/{id}', [ImageController::class, 'delete']);
@@ -149,7 +149,7 @@ Route::post('image/edit/{id}', [ImageController::class, 'edit']);
 Route::post( 'advertisement/add-image/{advertisement_id}', [ ImageController::class, 'addImageToAdvertising' ]);
 
 //Bid
-Route::get('bids', [BidController::class, 'list']);
+Route::get('bids', [BidController::class, 'pagination']);
 Route::post('bid-create', [BidController::class, 'save']);
 Route::get('bid/{id}', [BidController::class, 'view']);
 Route::get('bid/delete/{id}', [BidController::class, 'delete']);
@@ -157,7 +157,7 @@ Route::post('bid/edit/{id}', [BidController::class, 'edit']);
 
 
 //Favorite
-Route::get('favorites', [FavoriteController::class, 'list']);
+Route::get('favorites', [FavoriteController::class, 'pagination']);
 Route::post('favorite-create', [FavoriteController::class, 'save']);
 Route::get('favorite/{id}', [FavoriteController::class, 'view']);
 Route::get('favorite/delete/{advertisement_id}/{user_id}', [FavoriteController::class, 'deletebyID']);

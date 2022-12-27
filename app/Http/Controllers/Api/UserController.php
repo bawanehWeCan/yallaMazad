@@ -78,7 +78,7 @@ class UserController extends ApiController
     public function myFavorites()
     {
 
-        $favorites = Auth::user()->favorites;
+        $favorites = Auth::user()->favorites();
         return $this->returnData('data',  AdvertisementResource::collection( $favorites ), __('Get  succesfully'));
 
     }
@@ -87,7 +87,8 @@ class UserController extends ApiController
     public function myAdvertisement()
     {
 
-        $advertisements = Auth::user()->advertisements;
+        // $advertisements = Auth::user()->advertisements;
+        $advertisements = Advertisement::where('user_id',Auth::user()->id)->paginate(10) ;
         return $this->returnData('data',  AdvertisementResource::collection( $advertisements ), __('Get  succesfully'));
 
     }

@@ -35,8 +35,10 @@ class CategoryController extends ApiController
 
     public function getAdvByCategory($category_id){
 
-        $category = Category::find( $category_id );
-        return $this->returnData('data',  AdvertisementResource::collection( $category->advertisements ), __('Get  succesfully'));
+        // $category = Category::find( $category_id );
+
+        $advertisements = Advertisement::where('category_id',$category_id)->paginate(10) ;
+        return $this->returnData('data',  AdvertisementResource::collection( $advertisements ), __('Get  succesfully'));
 
     }
 }
