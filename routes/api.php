@@ -51,7 +51,7 @@ Route::middleware(['auth:api','changeLang'])->group(function () {
 
     Route::post('/user-update', [AuthController::class, 'updateProfile']);
 
-
+    Route::post('/update-password', [AuthController::class, 'updatePassword']);
 
     Route::get('my-favorites', [UserController::class, 'myFavorites']);
 

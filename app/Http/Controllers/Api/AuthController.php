@@ -182,6 +182,25 @@ class AuthController extends Controller
         return $this->returnError('Password not matched!');
     }
 
+
+    public function updatePassword(Request $request)
+    {
+        $user = Auth::user;
+        $old_pw =Hash::make($request->old_password);
+
+      if ($user->password== $old_pw) {
+
+
+                $user->update([
+                    'password' => Hash::make($request->new_password),
+                ]);
+
+            return $this->returnSuccessMessage('Password has been changed');
+        }
+
+        return $this->returnError('Password not matched!');
+    }
+
     public function updateProfile(ProfileUpdateRequest $request)
     {
         try {
