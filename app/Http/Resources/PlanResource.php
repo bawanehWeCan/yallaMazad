@@ -22,6 +22,9 @@ class PlanResource extends JsonResource
             'price'=>$this->price,
             'number_of_auction'=>$this->number_of_auction,
             'time'=>$this->time,
+            'point_one'=>$this->point_one,
+            'point_two'=>$this->point_two,
+            'point_three'=>$this->point_three,
 
         ];
     }
