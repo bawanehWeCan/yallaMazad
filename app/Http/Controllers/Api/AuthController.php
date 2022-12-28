@@ -189,7 +189,9 @@ class AuthController extends Controller
         $user = Auth::user();
         $old_pw =Hash::make($request->old_password);
 
-      if ($user->password== $old_pw) {
+    //   if ($user->password == $old_pw)
+
+        if(Hash::check($old_pw, $user->password)){
 
 
                 $user->update([
