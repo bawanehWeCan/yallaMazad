@@ -13,7 +13,7 @@ use App\Http\Controllers\Api\SliderController;
 use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CategoryUserController;
-
+use App\Http\Controllers\Api\TipController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -169,3 +169,10 @@ Route::post('favorite/edit/{id}', [FavoriteController::class, 'edit']);
 
 Route::get( 'users/get-advertisement/{user_id}', [ FavoriteController::class, 'getFavoritesAdv' ]);
 
+
+  //Tips
+   Route::get('tips', [TipController::class, 'pagination']);
+   Route::post('tip-create', [TipController::class, 'save']);
+   Route::get('tip/{id}', [TipController::class, 'view']);
+   Route::get('tip/delete/{id}', [TipController::class, 'delete']);
+   Route::post('tip/edit/{id}', [TipController::class, 'edit']);

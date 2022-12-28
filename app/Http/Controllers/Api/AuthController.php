@@ -187,7 +187,7 @@ class AuthController extends Controller
     public function updatePassword(Request $request)
     {
         $user = Auth::user();
-        $old_pw =Hash::make($request->old_password);
+        $old_pw =$request->old_password;
 
     //   if ($user->password == $old_pw)
 
