@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+
 class AuthController extends Controller
 {
     use ResponseTrait;
@@ -185,7 +186,7 @@ class AuthController extends Controller
 
     public function updatePassword(Request $request)
     {
-        $user = Auth::user;
+        $user = Auth::user();
         $old_pw =Hash::make($request->old_password);
 
       if ($user->password== $old_pw) {
