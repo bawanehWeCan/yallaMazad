@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+// use App\Models\Badge;
 use App\Models\Advertisement;
 use App\Repositories\Repository;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\BadgeResource;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ApiController;
@@ -110,4 +112,15 @@ class UserController extends ApiController
         $model->delete();
         return $this->returnSuccessMessage(__('Delete succesfully!'));
     }
+
+    public function myBadges()
+    {
+
+        // $advertisements = Auth::user()->advertisements;
+        $badges = Badge::where('user_id',Auth::user()->id)->paginate(10) ;
+        return $this->returnData('data',  BadgeResource::collection( $badges ), __('Get  succesfully'));
+
+    }
+
+
 }

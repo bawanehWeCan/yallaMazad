@@ -16,7 +16,8 @@ class BadgeResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'image'=>$this->image
+            'image'=>$this->image,
+            'user'=>$this->user->id,
         ];
     }
 }

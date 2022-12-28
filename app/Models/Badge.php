@@ -20,4 +20,8 @@ class Badge extends Model
             $this->attributes['image'] =  'img/'.$filename;
         }
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

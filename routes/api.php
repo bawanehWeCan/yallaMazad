@@ -57,6 +57,8 @@ Route::middleware(['auth:api','changeLang'])->group(function () {
 
     Route::get('my-advertisements', [UserController::class, 'myAdvertisement']);
 
+    Route::get('my-badges', [UserController::class, 'myBadges']);
+
 });
 
 Route::middleware('changeLang')->group(function () {
