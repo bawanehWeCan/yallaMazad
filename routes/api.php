@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\BidController;
 use App\Http\Controllers\Api\SliderController;
 use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\CategoryUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,7 +102,8 @@ Route::post('slider/edit/{id}', [SliderController::class, 'edit']);
 
 });
 
-
+//add categories to user
+Route::post('add-categories', [CategoryUserController::class, 'addCategoriesToUser']);
 
 //Auth
 Route::post('login', [AuthController::class, 'login']);

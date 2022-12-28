@@ -76,4 +76,8 @@ class User extends Authenticatable
     public function favorites(){
         return $this->belongsToMany(Advertisement::class,'favorites','user_id','advertisement_id')->paginate(10);
     }
+
+    public function hascategories(){
+        return $this->belongsToMany(Category::class,'user_categories','user_id','category_id');
+    }
 }
