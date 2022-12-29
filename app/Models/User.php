@@ -80,4 +80,8 @@ class User extends Authenticatable
     public function hascategories(){
         return $this->belongsToMany(Category::class,'user_categories','user_id','category_id');
     }
+
+    public function notifications(){
+        return $this->hasMany(Notification::class);
+    }
 }

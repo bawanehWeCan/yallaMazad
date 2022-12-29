@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
-// use App\Models\Badge;
+use App\Models\Notification;
 use App\Models\Advertisement;
 use App\Repositories\Repository;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\BadgeResource;
+use App\Http\Resources\NotificationResource;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ApiController;
@@ -122,5 +123,13 @@ class UserController extends ApiController
 
     }
 
+    public function myNotifications()
+    {
+
+        // $advertisements = Auth::user()->advertisements;
+        $notifications = Notification::where('user_id',Auth::user()->id)->paginate(10) ;
+        return $this->returnData('data',  NotificationResource::collection( $notifications ), __('Get  succesfully'));
+
+    }
 
 }

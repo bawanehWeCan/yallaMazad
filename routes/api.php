@@ -14,6 +14,10 @@ use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CategoryUserController;
 use App\Http\Controllers\Api\TipController;
+use App\Http\Controllers\Api\NotificationController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -59,6 +63,7 @@ Route::middleware(['auth:api','changeLang'])->group(function () {
 
     Route::get('my-badges', [UserController::class, 'myBadges']);
 
+    Route::get('my-notifications', [UserController::class, 'myNotifications']);
 });
 
 Route::middleware('changeLang')->group(function () {
@@ -101,6 +106,13 @@ Route::get('slider/{id}', [SliderController::class, 'view']);
 Route::get('slider/delete/{id}', [SliderController::class, 'delete']);
 Route::post('slider/edit/{id}', [SliderController::class, 'edit']);
 
+
+  //Notification
+  Route::get('notifications', [NotificationController::class, 'pagination']);
+  Route::post('notification-create', [NotificationController::class, 'save']);
+  Route::get('notification/{id}', [NotificationController::class, 'view']);
+  Route::get('notification/delete/{id}', [NotificationController::class, 'delete']);
+  Route::post('notification/edit/{id}', [NotificationController::class, 'edit']);
 
 });
 
