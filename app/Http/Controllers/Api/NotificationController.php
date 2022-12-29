@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class NotificationController extends ApiController
 {
-    use NotificationTrait;
+
 
     public function __construct()
     {
