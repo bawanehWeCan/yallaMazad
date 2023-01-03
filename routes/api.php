@@ -198,5 +198,7 @@ Route::get( 'users/get-advertisement/{user_id}', [ FavoriteController::class, 'g
 
 Route::get('pages', [PageController::class, 'pagination']);
 Route::post('pages-create', [PageController::class, 'save']);
-Route::get('pages/{id}', [PageController::class, 'profile']);
-Route::get('pages/delete/{id}', [PageController::class, 'delete']);
+Route::get('page/{id}', [PageController::class, 'view']);
+Route::get('page/delete/{id}', [PageController::class, 'delete']);
+Route::post('page/edit/{id}', [PageController::class, 'edit']);
+
