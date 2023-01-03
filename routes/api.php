@@ -15,7 +15,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CategoryUserController;
 use App\Http\Controllers\Api\TipController;
 use App\Http\Controllers\Api\NotificationController;
-
+use App\Http\Controllers\Api\PageController;
 
 
 /*
@@ -192,3 +192,11 @@ Route::get( 'users/get-advertisement/{user_id}', [ FavoriteController::class, 'g
    Route::get('tip/{id}', [TipController::class, 'view']);
    Route::get('tip/delete/{id}', [TipController::class, 'delete']);
    Route::post('tip/edit/{id}', [TipController::class, 'edit']);
+
+
+   //pages
+
+Route::get('pages', [PageController::class, 'pagination']);
+Route::post('pages-create', [PageController::class, 'save']);
+Route::get('pages/{id}', [PageController::class, 'profile']);
+Route::get('pages/delete/{id}', [PageController::class, 'delete']);
