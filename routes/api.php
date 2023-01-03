@@ -64,6 +64,14 @@ Route::middleware(['auth:api','changeLang'])->group(function () {
     Route::get('my-badges', [UserController::class, 'myBadges']);
 
     Route::get('my-notifications', [UserController::class, 'myNotifications']);
+
+
+//adv
+Route::get('advertisements', [AdvertisementController::class, 'pagination']);
+Route::post('advertisement-create', [AdvertisementController::class, 'save']);
+Route::get('advertisement/{id}', [AdvertisementController::class, 'view']);
+Route::get('advertisement/delete/{id}', [AdvertisementController::class, 'delete']);
+Route::post('advertisement/edit/{id}', [AdvertisementController::class, 'edit']);
 });
 
 Route::middleware('changeLang')->group(function () {
@@ -145,11 +153,7 @@ Route::get('my-subscriptions/{user_id}', [SubscriptionController::class, 'mySubs
 
 
 //Advertisement
-Route::get('advertisements', [AdvertisementController::class, 'pagination']);
-Route::post('advertisement-create', [AdvertisementController::class, 'save']);
-Route::get('advertisement/{id}', [AdvertisementController::class, 'view']);
-Route::get('advertisement/delete/{id}', [AdvertisementController::class, 'delete']);
-Route::post('advertisement/edit/{id}', [AdvertisementController::class, 'edit']);
+
 
 Route::get('popular-advertisements', [AdvertisementController::class, 'getPopularAdvertisings']);
 

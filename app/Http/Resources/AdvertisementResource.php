@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Auth;
+use App\Models\Favorite;
 
 class AdvertisementResource extends JsonResource
 {
@@ -14,9 +16,18 @@ class AdvertisementResource extends JsonResource
      */
     public function toArray($request)
     {
+
+        $fav = false;
+        if(Auth::user()){
+        $favorite = Favorite::where('user_id',Auth::user()->id)->where('advertisement_id',$this->id)->first();
+            if($favorite){
+                $fav = true ;
+            }
+    }
         return [
 
             'id'=>$this->id,
+            'is_favorite'=>$fav,
             'name'=>$this->name,
             'content'=>$this->content,
             'start_price'=>$this->start_price,
