@@ -68,10 +68,7 @@ class UserRepository extends AbstractRepository
 
         $user->update($data->except('image'));
 
-
-
-
-        return $user->fresh();
+         return $user->fresh();
 
     }
     /**
