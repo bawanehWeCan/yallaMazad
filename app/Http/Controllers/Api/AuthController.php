@@ -204,7 +204,7 @@ class AuthController extends Controller
         return $this->returnError('Password not matched!');
     }
 
-    public function updateProfile(ProfileUpdateRequest $request)
+    public function updateProfile(Request $request)
     {
         try {
             DB::beginTransaction();
