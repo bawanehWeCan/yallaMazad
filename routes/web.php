@@ -23,9 +23,12 @@ Route::get('test', [AddressController::class, 'save']);
 //http://admin.yallamzad.com/firebase
 // test for insert in firebase
 Route::get('firebase', function () {
-    $bid = app('firebase.firestore')->database()->collection('auctions')->document('some_id');// we will replace this value with auction id
+
+    // we try to insert collection( table ) into record
+    $bid = app('firebase.firestore')->database()->collection('auctions')->document('some_id')->collection('biddings');// we will replace this value with auction id
     $bid->set([
         'created_at' => 'aaa'
 
     ]);
 });
+
