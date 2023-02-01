@@ -36,9 +36,15 @@ class BidController extends ApiController
             $model = $this->repositry->save($request->all());
 
             if ($model) {
-
+// app('firebase.firestore') => firebase class
+//->database()->collection('auctions') اسم التيبل الي بدنا نشتغل عليه
+// ->document($request->advertisement_id) ريكورد بايدي الاعلان
+// )->collection('biddings') تيبل جوا الريكورد باسم مزايدات
+//->document($model->id) ريكورد بايدي المزايده
 
                 $bid = app('firebase.firestore')->database()->collection('auctions')->document($request->advertisement_id)->collection('biddings')->document($model->id); // we will replace this value with auction id
+
+                // insert for decument
                 $bid->set([
                     'amount' => $request->price,
                     'image' => (string)$user->image,
