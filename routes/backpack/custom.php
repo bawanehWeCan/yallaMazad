@@ -20,4 +20,10 @@ Route::group([
     Route::crud('category', 'CategoryCrudController');
     Route::crud('introduction', 'IntroductionCrudController');
     Route::crud('tip', 'TipCrudController');
+    Route::crud('page', 'PageCrudController');
+    Route::crud('slider', 'SliderCrudController');
+    Route::crud('plan', 'PlanCrudController');
+    Route::crud('advertisement', 'AdvertisementCrudController');
+    Route::crud('image', 'ImageCrudController');
+    Route::crud('bid', 'BidCrudController');
 }); // this should be the absolute last line of this file
