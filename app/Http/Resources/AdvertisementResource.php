@@ -18,7 +18,7 @@ class AdvertisementResource extends JsonResource
     public function toArray($request)
     {
 
-        $date = Carbon::createFromFormat('Y.m.d', $this->created_at);
+        $date = Carbon::now();
 $daysToAdd = 10;
 $date = $date->addDays($daysToAdd);
 
@@ -37,7 +37,7 @@ $date = $date->addDays($daysToAdd);
             'content'=>$this->content,
             'start_price'=>$this->start_price,
             'start_date'=>(string)$this->created_at,
-            'end_date'=>$daysToAdd ,
+            'end_date'=>$date ,
             'status'=>$this->status,
             'buy_now_price'=>$this->buy_now_price,
             'views'=>$this->views,
