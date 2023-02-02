@@ -27,6 +27,9 @@ class AdvertisementController extends ApiController
         $ads    = Advertisement::find($advertisement->id);
         $ads->start_date    =  $advertisement->created_at;
         $ads->end_date    =  $advertisement->updated_at;
+        $ads->price_one    =  50;
+        $ads->price_two    =  70;
+        $ads->price_three    =  90;
         $ads->save();
 
 
