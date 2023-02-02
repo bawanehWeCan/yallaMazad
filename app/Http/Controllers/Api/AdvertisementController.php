@@ -24,6 +24,15 @@ class AdvertisementController extends ApiController
 
         $advertisement = $this->repositry->save($request->except('images'));
 
+        $ads    = Advertisement::find($advertisement->id);
+        $ads    =  $advertisement->created_at;
+        $ads    =  $advertisement->updated_at;
+
+        $ads->save();
+
+
+
+
 
         foreach ($request->images as $image) {
 
