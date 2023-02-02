@@ -32,7 +32,7 @@ class AdvertisementController extends ApiController
         $request['price_three']    =  90;
 
 
-        $this->update($$advertisement->id,$request->except('images','id'));
+        $this->update($advertisement->id,$request->except('images','id'));
 
 
         foreach ($request->images as $image) {
