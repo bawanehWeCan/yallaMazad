@@ -21,7 +21,7 @@ class AdvertisementController extends ApiController
     }
 
     public function save( Request $request ){
-
+        $request['user_id'] = 1; // cuze mobile
         $advertisement = $this->repositry->save($request->except('images'));
 
         // $ads    = Advertisement::find($advertisement->id);
