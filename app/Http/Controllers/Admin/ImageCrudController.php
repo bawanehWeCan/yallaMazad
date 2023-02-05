@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\ImageRequest;
-use App\Models\Admin\Image;
+use App\Models\Image;
+use App\Http\Requests\Admin\ImageRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -19,11 +19,11 @@ class ImageCrudController extends CrudController
         store as traitStore;
     }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,31 +33,34 @@ class ImageCrudController extends CrudController
         CRUD::setEntityNameStrings('image', 'images');
     }
 
+
+
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
-        CRUD::column('image')->type('image');
         CRUD::addColumn(['name' => 'advertisement', 'label'=>'Ad name','type'     => 'closure',
         'function' => function(Image $entry) {
             return $entry?->advertisement?->name;
         }]);
+        CRUD::addColumn(['name'=>'image','type'=>'image']);
+
         CRUD::column('created_at');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
-    
+
     protected function setupShowOperation()
     {
-        CRUD::column('image')->type('image');
+        CRUD::addColumn(['name'=>'image','type'=>'image']);
         CRUD::addColumn(['name' => 'advertisement', 'label'=>'Ad name','type'     => 'closure',
         'function' => function(Image $entry) {
             return $entry?->advertisement?->name;
@@ -68,13 +71,13 @@ class ImageCrudController extends CrudController
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -99,11 +102,11 @@ class ImageCrudController extends CrudController
                 'label'     => "Advertisement",
                 'type'      => 'select',
                 'name'      => 'advertisement_id', // the db column for the foreign key
-    
+
                 // optional - manually specify the related model and attribute
                 'model'     => "App\Models\Advertisement", // related model
                 'attribute' => 'name', // foreign key attribute that is shown to user
-    
+
                 'options'   => (function ($query) {
                     return $query->latest()->get();
                 }), //  you can use this to filter the results show in the select
@@ -111,7 +114,7 @@ class ImageCrudController extends CrudController
         /**
          * Fields can be defined using the fluent syntax or array syntax:
          * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
+         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
          */
     }
 

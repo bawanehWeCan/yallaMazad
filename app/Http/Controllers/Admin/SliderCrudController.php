@@ -101,7 +101,13 @@ class SliderCrudController extends CrudController
 
         $this->crud->addField(['name' => 'en', 'type' => 'text','label'=>'English Name', 'store_in'     => 'name','fake'     => true, ]);
         $this->crud->addField(['name' => 'ar', 'type' => 'text','label'=>'Arabic Name', 'store_in'     => 'name','fake'     => true, ]);
-        CRUD::field('image');
+        $this->crud->addField([
+            'name'      => 'image',
+            'label'     => 'Image',
+            'type'      => 'upload',
+            'upload'=>true,
+            'value'=>''
+            ]);
         CRUD::field('route_type')->type('text');
         CRUD::field('route_id')->type('number');
 
@@ -126,9 +132,15 @@ class SliderCrudController extends CrudController
 
         $this->crud->addField(['name' => 'en', 'type' => 'text','label'=>'English Name', 'store_in'     => 'name','fake'     => true,'value'=>$slider->getTranslation('name','en')]);
         $this->crud->addField(['name' => 'ar', 'type' => 'text','label'=>'Arabic Name', 'store_in'     => 'name','fake'     => true, 'value'=>$slider->getTranslation('name','ar')]);
-        CRUD::field('image');
+        $this->crud->addField([
+            'name'      => 'image',
+            'label'     => 'Image',
+            'type'      => 'upload',
+            'upload'=>true,
+            'value'=>''
+            ]);
         CRUD::field('route_type')->type('text');
-        CRUD::field('route_id')->type('number');
+        CRUD::addField(['name'=>'route_id','type'=>'number','label'=>'Route id']);
     }
     public function insertDataWithValidation($update=null)
     {

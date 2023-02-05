@@ -40,6 +40,7 @@ class AdvertisementCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        CRUD::column('id')->label('number');
         CRUD::column('name');
         CRUD::column('content');
         CRUD::column('start_price');
@@ -57,6 +58,7 @@ class AdvertisementCrudController extends CrudController
 
     protected function setupShowOperation()
     {
+        CRUD::column('id')->label('number');
         CRUD::column('name');
         CRUD::column('content');
         CRUD::column('start_price');
@@ -101,8 +103,20 @@ class AdvertisementCrudController extends CrudController
         CRUD::field('start_price')->type('text');
         CRUD::field('start_date')->type('date');
         CRUD::field('end_date')->type('date');
-        CRUD::field('status');
-        CRUD::field('buy_now_price')->type('text');
+        CRUD::addField([   // select_from_array
+            'name'        => 'status',
+            'label'       => "Status",
+            'type'        => 'select_from_array',
+            'options'     => ['قيد المراجعة' => 'قيد المراجعة',
+                             'جاري الان' => 'جاري الان',
+                             'منتهي' => 'منتهي',
+                             'مرفوض' => 'مرفوض',
+                             'مقبول - بإنتظار بدأ المزاد' => 'مقبول - بإنتظار بدأ المزاد',
+                            ],
+            'allows_null' => false,
+            'default'=> 'قيد المراجعة',
+            // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
+                        ]);        CRUD::field('buy_now_price')->type('text');
         CRUD::addField(['name'=>'views','value'=>0,'type'=>'hidden']);
         CRUD::field('number_of_bids')->type('text');
         $this->crud->addField(
@@ -110,11 +124,11 @@ class AdvertisementCrudController extends CrudController
                 'label'     => "User",
                 'type'      => 'select',
                 'name'      => 'user_id', // the db column for the foreign key
-    
+
                 // optional - manually specify the related model and attribute
                 'model'     => "App\Models\User", // related model
                 'attribute' => 'name', // foreign key attribute that is shown to user
-    
+
                 'options'   => (function ($query) {
                     return $query->latest()->get();
                 }), //  you can use this to filter the results show in the select
@@ -125,7 +139,7 @@ class AdvertisementCrudController extends CrudController
                 'type'      => 'select',
                 'name'      => 'category_id', // the db column for the foreign key
                 'model'     => "App\Models\Category", // related model
-                'attribute' => 'name', // foreign key attribute that is shown to user    
+                'attribute' => 'name', // foreign key attribute that is shown to user
                 'options'   => (function ($query) {
                     return $query->latest()->get();
                 }), //  you can use this to filter the results show in the select
@@ -156,7 +170,19 @@ class AdvertisementCrudController extends CrudController
         CRUD::field('start_price')->type('text');
         CRUD::addField(['name'=>'start_date','type'=>'date','value'=> date("Y-m-d",strtotime($ad->start_date))]);
         CRUD::addField(['name'=>'end_date','type'=>'date','value'=> date("Y-m-d",strtotime($ad->end_date))]);
-        CRUD::field('status');
+        CRUD::addField([   // select_from_array
+            'name'        => 'status',
+            'label'       => "Status",
+            'type'        => 'select_from_array',
+            'options'     => ['قيد المراجعة' => 'قيد المراجعة',
+                             'جاري الان' => 'جاري الان',
+                             'منتهي' => 'منتهي',
+                             'مرفوض' => 'مرفوض',
+                             'مقبول - بإنتظار بدأ المزاد' => 'مقبول - بإنتظار بدأ المزاد',
+                            ],
+            'allows_null' => false,
+            // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
+                        ]);
         CRUD::field('buy_now_price')->type('text');
         CRUD::addField(['name'=>'views','type'=>'hidden']);
         CRUD::field('number_of_bids')->type('text');
@@ -165,11 +191,11 @@ class AdvertisementCrudController extends CrudController
                 'label'     => "User",
                 'type'      => 'select',
                 'name'      => 'user_id', // the db column for the foreign key
-    
+
                 // optional - manually specify the related model and attribute
                 'model'     => "App\Models\User", // related model
                 'attribute' => 'name', // foreign key attribute that is shown to user
-    
+
                 'options'   => (function ($query) {
                     return $query->latest()->get();
                 }), //  you can use this to filter the results show in the select
@@ -180,12 +206,12 @@ class AdvertisementCrudController extends CrudController
                 'type'      => 'select',
                 'name'      => 'category_id', // the db column for the foreign key
                 'model'     => "App\Models\Category", // related model
-                'attribute' => 'name', // foreign key attribute that is shown to user    
+                'attribute' => 'name', // foreign key attribute that is shown to user
                 'options'   => (function ($query) {
                     return $query->latest()->get();
                 }), //  you can use this to filter the results show in the select
             ]);
-  CRUD::field('price_one')->type('text');
+        CRUD::field('price_one')->type('text');
         CRUD::field('price_two')->type('text');
         CRUD::field('price_three')->type('text');
     }

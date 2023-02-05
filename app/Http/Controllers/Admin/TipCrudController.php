@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\TipRequest;
+use App\Models\Tip;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -39,7 +40,34 @@ class TipCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('note');
+        $this->crud->addColumn(['name' => 'note', 'label'=>'English Note','type'     => 'closure',
+        'function' => function(Tip $entry) {
+            return $entry->getTranslation('note','en');
+        }]);
+        $this->crud->addColumn(['name' => 'note_ar', 'label'=>'Arabic Note','type'     => 'closure',
+        'function' => function(Tip $entry) {
+            return $entry->getTranslation('note','ar');
+        }]);
+        CRUD::column('created_at');
+        CRUD::column('updated_at');
+
+        /**
+         * Columns can be defined using the fluent syntax or array syntax:
+         * - CRUD::column('price')->type('number');
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
+         */
+    }
+
+    protected function setupShowOperation()
+    {
+        $this->crud->addColumn(['name' => 'note', 'label'=>'English Note','type'     => 'closure',
+        'function' => function(Tip $entry) {
+            return $entry->getTranslation('note','en');
+        }]);
+        $this->crud->addColumn(['name' => 'note_ar', 'label'=>'Arabic Note','type'     => 'closure',
+        'function' => function(Tip $entry) {
+            return $entry->getTranslation('note','ar');
+        }]);
         CRUD::column('created_at');
         CRUD::column('updated_at');
 
@@ -60,7 +88,9 @@ class TipCrudController extends CrudController
     {
         CRUD::setValidation(TipRequest::class);
 
-        CRUD::field('note');
+        $this->crud->addField(['name' => 'en', 'type' => 'text','label'=>'English Note', 'store_in'     => 'note','fake'     => true, ]);
+        $this->crud->addField(['name' => 'ar', 'type' => 'text','label'=>'Arabic Note', 'store_in'     => 'note','fake'     => true, ]);
+
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -77,6 +107,11 @@ class TipCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
-        $this->setupCreateOperation();
+        CRUD::setValidation(TipRequest::class);
+        $tip = Tip::findOrFail(\Route::current()->parameter('id'));
+
+        $this->crud->addField(['name' => 'en', 'type' => 'text','label'=>'English Note', 'store_in'     => 'note','fake'     => true,'value'=>$tip->getTranslation('note','en') ]);
+        $this->crud->addField(['name' => 'ar', 'type' => 'text','label'=>'Arabic Note', 'store_in'     => 'note','fake'     => true,'value'=>$tip->getTranslation('note','ar') ]);
+
     }
 }

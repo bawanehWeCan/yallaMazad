@@ -29,7 +29,7 @@ class UserCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\gUser::class);
+        CRUD::setModel(\App\Models\User::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/user');
         CRUD::setEntityNameStrings('user', 'users');
     }
@@ -141,6 +141,9 @@ class UserCrudController extends CrudController
         $request = $this->crud->getRequest();
         if ($update == 'update') {
             $user = User::findOrFail(\Route::current()->parameter('id'));
+            if(empty($request->password)){
+                $request->request->remove('password');
+            }
             if($request->has('image')){
                 unlink($user->image);
             }

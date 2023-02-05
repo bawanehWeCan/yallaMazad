@@ -9,5 +9,6 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('slider') }}"><i class="nav-icon la la-th-list"></i> Sliders</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('plan') }}"><i class="nav-icon la la-th-list"></i> Plans</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('advertisement') }}"><i class="nav-icon la la-th-list"></i> Advertisements</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('image') }}"><i class="nav-icon la la-th-list"></i> Images</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('bid') }}"><i class="nav-icon la la-th-list"></i> Bids</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('image') }}"><i class="nav-icon la la-question"></i> Images</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('subscription') }}"><i class="nav-icon la la-question"></i> Subscriptions</a></li>

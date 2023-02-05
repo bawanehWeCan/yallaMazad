@@ -125,7 +125,7 @@ class PlanCrudController extends CrudController
         $this->crud->addField(['name' => 'details_ar', 'type' => 'textarea','label'=>'Arabic Details']);
         $this->crud->addField(['name' => 'details', 'type' => 'hidden' ]);
 
-        CRUD::field('price');
+        CRUD::field('price')->type('text');
         CRUD::field('number_of_auction');
         CRUD::field('time');
         CRUD::field('point_one');
@@ -157,7 +157,7 @@ class PlanCrudController extends CrudController
         $this->crud->addField(['name' => 'details_ar', 'type' => 'textarea','label'=>'Arabic Details','value'=>$plan->getTranslation('details','en')]);
         $this->crud->addField(['name' => 'details', 'type' => 'hidden' ]);
 
-        CRUD::field('price');
+        CRUD::field('price')->type('text');
         CRUD::field('number_of_auction');
         CRUD::field('time');
         CRUD::field('point_one');
