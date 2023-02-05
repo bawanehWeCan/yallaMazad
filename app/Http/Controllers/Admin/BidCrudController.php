@@ -50,6 +50,8 @@ class BidCrudController extends CrudController
                 $query->Where('advertisement_id', '=', $searchTerm);
             }
         ]);
+        CRUD::column('price');
+        CRUD::column('created_at');
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');
