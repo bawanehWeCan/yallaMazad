@@ -18,17 +18,17 @@ class AdvertisementResource extends JsonResource
     public function toArray($request)
     {
 
-//         $date = Carbon::now();
-// $daysToAdd = 10;
-// $date = $date->addDays($daysToAdd);
+        $date = Carbon::now();
+        $daysToAdd = 10;
+        $date = $date->addDays($daysToAdd);
 
-//         $fav = false;
-//         if(Auth::user()){
-//         $favorite = Favorite::where('user_id',Auth::user()->id)->where('advertisement_id',$this->id)->first();
-//             if($favorite){
-//                 $fav = true ;
-//             }
-//     }
+                $fav = false;
+                if(Auth::user()){
+                $favorite = Favorite::where('user_id',Auth::user()->id)->where('advertisement_id',$this->id)->first();
+                    if($favorite){
+                        $fav = true ;
+                    }
+            }
 
         return [
 
@@ -37,8 +37,8 @@ class AdvertisementResource extends JsonResource
             'name'=>$this->name,
             'content'=>$this->content,
             'start_price'=>$this->start_price,
-            'start_date'=>(string)$this->start_date,
-            'end_date'=>(string)$this->end_date,
+            'start_date'=>(string)$this->created_at,
+            'end_date'=>$date ,
             'status'=>$this->status,
             'buy_now_price'=>$this->buy_now_price,
             'views'=>$this->views,
