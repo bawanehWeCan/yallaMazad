@@ -101,8 +101,8 @@ class AdvertisementCrudController extends CrudController
         CRUD::field('name')->type('text');
         CRUD::field('content');
         CRUD::field('start_price')->type('text');
-        CRUD::field('start_date')->type('date_time');
-        CRUD::field('end_date')->type('date_time');
+        CRUD::field('start_date')->type('DateTime');
+        CRUD::field('end_date')->type('DateTime');
         CRUD::addField([   // select_from_array
             'name'        => 'status',
             'label'       => "Status",
@@ -168,8 +168,8 @@ class AdvertisementCrudController extends CrudController
         CRUD::field('name')->type('text');
         CRUD::field('content');
         CRUD::field('start_price')->type('text');
-        CRUD::addField(['name'=>'start_date','type'=>'date','value'=> date("Y-m-d",strtotime($ad->start_date))]);
-        CRUD::addField(['name'=>'end_date','type'=>'date','value'=> date("Y-m-d",strtotime($ad->end_date))]);
+        CRUD::addField(['name'=>'DateTime','type'=>'date')]);
+        CRUD::addField(['name'=>'DateTime','type'=>'date')]);
         CRUD::addField([   // select_from_array
             'name'        => 'status',
             'label'       => "Status",
