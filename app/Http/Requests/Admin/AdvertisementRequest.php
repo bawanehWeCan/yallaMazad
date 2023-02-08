@@ -37,8 +37,8 @@ class AdvertisementRequest extends FormRequest
             'price_one'=>'nullable|numeric',
             'price_two'=>'nullable|numeric',
             'price_three'=>'nullable|numeric',
-            'start_date'=>'required|date',
-            'end_date'=>['required|date',new DeterminEndDate($this->start_date)],
+            'start_date'=>'required',
+            'end_date'=>['required',new DeterminEndDate($this->start_date)],
 
         ];
     }
