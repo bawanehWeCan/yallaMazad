@@ -116,9 +116,10 @@ class AdvertisementCrudController extends CrudController
             'allows_null' => false,
             'default'=> 'قيد المراجعة',
             // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
-                        ]);        CRUD::field('buy_now_price')->type('text');
+                        ]);
+        CRUD::field('buy_now_price')->type('text');
         CRUD::addField(['name'=>'views','value'=>0,'type'=>'hidden']);
-        CRUD::field('number_of_bids')->type('text');
+        CRUD::addField(['name'=>'number_of_bids','value'=>0,'type'=>'hidden']);
         $this->crud->addField(
             [  // Select
                 'label'     => "User",
@@ -185,7 +186,7 @@ class AdvertisementCrudController extends CrudController
                         ]);
         CRUD::field('buy_now_price')->type('text');
         CRUD::addField(['name'=>'views','type'=>'hidden']);
-        CRUD::field('number_of_bids')->type('text');
+        CRUD::addField(['name'=>'number_of_bids','type'=>'hidden']);
         $this->crud->addField(
             [  // Select
                 'label'     => "User",
