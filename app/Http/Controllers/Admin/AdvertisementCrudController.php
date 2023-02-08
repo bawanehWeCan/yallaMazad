@@ -169,8 +169,8 @@ class AdvertisementCrudController extends CrudController
         CRUD::field('name')->type('text');
         CRUD::field('content');
         CRUD::field('start_price')->type('text');
-        CRUD::addField(['name'=>'DateTime','type'=>'date']);
-        CRUD::addField(['name'=>'DateTime','type'=>'date']);
+        CRUD::field('start_date')->type('datetime');
+        CRUD::field('end_date')->type('datetime');
         CRUD::addField([   // select_from_array
             'name'        => 'status',
             'label'       => "Status",
