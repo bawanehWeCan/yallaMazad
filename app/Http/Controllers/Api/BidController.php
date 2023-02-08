@@ -31,6 +31,9 @@ class BidController extends ApiController
 
             $num = (int)$ads->number_of_bids + 1;
             $ads->number_of_bids = $num;
+            if(\Carbon\Carbon::create(Advertisement::find(1)->end_date)->diffInMinutes(\Carbon\Carbon::now())<=10){
+                $ads->end_date = \Carbon\Carbon::create($ads->end_date)->addMinutes(10);
+            }
             $ads->save();
 
             $model = $this->repositry->save($request->all());
@@ -54,9 +57,10 @@ class BidController extends ApiController
                 return $this->returnData('data', new $this->resource($model), __('Succesfully'));
             }
 
-            return $this->returnError(__('Sorry! Failed to create !'));
+            // return $this->returnError(__('Sorry! Failed to create !'));
 
         } catch (\Throwable $th) {
+            // return $th;
             return $this->returnError(__('Sorry! Failed to create !'));
         }
     }
