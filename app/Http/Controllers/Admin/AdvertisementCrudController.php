@@ -40,7 +40,7 @@ class AdvertisementCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('id')->label('number');
+        //CRUD::column('id')->label('number');
         CRUD::column('name');
         CRUD::column('content');
         CRUD::column('start_price');
