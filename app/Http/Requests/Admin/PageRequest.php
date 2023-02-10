@@ -26,7 +26,7 @@ class PageRequest extends FormRequest
     {
         return [
             'title' => 'required|min:4|max:255',
-            'content' => 'required|min:4|max:10000'
+            'content' => 'required|min:4|max:60000'
         ];
     }
 
