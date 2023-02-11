@@ -21,23 +21,23 @@ class AdvertisementController extends ApiController
         $this->repositry =  new Repository($this->model);
     }
 
-    public function save(Request $request)
+  public function save(Request $request)
     {
         try {
-            $request['user_id'] = 1; // cuze mobile
+            $request['user_id'] = Auth::user()->id; // cuze mobile
             $advertisement = $this->repositry->save($request->except('images'));
 
-            // $ads    = Advertisement::find($advertisement->id);
-            $request['start_date']   =  $advertisement->created_at;
-            $request['end_date']    =  $advertisement->updated_at;
-            $request['price_one']    =  50;
-            $request['price_two']    =  70;
-            $request['price_three']    =  90;
+            // // $ads    = Advertisement::find($advertisement->id);
+            // $request['start_date']   =  $advertisement->created_at;
+            // $request['end_date']    =  $advertisement->updated_at;
+            // $request['price_one']    =  50;
+            // $request['price_two']    =  70;
+            // $request['price_three']    =  90;
 
 
 
 
-            $this->repositry->edit($advertisement->id, $request->except('images', 'id'));
+            // $this->repositry->edit($advertisement->id, $request->except('images', 'id'));
 
             if (isset($request->images)) {
                 foreach ($request->images as $image) {
