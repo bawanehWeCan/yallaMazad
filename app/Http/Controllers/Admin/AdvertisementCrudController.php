@@ -107,14 +107,13 @@ class AdvertisementCrudController extends CrudController
             'name'        => 'status',
             'label'       => "Status",
             'type'        => 'select_from_array',
-            'options'     => ['قيد المراجعة' => 'قيد المراجعة',
-                             'جاري الان' => 'جاري الان',
-                             'منتهي' => 'منتهي',
-                             'مرفوض' => 'مرفوض',
-                             'مقبول - بإنتظار بدأ المزاد' => 'مقبول - بإنتظار بدأ المزاد',
+            'options'     => [
+                                'pending'=>'pending',
+                                'approve'=>'approve',
+                                'rejected'=>'rejected',
                             ],
             'allows_null' => false,
-            'default'=> 'قيد المراجعة',
+            'default'=> 'pending',
             // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
                         ]);
         CRUD::field('buy_now_price')->type('text');
@@ -175,11 +174,10 @@ class AdvertisementCrudController extends CrudController
             'name'        => 'status',
             'label'       => "Status",
             'type'        => 'select_from_array',
-            'options'     => ['قيد المراجعة' => 'قيد المراجعة',
-                             'جاري الان' => 'جاري الان',
-                             'منتهي' => 'منتهي',
-                             'مرفوض' => 'مرفوض',
-                             'مقبول - بإنتظار بدأ المزاد' => 'مقبول - بإنتظار بدأ المزاد',
+            'options'     => [
+                                'pending'=>'pending',
+                                'approve'=>'approve',
+                                'rejected'=>'rejected',
                             ],
             'allows_null' => false,
             // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
