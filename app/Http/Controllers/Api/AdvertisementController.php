@@ -87,7 +87,7 @@ class AdvertisementController extends ApiController
     public function lookfor(Request $request)
     {
         $advertisements =  $this->model->where('name','like',"%$request->value%")->where('status','approve')->paginate(10);
-        $this->returnData('data', AdvertisementResource::collection($advertisement), __('Succesfully'));
+        $this->returnData('data', AdvertisementResource::collection($advertisements), __('Succesfully'));
     }
 
 
@@ -100,6 +100,6 @@ class AdvertisementController extends ApiController
     public function pagination($length = 10)
     {
         $advertisements =  $this->model->where('status','approve')->paginate($length);
-        $this->returnData('data', AdvertisementResource::collection($advertisement), __('Succesfully'));
+        $this->returnData('data', AdvertisementResource::collection($advertisements), __('Succesfully'));
     }
 }
