@@ -9,6 +9,7 @@ use App\Repositories\Repository;
 use App\Http\Requests\AdvertisementRequest;
 use App\Http\Resources\AdvertisementResource;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ApiController;
 use Exception;
 
