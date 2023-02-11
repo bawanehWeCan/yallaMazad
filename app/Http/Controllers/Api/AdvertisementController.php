@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Advertisement;
+use Exception;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use App\Models\Advertisement;
 use App\Repositories\Repository;
-use App\Http\Requests\AdvertisementRequest;
-use App\Http\Resources\AdvertisementResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ApiController;
-use Exception;
+use App\Http\Requests\AdvertisementRequest;
+use App\Http\Resources\AdvertisementResource;
 
 class AdvertisementController extends ApiController
 {
@@ -22,7 +22,7 @@ class AdvertisementController extends ApiController
         $this->repositry =  new Repository($this->model);
     }
 
-  public function save(Request $request)
+    public function save(Request $request)
     {
         try {
             $request['user_id'] = Auth::user()->id; // cuze mobile
@@ -86,8 +86,8 @@ class AdvertisementController extends ApiController
 
     public function lookfor(Request $request)
     {
-
-        return $this->search('name', $request->value);
+        $advertisements =  $this->model->where('name','like',"%$request->value%")->where('status','approve')->paginate(10);
+        $this->returnData('data', AdvertisementResource::collection($advertisement), __('Succesfully'));
     }
 
 
@@ -95,5 +95,11 @@ class AdvertisementController extends ApiController
     {
 
         return $this->listWithOrder('views', 'DESC');
+    }
+
+    public function pagination($length = 10)
+    {
+        $advertisements =  $this->model->where('status','approve')->paginate($length);
+        $this->returnData('data', AdvertisementResource::collection($advertisement), __('Succesfully'));
     }
 }
