@@ -94,7 +94,9 @@ class AdvertisementController extends ApiController
     public function getPopularAdvertisings()
     {
 
-        return $this->listWithOrder('views', 'DESC');
+        $advertisements =  $this->model->orderByDesc('views')->where('status','approve')->paginate(10);
+        return $this->returnData('data', AdvertisementResource::collection($advertisements), __('Succesfully'));
+
     }
 
     public function pagination($length = 10)

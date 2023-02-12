@@ -37,7 +37,7 @@ class CategoryController extends ApiController
 
         // $category = Category::find( $category_id );
 
-        $advertisements = Advertisement::where('category_id',$category_id)->paginate(10) ;
+        $advertisements = Advertisement::where('category_id',$category_id)->where('status','approve')->paginate(10) ;
         return $this->returnData('data',  AdvertisementResource::collection( $advertisements ), __('Get  succesfully'));
 
     }
