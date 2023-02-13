@@ -25,21 +25,9 @@ class AdvertisementRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|min:4|max:255',
-            'content'=>'required|min:4|max:2000',
-            'start_price'=>'required|numeric',
-            'status'=>'nullable|min:4|max:2000',
-            'buy_now_price'=>'required|numeric',
-            'views'=>'required|numeric',
-            'number_of_bids'=>'required|numeric',
-            'user_id'=>'required|exists:users,id',
-            'category_id'=>'required|exists:categories,id',
-            'price_one'=>'nullable|numeric',
-            'price_two'=>'nullable|numeric',
-            'price_three'=>'nullable|numeric',
-            'start_date'=>'required',
-            'end_date'=>['required',new DeterminEndDate($this->start_date)],
-
+           
+            'status'=>'required|in:pending,approve,rejected',
+           
         ];
     }
 
