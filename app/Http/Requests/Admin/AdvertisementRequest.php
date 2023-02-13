@@ -30,8 +30,6 @@ class AdvertisementRequest extends FormRequest
             'start_price'=>'required|numeric',
             'status'=>'required|in:pending,approve,rejected',
             'buy_now_price'=>'required|numeric',
-            'views'=>'required|numeric',
-            'number_of_bids'=>'required|numeric',
             'category_id'=>'required|exists:categories,id',
             'price_one'=>'nullable|numeric',
             'price_two'=>'nullable|numeric',
