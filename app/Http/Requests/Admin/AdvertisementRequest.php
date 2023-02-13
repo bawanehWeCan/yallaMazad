@@ -31,16 +31,5 @@ class AdvertisementRequest extends FormRequest
         ];
     }
 
-      /**
-     * Get the validation attributes that apply to the request.
-     *
-     * @return array
-     */
-    public function attributes()
-    {
-        return [
-            'user_id' => 'user',
-            'category_id' => 'category',
-        ];
-    }
+    
 }
