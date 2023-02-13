@@ -41,6 +41,7 @@ class AdvertisementCrudController extends CrudController
     {
         CRUD::column('id')->label('number');
         CRUD::column('name');
+        CRUD::column('image')->type('image');
         CRUD::column('content');
         CRUD::column('start_price');
         CRUD::column('status');
@@ -70,6 +71,7 @@ class AdvertisementCrudController extends CrudController
         'function' => function(Advertisement $entry) {
             return $entry?->user?->name;
         }]);
+       CRUD::column('image')->type('image');
        CRUD::addColumn(['name' => 'category', 'label'=>'Category','type'     => 'closure',
         'function' => function(Advertisement $entry) {
             return $entry?->category?->name;
@@ -87,17 +89,18 @@ class AdvertisementCrudController extends CrudController
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
-    /**
-     * Define what happens when the Create operation is loaded.
-     *
-     * @see https://backpackforlaravel.com/docs/crud-operation-create
-     * @return void
-     */
+
+
 
     protected function setupUpdateOperation()
     {
         CRUD::setValidation(AdvertisementRequest::class);
-
+        $ad = Advertisement::findOrFail(\Route::current()->parameter('id'));
+        CRUD::field('name')->type('text');
+        CRUD::field('content');
+        CRUD::field('start_price')->type('text');
+        CRUD::field('start_date')->type('datetime');
+        CRUD::field('end_date')->type('datetime');
         CRUD::addField([   // select_from_array
             'name'        => 'status',
             'label'       => "Status",
@@ -110,7 +113,23 @@ class AdvertisementCrudController extends CrudController
             'allows_null' => false,
             // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
                         ]);
+        CRUD::field('buy_now_price')->type('text');
+        CRUD::addField(['name'=>'views','type'=>'hidden']);
+        CRUD::addField(['name'=>'number_of_bids','type'=>'hidden']);
 
-
+            $this->crud->addField(
+            [  // Select
+                'label'     => "Category",
+                'type'      => 'select',
+                'name'      => 'category_id', // the db column for the foreign key
+                'model'     => "App\Models\Category", // related model
+                'attribute' => 'name', // foreign key attribute that is shown to user
+                'options'   => (function ($query) {
+                    return $query->latest()->get();
+                }), //  you can use this to filter the results show in the select
+            ]);
+        CRUD::field('price_one')->type('text');
+        CRUD::field('price_two')->type('text');
+        CRUD::field('price_three')->type('text');
     }
 }
