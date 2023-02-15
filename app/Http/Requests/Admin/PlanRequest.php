@@ -37,9 +37,9 @@ class PlanRequest extends FormRequest
             'price'=>'required|numeric',
             'number_of_auction'=>'required|numeric',
             'time'=>'required|numeric',
-            'point_one'=>'nullabl|min:4|max:2000',
-            'point_two'=>'nullabl|min:4|max:2000',
-            'point_three'=>'nullabl|min:4|max:2000',
+            'point_one'=>'nullable|min:4|max:2000',
+            'point_two'=>'nullable|min:4|max:2000',
+            'point_three'=>'nullable|min:4|max:2000',
         ];
     }
 
