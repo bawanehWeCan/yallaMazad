@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Image;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\Admin\ImageRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -125,7 +126,7 @@ class ImageCrudController extends CrudController
 
         /** @var \Illuminate\Http\Request $request */
         $request = $this->crud->getRequest();
-        if ($request->has('images')) {
+        if ($request->has('images') ) {
             foreach ($request->images as $k => $image) {
 
 
@@ -145,7 +146,7 @@ class ImageCrudController extends CrudController
     protected function setupDeleteOperation()
     {
         $image = Image::findOrFail(\Route::current()->parameter('id'));
-        if ($image) {
+        if ($image && File::exists($image->image)) {
             unlink($image->image);
         }
     }

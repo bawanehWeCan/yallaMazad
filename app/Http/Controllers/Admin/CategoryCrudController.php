@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\Admin\CategoryRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -138,7 +139,7 @@ class CategoryCrudController extends CrudController
         $request = $this->crud->getRequest();
         if ($update == 'update') {
             $category = Category::findOrFail(\Route::current()->parameter('id'));
-            if($request->has('image')){
+            if($request->has('image') && File::exists($category->image)){
                 unlink($category->image);
             }
         }
@@ -149,7 +150,7 @@ class CategoryCrudController extends CrudController
     protected function setupDeleteOperation()
     {
         $category = Category::findOrFail(\Route::current()->parameter('id'));
-        if ($category) {
+        if ($category && File::exists($category->image)) {
             unlink($category->image);
         }
     }

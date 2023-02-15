@@ -114,6 +114,7 @@ class AdvertisementCrudController extends CrudController
             // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
                         ]);
         CRUD::field('buy_now_price')->type('text');
+       
             $this->crud->addField(
             [  // Select
                 'label'     => "Category",
