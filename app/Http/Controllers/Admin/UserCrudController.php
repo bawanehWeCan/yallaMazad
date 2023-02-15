@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\UserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
+use App\Http\Requests\Admin\UserRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -144,7 +145,7 @@ class UserCrudController extends CrudController
             if(empty($request->password)){
                 $request->request->remove('password');
             }
-            if($request->has('image')){
+            if($request->has('image') && File::exists($user->image)){
                 unlink($user->image);
             }
         }
@@ -155,7 +156,7 @@ class UserCrudController extends CrudController
     protected function setupDeleteOperation()
     {
         $user = User::findOrFail(\Route::current()->parameter('id'));
-        if ($user) {
+        if ($user && File::exists($user->image)) {
             unlink($user->image);
         }
     }

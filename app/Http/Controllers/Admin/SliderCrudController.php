@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\SliderRequest;
 use App\Models\Slider;
+use Illuminate\Support\Facades\File;
+use App\Http\Requests\Admin\SliderRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -150,7 +151,7 @@ class SliderCrudController extends CrudController
         $request = $this->crud->getRequest();
         if ($update == 'update') {
             $slider = Slider::findOrFail(\Route::current()->parameter('id'));
-            if($request->has('image')){
+            if($request->has('image')&& File::exists($slider->image)){
                 unlink($slider->image);
             }
         }
@@ -161,7 +162,7 @@ class SliderCrudController extends CrudController
     protected function setupDeleteOperation()
     {
         $slider = Slider::findOrFail(\Route::current()->parameter('id'));
-        if ($slider) {
+        if ($slider&& File::exists($slider->image)) {
             unlink($slider->image);
         }
     }
