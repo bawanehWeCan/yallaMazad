@@ -40,6 +40,7 @@ class AdvertisementResource extends JsonResource
             'start_date'=>(string)$this->start_date,
             'end_date'=>(string)$this->end_date ,
             'status'=>$this->status,
+            'reject_description'=>$this->reject_description,
             'buy_now_price'=>$this->buy_now_price,
             'views'=>$this->views,
             'number_of_bids'=>$this->number_of_bids,
