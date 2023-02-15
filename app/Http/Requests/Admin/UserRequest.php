@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
-use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
