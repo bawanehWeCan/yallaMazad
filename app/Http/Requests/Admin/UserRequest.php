@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use Illuminate\Support\Facades\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -27,7 +28,7 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required | string ',
             'email' => 'required|email|unique:users,email,'.$this->id,
-            'password' => 'required|min:8',
+            'password' => ['required_without:id', 'nullable',Password::min(8)],
             'phone' => 'required|min:9|regex:/^([0-9\s\-\+\(\)]*)$/|unique:users,phone,'.$this->id,
             'type' => 'required|in:admin,user',
             'image'=>'required_without:id|mimes:jpg,gif,jpeg,png',
