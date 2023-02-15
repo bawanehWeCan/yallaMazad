@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Badge;
-use App\Http\Requests\BadgeRequest;
+use App\Http\Requests\Admin\BadgeRequest;
 use Illuminate\Support\Facades\File;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
