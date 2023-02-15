@@ -44,7 +44,7 @@ class ImageCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->groupBy('advertisement_id');
+        $this->crud->orderBy('advertisement_id');
         CRUD::addColumn(['name' => 'advertisement', 'label'=>'Ad name','type'     => 'closure',
         'function' => function(Image $entry) {
             return $entry?->advertisement?->name;
