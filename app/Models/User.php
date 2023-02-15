@@ -6,11 +6,14 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Hash;
 // use Spatie\Permission\Traits\HasRoles;
 
 
 class User extends Authenticatable
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasApiTokens;
     use Notifiable;
     // use HasRoles;
@@ -25,6 +28,7 @@ class User extends Authenticatable
         'email',
         'password',
         'image',
+        'type',
         'phone'
     ];
 
@@ -52,8 +56,8 @@ class User extends Authenticatable
             $file = $value;
             $extension = $file->getClientOriginalExtension(); // getting image extension
             $filename =time().mt_rand(1000,9999).'.'.$extension;
-            $file->move(public_path('img/'), $filename);
-            $this->attributes['image'] =  'img/'.$filename;
+            $file->move(public_path('img/profiles/'), $filename);
+            $this->attributes['image'] =  'img/profiles/'.$filename;
         }
     }
 
@@ -84,5 +88,12 @@ class User extends Authenticatable
 
     public function notifications(){
         return $this->hasMany(Notification::class);
+    }
+
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => Hash::make($value),
+        );
     }
 }
