@@ -27,8 +27,8 @@ class PageRequest extends FormRequest
         return [
             'en' => 'required|min:4|max:255',
             'ar' => 'required|min:4|max:255',
-            'content_en'=>'required|min:4|max:2000',
-            'content_ar'=>'required|min:4|max:2000',
+            'content_en'=>'required|min:4|max:60000',
+            'content_ar'=>'required|min:4|max:60000',
         ];
     }
     /**
