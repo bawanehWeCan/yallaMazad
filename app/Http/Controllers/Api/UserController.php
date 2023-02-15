@@ -92,7 +92,7 @@ class UserController extends ApiController
     {
 
         // $advertisements = Auth::user()->advertisements;
-        $advertisements = Advertisement::where('user_id',Auth::user()->id)->paginate(10) ;
+        $advertisements = Advertisement::where('user_id',Auth::user()->id)->orderBy('id', 'DESC')->paginate(10) ;
         return $this->returnData('data',  AdvertisementResource::collection( $advertisements ), __('Get  succesfully'));
 
     }
