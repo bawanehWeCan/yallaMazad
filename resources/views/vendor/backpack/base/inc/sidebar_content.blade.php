@@ -12,3 +12,5 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('bid') }}"><i class="nav-icon la la-th-list"></i> Bids</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('image') }}"><i class="nav-icon la la-question"></i> Images</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('subscription') }}"><i class="nav-icon la la-question"></i> Subscriptions</a></li>
+
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('badge') }}"><i class="nav-icon la la-question"></i> Badges</a></li>
