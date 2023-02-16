@@ -42,6 +42,9 @@ class CategoryController extends ApiController
 
     }
 
+  
+
+ 
 
     // public function getAdvByCategory($category_id){
 
@@ -51,7 +54,7 @@ class CategoryController extends ApiController
 
     //     $data['now']=AdvertisementResource::collection(Advertisement::where('category_id',$category_id)->where('status','approve')->where('start_date', '>=', $date)->where('end_date', '<=', $date)->paginate(10) );
     //     $data['next']=AdvertisementResource::collection(Advertisement::where('category_id',$category_id)->where('status','approve')->where('start_date', '>', $date)->paginate(10) );;
-    //     $data[ 'finished' ]= AdvertisementResource::collection(Advertisement::where('category_id',$category_id)->where('status','approve')->where('end_date', '<', $date)->paginate(10) );
+    //     $data[ 'finished']= AdvertisementResource::collection(Advertisement::where('category_id',$category_id)->where('status','approve')->where('end_date', '<', $date)->paginate(10) );
     //     return $this->returnData( 'data' ,  $data , __('Succesfully'));
 
 

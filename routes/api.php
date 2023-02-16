@@ -175,6 +175,8 @@ Route::get('bid/{id}', [BidController::class, 'view']);
 Route::get('bid/delete/{id}', [BidController::class, 'delete']);
 Route::post('bid/edit/{id}', [BidController::class, 'edit']);
 
+//direct sale
+Route::post('direct-sale', [BidController::class, 'directSale']);
 
 //Favorite
 Route::get('favorites', [FavoriteController::class, 'pagination']);
