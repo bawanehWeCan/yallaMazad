@@ -115,7 +115,7 @@ class BidController extends ApiController
 
                 ]);
 
-                $ads->update(['status' => 'complete']);
+                $ads->update(['status' => "complete"]);
 
                 $fav = new Favorite();
                 $fav->user_id = $request->user_id;
