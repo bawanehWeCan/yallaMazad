@@ -25,11 +25,12 @@ class PageRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:4|max:255',
-            'content' => 'required|min:4|max:60000'
+            'en' => 'required|min:4|max:255',
+            'ar' => 'required|min:4|max:255',
+            'content_en'=>'required|min:4|max:60000',
+            'content_ar'=>'required|min:4|max:60000',
         ];
     }
-
     /**
      * Get the validation attributes that apply to the request.
      *
@@ -38,7 +39,8 @@ class PageRequest extends FormRequest
     public function attributes()
     {
         return [
-            //
+            'content_en'=>'English Content',
+            'content_ar'=>'Arabic Content',
         ];
     }
 

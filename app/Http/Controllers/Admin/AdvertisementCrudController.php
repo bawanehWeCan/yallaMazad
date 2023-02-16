@@ -64,6 +64,7 @@ class AdvertisementCrudController extends CrudController
         CRUD::column('start_price');
         CRUD::column('end_date');
         CRUD::column('status');
+        CRUD::column('reject_description');
         CRUD::column('buy_now_price');
         CRUD::column('views');
         CRUD::column('number_of_bids');
@@ -113,8 +114,9 @@ class AdvertisementCrudController extends CrudController
             'allows_null' => false,
             // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
                         ]);
+        CRUD::field('reject_description')->type('textarea');
         CRUD::field('buy_now_price')->type('text');
-       
+
             $this->crud->addField(
             [  // Select
                 'label'     => "Category",
