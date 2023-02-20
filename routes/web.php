@@ -37,7 +37,7 @@ Route::get('firebase', function () {
 
 Route::get('clear', function () {
 
-    \Artisan::call("ptimize:clear");
+    \Artisan::call("optimize:clear");
 });
 
 
