@@ -90,10 +90,10 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class);
     }
 
-    protected function password(): Attribute
-    {
-        return Attribute::make(
-            set: fn ($value) => Hash::make($value),
-        );
-    }
+    // protected function password(): Attribute
+    // {
+    //     return Attribute::make(
+    //         set: fn ($value) => Hash::make($value),
+    //     );
+    // }
 }
