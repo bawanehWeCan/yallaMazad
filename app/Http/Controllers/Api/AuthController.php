@@ -307,15 +307,8 @@ class AuthController extends Controller
 
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET', '://82.212.81.40:8080/websmpp/websms', [
-            'query' => [
-                'user' => 'Wecan',
-                'pass' => 'Suh12346',
-                'sid' => 'Yalla Mazad',
-                'mno' => $phone,
-                'text' => "Your OTP is " . $otp . " for your account",
-                'respformat' => 'json',
-            ],
+        $response = $client->request('GET', "://82.212.81.40:8080/websmpp/websms?user=Wecan&pass=Suh12346&sid=Yalla Mazad&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json", [
+            
             'headers' => [
                 'Authorization' => 'Bearer 2c1d0706b21b715ff1e5a480b8360d90',
                 'Accept'     => 'application/json',
