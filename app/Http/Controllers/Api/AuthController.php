@@ -322,7 +322,7 @@ class AuthController extends Controller
             ]
         ]);
 
-        dd( $response );
+        // dd( $response );
 
         return $otp;
     }
