@@ -27,4 +27,11 @@ class Advertisement extends Model
     public function getImageAttribute(){
         return (!empty( $this?->images->first()?->image))? $this->images->first()->image :'';
     }
+
+    public function buyer(){
+        return $this->hasOne(Adv_User::class);
+    }
+    public function bids(){
+        return $this->hasMany(Bid::class);
+    }
 }

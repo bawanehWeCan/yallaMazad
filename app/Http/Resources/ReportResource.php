@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BadgeResource extends JsonResource
+class ReportResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,15 @@ class BadgeResource extends JsonResource
     public function toArray($request)
     {
         return [
+
             'id'=>$this->id,
-            'name'=>(string)$this->name,
-            'image'=>$this->image,
-            'user'=>$this->user->id,
+            'title'=>$this->title,
+            'content'=>$this->content,
+            'advertisment'=>new AdvertisementResource($this?->advertisement),
+            'receiver'=>new UserResource($this?->user),
+            'sender'=>new UserResource($this?->sender),
+
+
         ];
     }
 }

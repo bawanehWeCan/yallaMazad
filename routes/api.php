@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\CategoryUserController;
 use App\Http\Controllers\Api\TipController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\PageController;
+use App\Http\Controllers\Api\ReportController;
 
 
 /*
@@ -212,3 +213,6 @@ Route::post('page/edit/{id}', [PageController::class, 'edit']);
 //get time
 Route::get('get-time', [BidController::class, 'getTime']);
 
+
+//send report to user or to adv
+Route::post('send-report', [ReportController::class, 'save']);
