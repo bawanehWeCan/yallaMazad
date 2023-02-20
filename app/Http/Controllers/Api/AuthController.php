@@ -311,7 +311,7 @@ class AuthController extends Controller
 
         curl_close($ch);
 
-        curl_setopt($ch, CURLOPT_URL, "://82.212.81.40:8080/websmpp/websms");
+        curl_setopt($ch, CURLOPT_URL, "https://gwjo1s.broadnet.me:8443/websmpp/websms");
         curl_setopt($ch, CURLOPT_POST, 1);
 
 
