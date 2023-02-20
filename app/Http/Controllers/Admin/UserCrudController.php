@@ -16,7 +16,9 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class UserCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
+        store as traitStore;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation{
         update as traitUpdate;
     }
@@ -80,6 +82,12 @@ class UserCrudController extends CrudController
          * - $this->crud->addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
+    public function store()
+    {
+        $this->insertDataWithValidation();
+        return $this->traitStore();
+    }
+
     public function update()
     {
         $this->insertDataWithValidation('update');
