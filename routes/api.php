@@ -204,3 +204,7 @@ Route::get('page/{id}', [PageController::class, 'view']);
 Route::get('page/delete/{id}', [PageController::class, 'delete']);
 Route::post('page/edit/{id}', [PageController::class, 'edit']);
 
+
+//get time
+Route::get('get-time', [BidController::class, 'getTime']);
+

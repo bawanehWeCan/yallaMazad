@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ApiController;
 use App\Models\Advertisement;
 use App\Models\User;
+use Carbon\Carbon;
 
 class BidController extends ApiController
 {
@@ -142,4 +143,15 @@ class BidController extends ApiController
 
         return $this->update($id, $request->all());
     }
+
+
+    public function getTime()
+{
+    $mytime =Carbon::now();
+     return $this->returnSuccessMessage($mytime->toDateTimeString());
+
+
+}
+
+
 }

@@ -42,9 +42,23 @@ class CategoryController extends ApiController
 
     }
 
-  
+    // public function getAdvByCategory($category_id){
 
- 
+    //     // $category = Category::find( $category_id );
+
+    //     $advertisements = Advertisement::where('category_id',$category_id)->
+    //     orderByRaw(DB::raw("
+    //         CASE status WHEN 'now' THEN 1
+    //                WHEN 'next' THEN 2
+    //                WHEN 'finished' THEN 3
+    //                ELSE 4 END ASC"))->paginate(10) ;
+    //     return $this->returnData('data',  AdvertisementResource::collection( $advertisements ), __('Get  succesfully'));
+
+    // }
+
+
+
+
 
     // public function getAdvByCategory($category_id){
 
