@@ -68,9 +68,13 @@ class AdvertisementCrudController extends CrudController
         CRUD::column('buy_now_price');
         CRUD::column('views');
         CRUD::column('number_of_bids');
-        CRUD::addColumn(['name' => 'user', 'label'=>'User','type'     => 'closure',
+        CRUD::addColumn(['name' => 'buyer', 'label'=>'Advertisement Buyer','type'     => 'closure',
         'function' => function(Advertisement $entry) {
-            return $entry?->user?->name;
+            return $entry?->buyer?->name;
+        }]);
+        CRUD::addColumn(['name' => 'winner', 'label'=>'Advertisement Winner','type'     => 'closure',
+        'function' => function(Advertisement $entry) {
+            return $entry?->bids()?->max('price')->user?->name;
         }]);
        CRUD::column('image')->type('image');
        CRUD::addColumn(['name' => 'category', 'label'=>'Category','type'     => 'closure',
