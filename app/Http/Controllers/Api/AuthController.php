@@ -187,16 +187,16 @@ class AuthController extends Controller
     public function updatePassword(Request $request)
     {
         $user = Auth::user();
-        $old_pw =$request->old_password;
+        $old_pw = $request->old_password;
 
-    //   if ($user->password == $old_pw)
+        //   if ($user->password == $old_pw)
 
-        if(Hash::check($old_pw, $user->password)){
+        if (Hash::check($old_pw, $user->password)) {
 
 
-                $user->update([
-                    'password' => Hash::make($request->new_password),
-                ]);
+            $user->update([
+                'password' => Hash::make($request->new_password),
+            ]);
 
             return $this->returnSuccessMessage('Password has been changed');
         }
@@ -305,26 +305,38 @@ class AuthController extends Controller
         $otp = 5555;
         // $otp = mt_rand(1000, 9999);
 
-        $curl = curl_init();
+        // $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "://82.212.81.40:8080/websmpp/websms",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "user=Wecan&pass=Suh12346&sid=Yalla Mazad&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json",
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer 2c1d0706b21b715ff1e5a480b8360d90"
-            ),
+        // curl_setopt_array($curl, array(
+        //     CURLOPT_URL => "://82.212.81.40:8080/websmpp/websms",
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_ENCODING => "",
+        //     CURLOPT_MAXREDIRS => 10,
+        //     CURLOPT_TIMEOUT => 0,
+        //     CURLOPT_FOLLOWLOCATION => true,
+        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //     CURLOPT_CUSTOMREQUEST => "POST",
+        //     CURLOPT_POSTFIELDS => "user=Wecan&pass=Suh12346&sid=Yalla Mazad&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json",
+        //     CURLOPT_HTTPHEADER => array(
+        //         "Authorization: Bearer 2c1d0706b21b715ff1e5a480b8360d90"
+        //     ),
+        // ));
+
+        // curl_exec($curl);
+
+        // curl_close($curl);
+
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, "://82.212.81.40:8080/websmpp/websms?user=Wecan&pass=Suh12346&sid=Yalla Mazad&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json");
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "user=Wecan&pass=Suh12346&sid=Yalla Mazad&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Authorization: Bearer 2c1d0706b21b715ff1e5a480b8360d90"
         ));
 
-        curl_exec($curl);
-
-        curl_close($curl);
+        curl_exec($ch);
 
         return $otp;
     }
