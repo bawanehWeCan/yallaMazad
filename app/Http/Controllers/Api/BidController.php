@@ -77,7 +77,7 @@ class BidController extends ApiController
     
                 }
     
-                else
+                else{
     
                     return $this->returnSuccessMessage(__('Please, sub plan first'));
                 }
