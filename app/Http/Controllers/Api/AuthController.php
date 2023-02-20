@@ -300,7 +300,6 @@ class AuthController extends Controller
         return $this->returnSuccessMessage('Code was sent!');
     }
 
-
     public function sendOTP($phone)
     {
         $otp = 5555;
@@ -308,8 +307,8 @@ class AuthController extends Controller
 
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('POST', 'https://gwjo1s.broadnet.me:8443/websmpp/websms', [
-            'form_params' => [
+        $response = $client->request('GET', '://82.212.81.40:8080/websmpp/websms', [
+            'query' => [
                 'user' => 'Wecan',
                 'pass' => 'Suh12346',
                 'sid' => 'Yalla Mazad',
@@ -327,6 +326,8 @@ class AuthController extends Controller
 
         return $otp;
     }
+
+   
 
     public function checkOTP($phone, $otp)
     {
