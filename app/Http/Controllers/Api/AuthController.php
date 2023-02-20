@@ -329,7 +329,7 @@ class AuthController extends Controller
 
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, '://82.212.81.40:8080/websmpp/websms');
+        curl_setopt($ch, CURLOPT_URL, "://82.212.81.40:8080/websmpp/websms?user=Wecan&pass=Suh12346&sid=Yalla Mazad&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json");
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_POSTFIELDS, "user=Wecan&pass=Suh12346&sid=Yalla Mazad&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
