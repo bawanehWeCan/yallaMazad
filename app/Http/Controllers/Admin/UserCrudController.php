@@ -140,6 +140,10 @@ class UserCrudController extends CrudController
 
         /** @var \Illuminate\Http\Request $request */
         $request = $this->crud->getRequest();
+        if(!empty($request->password)){
+            $password = bcrypt($request->password);
+            $request->request->set('password', $password);
+        }
         if ($update == 'update') {
             $user = User::findOrFail(\Route::current()->parameter('id'));
             if(empty($request->password)){

@@ -265,6 +265,9 @@ class AuthController extends Controller
     }
 
 
+
+
+
     public function updatePhone(Request $request, $id)
     {
         $user = User::find($id);

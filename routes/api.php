@@ -45,6 +45,7 @@ Route::post('phone-update/{id}', [AuthController::class, 'updatePhone']);
 Route::post('resend-otp/{id}', [AuthController::class, 'resendOTP']);
 
 
+
 Route::post('add-badge', [UserController::class, 'addBadge']);
 Route::get('delete-badge/{id}', [UserController::class, 'deleteBadge']);
 
@@ -52,6 +53,9 @@ Route::get('delete-badge/{id}', [UserController::class, 'deleteBadge']);
 
 //Auth
 Route::middleware(['auth:api','changeLang'])->group(function () {
+
+
+    Route::get('logout', [AuthController::class, 'logout']);
 
     Route::post('/user-update', [AuthController::class, 'updateProfile']);
 
