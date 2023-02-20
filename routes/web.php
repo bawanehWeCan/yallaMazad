@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AddressController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,4 +33,12 @@ Route::get('firebase', function () {
 
     ]);
 });
+
+
+Route::get('clear', function () {
+
+    \Artisan::call("ptimize:clear");
+});
+
+
 
