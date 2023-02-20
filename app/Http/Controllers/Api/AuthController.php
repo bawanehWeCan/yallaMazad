@@ -329,14 +329,61 @@ class AuthController extends Controller
 
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "://82.212.81.40:8080/websmpp/websms?user=Wecan&pass=Suh12346&sid=Yalla Mazad&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json");
+        curl_setopt($ch, CURLOPT_URL, "://82.212.81.40:8080/websmpp/websms");
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_POSTFIELDS, "user=Wecan&pass=Suh12346&sid=Yalla Mazad&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json");
+        curl_setopt(
+            $ch,
+            CURLOPT_POSTFIELDS,
+            http_build_query(array(
+                'user' => 'Wecan',
+                'pass' => 'Suh12346',
+                'sid' => 'Yalla Mazad',
+                'mno' => $phone,
+                'text' => "Your OTP is " . $otp . " for your account",
+                'respformat' => 'jspn',
+            ),)
+        );
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             "Authorization: Bearer 2c1d0706b21b715ff1e5a480b8360d90"
         ));
 
         curl_exec($ch);
+
+
+        $ch = curl_init();
+
+        curl_close($ch);
+
+        curl_setopt($ch, CURLOPT_URL, "://82.212.81.40:8080/websmpp/websms");
+        curl_setopt($ch, CURLOPT_POST, 1);
+
+
+        // In real life you should use something like:
+        curl_setopt(
+            $ch,
+            CURLOPT_POSTFIELDS,
+            http_build_query(array(
+                'user' => 'Wecan',
+                'pass' => 'Suh12346',
+                'sid' => 'Yalla Mazad',
+                'mno' => $phone,
+                'text' => "Your OTP is " . $otp . " for your account",
+                'respformat' => 'jspn',
+            ),)
+        );
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Authorization: Bearer 2c1d0706b21b715ff1e5a480b8360d90"
+        ));
+
+        // Receive server response ...
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $server_output = curl_exec($ch);
+
+        dd( $server_output );
+
+        curl_close($ch);
 
         return $otp;
     }
