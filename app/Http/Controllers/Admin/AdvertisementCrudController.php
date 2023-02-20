@@ -74,7 +74,7 @@ class AdvertisementCrudController extends CrudController
         }]);
         CRUD::addColumn(['name' => 'winner', 'label'=>'Advertisement Winner','type'     => 'closure',
         'function' => function(Advertisement $entry) {
-            return $entry?->bids()?->max('price')->user?->name;
+            return $entry?->bids()?->max('price')->user;
         }]);
        CRUD::column('image')->type('image');
        CRUD::addColumn(['name' => 'category', 'label'=>'Category','type'     => 'closure',
