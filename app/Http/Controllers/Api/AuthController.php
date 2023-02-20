@@ -325,7 +325,7 @@ class AuthController extends Controller
                 'sid' => 'Yalla Mazad',
                 'mno' => $phone,
                 'text' => "Your OTP is " . $otp . " for your account",
-                'respformat' => 'jspn',
+                'respformat' => 'json',
             ),)
         );
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -337,7 +337,7 @@ class AuthController extends Controller
 
         $server_output = curl_exec($ch);
 
-        dd( curl_errno($ch) );
+        // dd( curl_errno($ch) );
 
         
         //  throw new Exception(curl_error($ch), curl_errno($ch)) ;
