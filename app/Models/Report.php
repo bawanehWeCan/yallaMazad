@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
+    
     protected $guarded=[];
 
     public function user(){
