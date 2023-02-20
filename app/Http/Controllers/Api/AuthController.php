@@ -308,7 +308,7 @@ class AuthController extends Controller
 
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('POST', '://gwjo1s.broadnet.me:8443/websmpp/websms', [
+        $response = $client->request('POST', 'https://gwjo1s.broadnet.me:8443/websmpp/websms', [
             'form_params' => [
                 'user' => 'Wecan',
                 'pass' => 'Suh12346',
