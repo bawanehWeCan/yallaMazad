@@ -11,6 +11,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Traits\ResponseTrait;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -305,52 +306,7 @@ class AuthController extends Controller
         $otp = 5555;
         // $otp = mt_rand(1000, 9999);
 
-        // $curl = curl_init();
-
-        // curl_setopt_array($curl, array(
-        //     CURLOPT_URL => "://82.212.81.40:8080/websmpp/websms",
-        //     CURLOPT_RETURNTRANSFER => true,
-        //     CURLOPT_ENCODING => "",
-        //     CURLOPT_MAXREDIRS => 10,
-        //     CURLOPT_TIMEOUT => 0,
-        //     CURLOPT_FOLLOWLOCATION => true,
-        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        //     CURLOPT_CUSTOMREQUEST => "POST",
-        //     CURLOPT_POSTFIELDS => "user=Wecan&pass=Suh12346&sid=Yalla Mazad&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json",
-        //     CURLOPT_HTTPHEADER => array(
-        //         "Authorization: Bearer 2c1d0706b21b715ff1e5a480b8360d90"
-        //     ),
-        // ));
-
-        // curl_exec($curl);
-
-        // curl_close($curl);
-
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, "://82.212.81.40:8080/websmpp/websms");
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "user=Wecan&pass=Suh12346&sid=Yalla Mazad&mno=" . $phone . "&text=Your OTP is " . $otp . " for your account&type=1&respformat=json");
-        curl_setopt(
-            $ch,
-            CURLOPT_POSTFIELDS,
-            http_build_query(array(
-                'user' => 'Wecan',
-                'pass' => 'Suh12346',
-                'sid' => 'Yalla Mazad',
-                'mno' => $phone,
-                'text' => "Your OTP is " . $otp . " for your account",
-                'respformat' => 'jspn',
-            ),)
-        );
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer 2c1d0706b21b715ff1e5a480b8360d90"
-        ));
-
-        curl_exec($ch);
-
-
+        
         $ch = curl_init();
 
         curl_close($ch);
@@ -382,6 +338,10 @@ class AuthController extends Controller
         $server_output = curl_exec($ch);
 
         dd( $server_output );
+
+        if ($server_output === false) {
+            dd( new Exception(curl_error($ch), curl_errno($ch)) );
+        }
 
         curl_close($ch);
 
