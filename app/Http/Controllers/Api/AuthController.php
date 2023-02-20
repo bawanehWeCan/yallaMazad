@@ -338,7 +338,7 @@ class AuthController extends Controller
         $server_output = curl_exec($ch);
 
         
-            dd( new Exception(curl_error($ch), curl_errno($ch)) );
+         throw new Exception(curl_error($ch), curl_errno($ch)) ;
         
 
         curl_close($ch);
