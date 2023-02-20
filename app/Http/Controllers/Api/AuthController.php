@@ -306,44 +306,24 @@ class AuthController extends Controller
         $otp = 5555;
         // $otp = mt_rand(1000, 9999);
 
-        
-        $ch = curl_init();
 
-        curl_close($ch);
-
-        curl_setopt($ch, CURLOPT_URL, "://gwjo1s.broadnet.me:8443/websmpp/websms");
-        curl_setopt($ch, CURLOPT_POST, 1);
-
-
-        // In real life you should use something like:
-        curl_setopt(
-            $ch,
-            CURLOPT_POSTFIELDS,
-            http_build_query(array(
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('POST', '://gwjo1s.broadnet.me:8443/websmpp/websms', [
+            'form_params' => [
                 'user' => 'Wecan',
                 'pass' => 'Suh12346',
                 'sid' => 'Yalla Mazad',
                 'mno' => $phone,
                 'text' => "Your OTP is " . $otp . " for your account",
                 'respformat' => 'json',
-            ),)
-        );
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer 2c1d0706b21b715ff1e5a480b8360d90"
-        ));
+            ],
+            'headers' => [
+                'Authorization' => 'Bearer 2c1d0706b21b715ff1e5a480b8360d90',
+                'Accept'     => 'application/json',
+            ]
+        ]);
 
-        // Receive server response ...
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $server_output = curl_exec($ch);
-
-        // dd( curl_errno($ch) );
-
-        
-        //  throw new Exception(curl_error($ch), curl_errno($ch)) ;
-        
-
-        curl_close($ch);
+        dd( $response );
 
         return $otp;
     }
