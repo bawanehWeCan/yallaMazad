@@ -34,7 +34,7 @@ class BidController extends ApiController
             $counts=Adv_User::where('user_id',$request->user_id)->where('advertisement_id',$request->advertisement_id)->get()->count();
             $user=User::find($request->user_id);
             if( $request->price > $ads->high_price ){
-                if($counts==0 ){
+                if($counts==0 || $counts < $user->subscriptions?->latest()?->plan?->number_of_auction){
 
 
                     $user = User::find( $request->user_id );
