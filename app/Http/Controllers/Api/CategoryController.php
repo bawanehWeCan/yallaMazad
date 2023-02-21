@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Category;
-use App\Models\Advertisement;
-use Illuminate\Http\Request;
-use App\Repositories\Repository;
-use App\Http\Requests\CategoryRequest;
-use App\Http\Resources\CategoryResource;
-use App\Http\Resources\AdvertisementResource;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\ApiController;
+use App\Http\Resources\AdvertisementResource;
+use App\Http\Resources\CategoryResource;
+use App\Models\Advertisement;
+use App\Models\Category;
+use App\Repositories\Repository;
+use Illuminate\Http\Request;
 
 class CategoryController extends ApiController
 {
@@ -18,27 +16,35 @@ class CategoryController extends ApiController
     {
         $this->resource = CategoryResource::class;
         $this->model = app(Category::class);
-        $this->repositry =  new Repository($this->model);
+        $this->repositry = new Repository($this->model);
     }
 
-    public function save( Request $request ){
-        return $this->store( $request->all() );
+    public function save(Request $request)
+    {
+        return $this->store($request->all());
     }
 
-    public function edit($id,Request $request){
+    public function edit($id, Request $request)
+    {
 
-
-        return $this->update($id,$request->all());
+        return $this->update($id, $request->all());
 
     }
 
-
-    public function getAdvByCategory($category_id){
+    public function getAdvByCategory($category_id)
+    {
 
         // $category = Category::find( $category_id );
 
-        $advertisements = Advertisement::where('category_id',$category_id)->where('status','approve')->paginate(10) ;
-        return $this->returnData('data',  AdvertisementResource::collection( $advertisements ), __('Get  succesfully'));
+        $advertisements = Advertisement::where('category_id', $category_id)
+            ->where('status', 'approve')
+            ->orWhere('status', 'complete')
+            ->orderBy('status', 'asc')
+            ->orderBy('start_date', 'asc')
+
+            ->paginate(10);
+
+        return $this->returnData('data', AdvertisementResource::collection($advertisements), __('Get  succesfully'));
 
     }
 
@@ -56,12 +62,7 @@ class CategoryController extends ApiController
 
     // }
 
-
-
-
-
     // public function getAdvByCategory($category_id){
-
 
     //     $date = today()->format('Y-m-d H:i:s');
     //     $data = array();
@@ -70,7 +71,6 @@ class CategoryController extends ApiController
     //     $data['next']=AdvertisementResource::collection(Advertisement::where('category_id',$category_id)->where('status','approve')->where('start_date', '>', $date)->paginate(10) );;
     //     $data[ 'finished']= AdvertisementResource::collection(Advertisement::where('category_id',$category_id)->where('status','approve')->where('end_date', '<', $date)->paginate(10) );
     //     return $this->returnData( 'data' ,  $data , __('Succesfully'));
-
 
     //    }
 
