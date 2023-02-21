@@ -32,57 +32,60 @@ class BidController extends ApiController
 
 
             $counts=Adv_User::where('user_id',$request->user_id)->where('advertisement_id',$request->advertisement_id)->get()->count();
-           
-            if( true ){
-                if($counts==0){
+            $user=User::find($request->user_id);
+            if( $request->price > $ads->high_price ){
+                if($counts==0 || $counts < $user->subscriptions?->last?->plan?->number_of_auction){
 
 
                     $user = User::find( $request->user_id );
-    
+
                     $num = (int)$ads->number_of_bids + 1;
                     $ads->number_of_bids = $num;
                     if(\Carbon\Carbon::create(Advertisement::find(1)->end_date)->diffInMinutes(\Carbon\Carbon::now())<=10){
                         $ads->end_date = \Carbon\Carbon::create($ads->end_date)->addMinutes(10);
                     }
                     $ads->save();
-    
+
                     $model = $this->repositry->save($request->all());
-    
+
                     if ($model) {
-    
+
                         $bid = app('firebase.firestore')->database()->collection('auctions')->document($request->advertisement_id)->collection('biddings')->document($model->id); // we will replace this value with auction id
-    
+
                         // insert for decument
                         $bid->set([
                             'amount' => $request->price,
                             'image' => (string)$user->image,
                             'name' => (string)$user->name
-    
+
                         ]);
-    
+
                         $fav = new Favorite();
                         $fav->user_id = $request->user_id;
                         $fav->advertisement_id = $request->advertisement_id;
                         $fav->save();
-    
+
                         $adv_user = new Adv_User();
                         $adv_user->user_id = $request->user_id;
                         $adv_user->advertisement_id = $request->advertisement_id;
                         $adv_user->save();
-    
+
+                        $ads->update(['high_price' => $request->price ]);
+
                             return $this->returnData('data', new $this->resource($model), __('Succesfully'));
-    
-    
+
+
                     }
-    
+
                 }
-    
+
                 else{
-    
+
                     return $this->returnSuccessMessage(__('Please, sub plan first'));
                 }
             }else{
                 //hight price response
+                return $this->returnSuccessMessage(__('The price has already been entered. Please enter a higher price'));
             }
 
             // return $this->returnError(__('Sorry! Failed to create !'));
