@@ -127,6 +127,9 @@ Route::post('slider/edit/{id}', [SliderController::class, 'edit']);
   Route::get('notification/delete/{id}', [NotificationController::class, 'delete']);
   Route::post('notification/edit/{id}', [NotificationController::class, 'edit']);
 
+  //send noti to user
+  Route::post('send-noti', [NotificationController::class, 'sendNotiToUser']);
+
 });
 
 //add categories to user
