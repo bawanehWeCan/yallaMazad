@@ -51,9 +51,11 @@ class AdvertisementResource extends JsonResource
             'price_two'=>100,
             'price_three'=>150,
             'image'=>(string)$this?->image,
+            'high_price'=>(double)$this?->high_price,
             'user'=>UserResource::make($this->user),
             'category'=>CategoryResource::make($this?->category),
             'images'=> ImageResource::collection($this?->images),
+
         ];
     }
 }
