@@ -26,6 +26,8 @@ class BadgeRequest extends FormRequest
         return [
             'user_id'=>'required|exists:users,id',
             'image'=>'required_without:id|mimes:jpg,gif,jpeg,png',
+            'name' => 'required|min:4|max:255',
+
         ];
     }
 }
