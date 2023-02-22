@@ -138,7 +138,10 @@ class AuthController extends Controller
 
             //$user->token = $request->token;
             $user->save();
+            $user->confirm = 1;
+            $user->save();
             Auth::login($user);
+
 
             return response(['status' => true, 'code' => 200, 'msg' => 'success', 'data' => [
                 'token' => $accessToken,
@@ -327,7 +330,7 @@ class AuthController extends Controller
         return $otp;
     }
 
-   
+
 
     public function checkOTP($phone, $otp)
     {
