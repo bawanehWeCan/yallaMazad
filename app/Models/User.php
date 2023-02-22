@@ -112,7 +112,7 @@ class User extends Authenticatable
             if($user->reportSender) $user->reportSender()->delete();
             if($user->reports) $user->reports()->delete();
             if($user->favorites()->count()>0) $user->favorites()->detach();
-            if($user->categories()->count()>0) $user->categories()->detach();
+            if($user->hascategories()->count()>0) $user->hascategories()->detach();
             if ($user->image&&\Illuminate\Support\Facades\File::exists($user->image)) {
                 unlink($user->image);
             }
