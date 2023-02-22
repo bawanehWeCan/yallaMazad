@@ -34,4 +34,13 @@ class Advertisement extends Model
     public function bids(){
         return $this->hasMany(Bid::class);
     }
+
+    protected static function booted()
+    {
+        static::deleted(function ($user) {
+            if($user->bids) $user->bids()->delete();
+            if($user->buyer) $user->buyer()->delete();
+            if($user->images) $user->images()->delete();
+        });
+    }
 }

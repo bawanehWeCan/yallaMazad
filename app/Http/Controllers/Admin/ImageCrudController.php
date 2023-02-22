@@ -143,11 +143,5 @@ class ImageCrudController extends CrudController
 
 
     }
-    protected function setupDeleteOperation()
-    {
-        $image = Image::findOrFail(\Route::current()->parameter('id'));
-        if ($image && File::exists($image->image)) {
-            unlink($image->image);
-        }
-    }
+   
 }

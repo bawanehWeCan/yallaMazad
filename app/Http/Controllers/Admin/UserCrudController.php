@@ -165,11 +165,5 @@ class UserCrudController extends CrudController
         $this->crud->setRequest($request);
         $this->crud->unsetValidation(); // Validation has already been run
     }
-    protected function setupDeleteOperation()
-    {
-        $user = User::findOrFail(\Route::current()->parameter('id'));
-        if ($user && File::exists($user->image)) {
-            unlink($user->image);
-        }
-    }
+   
 }

@@ -24,4 +24,14 @@ class Image extends Model
     public function advertisement(){
         return $this->belongsTo(Advertisement::class);
     }
+
+    protected static function booted()
+    {
+        static::deleted(function ($image) {
+
+            if ($image->image&&\Illuminate\Support\Facades\File::exists($image->image)) {
+                unlink($image->image);
+            }
+        });
+    }
 }

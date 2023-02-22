@@ -29,8 +29,7 @@ class User extends Authenticatable
         'password',
         'image',
         'type',
-        'phone',
-        'confirm'
+        'phone'
     ];
 
     /**
@@ -79,7 +78,12 @@ class User extends Authenticatable
         return $this->hasMany(Badge::class);
     }
 
+    public function bids(){
+        return $this->hasMany(Bid::class);
+    }
+
     public function favorites(){
+
         return $this->belongsToMany(Advertisement::class,'favorites','user_id','advertisement_id')->orderBy('id', 'DESC')->paginate(10);
     }
 
@@ -90,13 +94,29 @@ class User extends Authenticatable
     public function notifications(){
         return $this->hasMany(Notification::class);
     }
+    public function reportSender(){
+        return $this->hasMany(Report::class,'sender_id');
+    }
+    public function reports(){
+        return $this->hasMany(Report::class,'user_id');
+    }
 
+    protected static function booted()
+    {
+        static::deleted(function ($user) {
+            if($user->subscriptions) $user->subscriptions()->delete();
+            if($user->advertisements) $user->advertisements()->delete();
+            if($user->badges) $user->badges()->delete();
+            if($user->notifications) $user->notifications()->delete();
+            if($user->bids) $user->bids()->delete();
+            if($user->reportSender) $user->reportSender()->delete();
+            if($user->reports) $user->reports()->delete();
+            if($user->favorites()->count()>0) $user->favorites()->detach();
+            if($user->hascategories()->count()>0) $user->hascategories()->detach();
+            if ($user->image&&\Illuminate\Support\Facades\File::exists($user->image)) {
+                unlink($user->image);
+            }
+        });
+    }
 
-
-    // protected function password(): Attribute
-    // {
-    //     return Attribute::make(
-    //         set: fn ($value) => Hash::make($value),
-    //     );
-    // }
 }
