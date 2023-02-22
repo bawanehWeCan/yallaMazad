@@ -70,6 +70,8 @@ Route::middleware(['auth:api','changeLang'])->group(function () {
 
     Route::get('my-notifications', [UserController::class, 'myNotifications']);
 
+    Route::post('user/token', [AuthController::class, 'updateDeviceToken']);
+
 
 //adv
 Route::get('advertisements', [AdvertisementController::class, 'pagination']);

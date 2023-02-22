@@ -343,4 +343,14 @@ class AuthController extends Controller
 
         return false;
     }
+
+
+    public function updateDeviceToken(Request $request)
+    {
+        $user = Auth::user();
+        $user->device_token = $request->device_token;
+        $user->save();
+
+        return $this->returnData('user', UserResource::make(User::find(Auth::user()->id)), 'successful');
+    }
 }
