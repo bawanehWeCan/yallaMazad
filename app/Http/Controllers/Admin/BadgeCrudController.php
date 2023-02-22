@@ -147,11 +147,5 @@ class BadgeCrudController extends CrudController
         $this->crud->setRequest($request);
         $this->crud->unsetValidation(); // Validation has already been run
     }
-    protected function setupDeleteOperation()
-    {
-        $badge = Badge::findOrFail(\Route::current()->parameter('id'));
-        if ($badge && File::exists($badge->image)) {
-            unlink($badge->image);
-        }
-    }
+   
 }
