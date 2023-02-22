@@ -102,11 +102,11 @@ class BidController extends ApiController
 
                 else{
 
-                    return $this->returnSuccessMessage(__('Please, sub plan first'));
+                    return $this->returnError(__('Please, sub plan first'));
                 }
             }else{
                 //hight price response
-                return $this->returnError(__('The price has already been entered. Please enter a higher price'));
+                return $this->returnSuccessMessage(__('The price has already been entered. Please enter a higher price'));
             }
 
             // return $this->returnError(__('Sorry! Failed to create !'));
