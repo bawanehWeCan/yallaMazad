@@ -138,8 +138,6 @@ class AuthController extends Controller
 
             //$user->token = $request->token;
             $user->save();
-            $user->confirm = 1;
-            $user->save();
             Auth::login($user);
 
 
@@ -337,7 +335,10 @@ class AuthController extends Controller
         $user = User::where('phone', $phone)->first();
 
         if ((string)$user->otp == (string)$otp) {
+            $user->confirm = 1;
+            $user->save();
             return true;
+
         }
 
         return false;
