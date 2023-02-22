@@ -26,4 +26,12 @@ class Badge extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    protected static function booted()
+    {
+        static::deleted(function ($badge) {
+            if ($badge->image&&\Illuminate\Support\Facades\File::exists($badge->image)) {
+                unlink($badge->image);
+            }
+        });
+    }
 }

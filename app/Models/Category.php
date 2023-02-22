@@ -32,4 +32,6 @@ class Category extends Model
         return $this->belongsToMany(User::class);
     }
 
+   
+
 }
