@@ -29,7 +29,7 @@ class AdvertisementRequest extends FormRequest
             'content'=>'required|min:4|max:2000',
             'start_price'=>'required|numeric',
             'status'=>'required|in:pending,approve,rejected',
-            'reject_description'=>'required_if:status,rejected|min:4|max:10000',
+            'reject_description'=>'required_if:status,rejected|nullable|min:4|max:10000',
             'buy_now_price'=>'required|numeric',
             'category_id'=>'required|exists:categories,id',
             'price_one'=>'nullable|numeric',
