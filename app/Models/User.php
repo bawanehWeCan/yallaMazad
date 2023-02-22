@@ -29,7 +29,8 @@ class User extends Authenticatable
         'password',
         'image',
         'type',
-        'phone'
+        'phone',
+        'confirm'
     ];
 
     /**
@@ -89,6 +90,8 @@ class User extends Authenticatable
     public function notifications(){
         return $this->hasMany(Notification::class);
     }
+
+
 
     // protected function password(): Attribute
     // {

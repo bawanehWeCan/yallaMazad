@@ -31,7 +31,7 @@ class BidController extends ApiController
             $ads = Advertisement::find($request->advertisement_id);
 
 
-            $counts=Adv_User::where('user_id',$request->user_id)->where('advertisement_id',$request->advertisement_id)->get()->count();
+            $counts=Adv_User::where('user_id',$request->user_id)->where('advertisement_id',"!=",$request->advertisement_id)->get()->count();
             $user=User::find($request->user_id);
             if( $request->price > $ads->high_price ){
                 if($counts==0 || $counts < $user->subscriptions?->latest()?->plan?->number_of_auction){
@@ -72,6 +72,27 @@ class BidController extends ApiController
 
                         $ads->update(['high_price' => $request->price ]);
 
+                //اشعار لصاحب المزاد
+                        $user = User::find($ads->user_id);
+
+                        $token = $user->device_token;
+
+                            $this->send('تم إضافة مزايدة جديدة على إعلانك', 'مرحبا ', $token);
+
+                            $note= new Notification();
+                            $note->content = 'تم إضافة مزايدة جديدة على إعلانك';
+                            $note->user_id = $ads->user_id;
+                            $note->save();
+
+                            //اشعار لجميع المشاركين في المزاد عدا المزايد
+
+                            $user_ids = Bid::where('advertisement_id',$request->advertisement_id)->where('user_id',"!=",$request->user_id)->pluck('user_id')->all();
+                            $FcmToken = User::whereIn('id',$user_ids)->whereNotNull('device_token')
+                            ->pluck('device_token')->all();
+
+                         $this->send('تم إضافة مزايدة جديدة', 'مرحبا ', $FcmToken, true);
+
+
                             return $this->returnData('data', new $this->resource($model), __('Succesfully'));
 
 
@@ -90,8 +111,9 @@ class BidController extends ApiController
 
             // return $this->returnError(__('Sorry! Failed to create !'));
 
-        } catch (\Throwable $th) {
+        } catch (\Exception $ex) {
             // return $th;
+            //dd($ex);
             return $this->returnError(__('Sorry! Failed to create !'));
         }
     }
@@ -132,6 +154,18 @@ class BidController extends ApiController
                 $fav->user_id = $request->user_id;
                 $fav->advertisement_id = $request->advertisement_id;
                 $fav->save();
+
+                   //اشعار لصاحب المزاد
+                        $user = User::find($ads->user_id);
+
+                        $token = $user->device_token;
+
+                            $this->send('تم شراء المنتج بشكل مباشر', 'مرحبا ', $token);
+
+                            $note= new Notification();
+                            $note->content = 'تم شراء المنتج بشكل مباشر';
+                            $note->user_id = $ads->user_id;
+                            $note->save();
 
                 return $this->returnData('data', new $this->resource($model), __('Succesfully'));
 
