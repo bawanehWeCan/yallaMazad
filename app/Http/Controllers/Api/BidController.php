@@ -106,7 +106,7 @@ class BidController extends ApiController
                 }
             }else{
                 //hight price response
-                return $this->returnSuccessMessage(__('The price has already been entered. Please enter a higher price'));
+                return $this->returnError(__('The price has already been entered. Please enter a higher price'));
             }
 
             // return $this->returnError(__('Sorry! Failed to create !'));
