@@ -101,7 +101,7 @@ class BadgeCrudController extends CrudController
         ]);
         $this->crud->addField(
             [  // Select
-                'label'     => "Supplier",
+                'label'     => "User",
                 'type'      => 'select',
                 'name'      => 'user_id', // the db column for the foreign key
 
