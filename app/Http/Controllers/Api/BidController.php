@@ -113,7 +113,7 @@ class BidController extends ApiController
 
         } catch (\Exception $ex) {
             // return $th;
-            //dd($ex);
+            dd($ex);
             return $this->returnError(__('Sorry! Failed to create !'));
         }
     }
