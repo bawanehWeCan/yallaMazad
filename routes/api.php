@@ -130,6 +130,8 @@ Route::post('slider/edit/{id}', [SliderController::class, 'edit']);
   //send noti to user
   Route::post('send-noti', [NotificationController::class, 'sendNotiToUser']);
 
+  Route::post('send-to-all', [NotificationController::class, 'sendNotiToAll']);
+
 });
 
 //add categories to user
