@@ -27,7 +27,13 @@ class ReportController extends ApiController
         if($adv || $user){
             return $this->returnError(__('Sorry! You cannot report again !'));
         }
-        return $this->store( $request->all() );
+
+          // $advertisment=Advertisement::find($request->advertisement_id);
+        // $reciever=User::find($request->user_id);
+
+            return $this->store( $request->all() );
+
+
     }
 
 
