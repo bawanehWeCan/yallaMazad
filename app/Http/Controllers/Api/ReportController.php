@@ -33,7 +33,16 @@ class ReportController extends ApiController
 
             return $this->store( $request->all() );
 
+            // $bid = app('firebase.firestore')->database()->collection('auctions')->document($request->advertisement_id)->collection('biddings')->document($model->id); // we will replace this value with auction id
 
+            // insert for document
+    //         $bid->set([
+
+    //             // 'amount' => $request->price,
+    //             'image' => (string)$user->image,
+    //             'name' => (string)$user->name,
+    //             'user_id' => (integer)$user->id
+    //         ]);
     }
 
 
