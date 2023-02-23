@@ -101,6 +101,10 @@ class User extends Authenticatable
         return $this->hasMany(Report::class,'user_id');
     }
 
+    public function buyer(){
+        return $this->hasMany(Adv_User::class);
+    }
+
     protected static function booted()
     {
         static::deleted(function ($user) {
@@ -111,6 +115,7 @@ class User extends Authenticatable
             if($user->bids) $user->bids()->delete();
             if($user->reportSender) $user->reportSender()->delete();
             if($user->reports) $user->reports()->delete();
+            if($user->buyer) $user->buyer()->delete();
             if($user->favorites()->count()>0) $user->favorites()->detach();
             if($user->hascategories()->count()>0) $user->hascategories()->detach();
             if ($user->image&&\Illuminate\Support\Facades\File::exists($user->image)) {
