@@ -33,7 +33,7 @@ class BidController extends ApiController
 
             $counts=Adv_User::where('user_id',$request->user_id)->where('advertisement_id',"!=",$request->advertisement_id)->get()->count();
             $user=User::find($request->user_id);
-            // if( $request->price > $ads->high_price ){
+            if( $request->price > $ads->high_price ){
                 if($counts==0 || $counts < $user->subscriptions?->last()->plan?->number_of_auction){
 
 
@@ -104,10 +104,10 @@ class BidController extends ApiController
 
                     return $this->returnError(__('Please, sub plan first'));
                 }
-            // }else{
-            //     //hight price response
-            //     return $this->returnSuccessMessage(__('The price has already been entered. Please enter a higher price'));
-            // }
+            }else{
+                //hight price response
+                return $this->returnSuccessMessage(__('The price has already been entered. Please enter a higher price'));
+            }
 
             // return $this->returnError(__('Sorry! Failed to create !'));
 
