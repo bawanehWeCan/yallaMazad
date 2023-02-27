@@ -30,6 +30,14 @@ class BidController extends ApiController
 
             $ads = Advertisement::find($request->advertisement_id);
 
+            if( $ads->status == 'complete' ){
+                return $this->returnError(__('sorry !! this ads has been end'));
+            }
+
+            if( \Carbon\Carbon::now() > \Carbon\Carbon::format( $ads->end_date ) ){
+                return $this->returnError(__('sorry !! this ads has been end'));
+            }
+
 
             $counts=Adv_User::where('user_id',$request->user_id)->where('advertisement_id',"!=",$request->advertisement_id)->get()->count();
             $user=User::find($request->user_id);
