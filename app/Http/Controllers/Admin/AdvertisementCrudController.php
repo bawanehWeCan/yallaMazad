@@ -114,6 +114,9 @@ class AdvertisementCrudController extends CrudController
                                 'pending'=>'pending',
                                 'approve'=>'approve',
                                 'rejected'=>'rejected',
+                                'current'=>'current',
+                                'complete'=>'complete',
+
                             ],
             'allows_null' => false,
             // 'allows_multiple' => true, // OPTIONAL; needs you to cast this to array in your model;
