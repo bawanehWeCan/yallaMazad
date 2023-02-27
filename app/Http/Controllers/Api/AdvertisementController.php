@@ -27,15 +27,14 @@ class AdvertisementController extends ApiController
 
 
         $date = today()->format('Y-m-d H:i:s');
-        $ads = Advertisement::paginate(10);
+        $ads = Advertisement::where('status','approve')->paginate(10);
         foreach ($ads as $ad) {
 
 
             if($ad->start_date <= $date && $ad->end_date >= $date){
 
-                $ad->update([
-                    'status' => "current"
-                ]);
+                $ad->status = 'current';
+                $ad->save();
 
             }
 
