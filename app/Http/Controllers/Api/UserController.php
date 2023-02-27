@@ -136,7 +136,7 @@ class UserController extends ApiController
     public function myNotifications(){
 
 
-        $notifications = array();
+
         foreach (Notification::where('user_id',Auth::user()->id)->paginate(10) as $not) {
 
 
@@ -148,7 +148,7 @@ class UserController extends ApiController
                 array_push($notifications, $not);
 
 
-        return $this->returnData('data', NotificationResource::collection($notifications), __('Get  succesfully'));
+        return $this->returnData('data', NotificationResource::collection(Notification::where('user_id',Auth::user()->id)->paginate(10)), __('Get  succesfully'));
     }
 
 

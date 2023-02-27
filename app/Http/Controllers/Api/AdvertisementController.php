@@ -27,7 +27,8 @@ class AdvertisementController extends ApiController
 
 
         $date = today()->format('Y-m-d H:i:s');
-        foreach (Advertisement::all() as $ad) {
+        $ads = Advertisement::paginate(10);
+        foreach ($ads as $ad) {
 
 
             if($ad->start_date <= $date && $ad->end_date >= $date){
@@ -40,7 +41,7 @@ class AdvertisementController extends ApiController
 
             }
 
-        return $this->returnData('data', $this->resource::collection(Advertisement::paginate(10)), __('Get  succesfully'));
+        return $this->returnData('data', $this->resource::collection($ads), __('Get  succesfully'));
     }
 
     public function save(Request $request)
