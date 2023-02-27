@@ -99,7 +99,7 @@ class AdvertisementController extends ApiController
         ]);
 
         $date = today()->format('Y-m-d H:i:s');
-        if($model->start_date >= $date && $model->end_date <= $date){
+        if($ad->start_date <= $date && $ad->end_date >= $date){
 
             $model->update([
                 'status' => "current"
