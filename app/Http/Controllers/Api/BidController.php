@@ -34,7 +34,7 @@ class BidController extends ApiController
                 return $this->returnError(__('sorry !! this ads has been end'));
             }
 
-            if( \Carbon\Carbon::now()->gt( \Carbon\Carbon::format( $ads->end_date ) ) ){
+            if( \Carbon\Carbon::now()->gt( new \Carbon\Carbon( $ads->end_date ) ) ){
                 return $this->returnError(__('sorry !! this ads has been end'));
             }
 
