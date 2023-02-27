@@ -9,6 +9,8 @@ use App\Http\Requests\ReportRequest;
 use App\Http\Resources\ReportResource;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ApiController;
+use App\Models\Advertisement;
+use App\Models\User;
 
 class ReportController extends ApiController
 {
