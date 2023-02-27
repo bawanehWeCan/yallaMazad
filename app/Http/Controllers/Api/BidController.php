@@ -69,7 +69,8 @@ class BidController extends ApiController
                         $bid->set([
                             'amount' => $request->price,
                             'image' => (string)$user->image,
-                            'name' => (string)$user->name
+                            'name' => (string)$user->name,
+                            'user_id' => (integer)$user->id
 
                         ]);
 
