@@ -28,7 +28,7 @@ class AdvertisementRequest extends FormRequest
             'name'=>'required|min:4|max:255',
             'content'=>'required|min:4|max:2000',
             'start_price'=>'required|numeric',
-            'status'=>'required|in:pending,approve,rejected',
+            'status'=>'required|in:pending,approve,rejected,current,complete',
             'reject_description'=>'required_if:status,rejected|nullable|min:4|max:10000',
             'buy_now_price'=>'required|numeric',
             'category_id'=>'required|exists:categories,id',
