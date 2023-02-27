@@ -24,17 +24,20 @@ class ReportController extends ApiController
 
     public function save( Request $request ){
 
-        $advertisment=Advertisement::find($request->advertisement_id);
-        $reciever=User::find($request->user_id);
+        if( isset( $request->advertisement_id ) ){
+            $advertisment=Advertisement::find($request->advertisement_id);
+            if(!$advertisment){
+                return $this->returnError(__('Sorry! ads not found !'));
 
-        if(!$advertisment){
-            return $this->returnError(__('Sorry! ads not found !'));
-
+            }
         }
 
-        if(!$reciever){
-            return $this->returnError(__('Sorry! user not found !'));
+        if( isset( $request->user_id ) ){
+            $reciever=User::find($request->user_id);
+            if(!$reciever){
+                return $this->returnError(__('Sorry! user not found !'));
 
+            }
         }
 
         $adv = Report::where('advertisement_id',$request->advertisement_id)->where('sender_id',$request->sender_id)->first();
