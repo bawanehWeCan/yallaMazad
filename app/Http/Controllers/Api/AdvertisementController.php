@@ -25,22 +25,22 @@ class AdvertisementController extends ApiController
 
     public function advs(){
 
-        $advs = array();
+
         $date = today()->format('Y-m-d H:i:s');
         foreach (Advertisement::all() as $ad) {
 
 
-            if($ad->start_date >= $date && $ad->end_date <= $date){
+            if($ad->start_date <= $date && $ad->end_date >= $date){
 
                 $ad->update([
                     'status' => "current"
                 ]);
 
             }
-                array_push($advs, $ad);
+
             }
 
-        return $this->returnData('data', $this->resource::collection($advs), __('Get  succesfully'));
+        return $this->returnData('data', $this->resource::collection(Advertisement::paginate(10)), __('Get  succesfully'));
     }
 
     public function save(Request $request)
