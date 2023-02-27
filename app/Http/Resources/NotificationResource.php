@@ -18,6 +18,10 @@ class NotificationResource extends JsonResource
 
             'id'=>$this->id,
             'content'=>$this->content,
+            'route_id'=>(integer)$this?->route_id,
+            'type'=>(string)$this?->type,
+            'is_read'=>$this->is_read,
+            'created_at'=>$this->created_at,
             'user'=> new UserResource($this?->user),
         ];
     }

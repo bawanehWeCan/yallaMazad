@@ -123,13 +123,34 @@ class UserController extends ApiController
 
     }
 
-    public function myNotifications()
-    {
+    // public function myNotifications()
+    // {
 
-        // $advertisements = Auth::user()->advertisements;
-        $notifications = Notification::where('user_id',Auth::user()->id)->paginate(10) ;
-        return $this->returnData('data',  NotificationResource::collection( $notifications ), __('Get  succesfully'));
+    //     // $advertisements = Auth::user()->advertisements;
+    //     $notifications = Notification::where('user_id',Auth::user()->id)->paginate(10) ;
+    //     return $this->returnData('data',  NotificationResource::collection( $notifications ), __('Get  succesfully'));
 
+    // }
+
+
+    public function myNotifications(){
+
+
+        $notifications = array();
+        foreach (Notification::where('user_id',Auth::user()->id)->paginate(10) as $not) {
+
+
+                $not->update([
+                    'is_read' => 1
+                ]);
+
+            }
+                array_push($notifications, $not);
+
+
+        return $this->returnData('data', NotificationResource::collection($notifications), __('Get  succesfully'));
     }
+
+
 
 }

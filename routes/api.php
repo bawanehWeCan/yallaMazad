@@ -74,7 +74,7 @@ Route::middleware(['auth:api','changeLang'])->group(function () {
 
 
 //adv
-Route::get('advertisements', [AdvertisementController::class, 'pagination']);
+Route::get('advertisements', [AdvertisementController::class, 'advs']);
 Route::post('advertisement-create', [AdvertisementController::class, 'save']);
 Route::get('advertisement/{id}', [AdvertisementController::class, 'view']);
 Route::get('advertisement/delete/{id}', [AdvertisementController::class, 'delete']);

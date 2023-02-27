@@ -22,6 +22,27 @@ class AdvertisementController extends ApiController
         $this->repositry =  new Repository($this->model);
     }
 
+
+    public function advs(){
+
+        $advs = array();
+        $date = today()->format('Y-m-d H:i:s');
+        foreach (Advertisement::all() as $ad) {
+
+
+            if($ad->start_date >= $date && $ad->end_date <= $date){
+
+                $ad->update([
+                    'status' => "current"
+                ]);
+
+            }
+                array_push($advs, $ad);
+            }
+
+        return $this->returnData('data', $this->resource::collection($advs), __('Get  succesfully'));
+    }
+
     public function save(Request $request)
     {
         try {
@@ -76,6 +97,15 @@ class AdvertisementController extends ApiController
         $model->update([
             'views' => $views
         ]);
+
+        $date = today()->format('Y-m-d H:i:s');
+        if($model->start_date >= $date && $model->end_date <= $date){
+
+            $model->update([
+                'status' => "current"
+            ]);
+
+        }
 
         if ($model) {
             return $this->returnData('data', new $this->resource($model), __('Get  succesfully'));

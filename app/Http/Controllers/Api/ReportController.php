@@ -22,27 +22,42 @@ class ReportController extends ApiController
 
     public function save( Request $request ){
 
+        $advertisment=Advertisement::find($request->advertisement_id);
+        $reciever=User::find($request->user_id);
+
+        if(!$advertisment){
+            return $this->returnError(__('Sorry! ads not found !'));
+
+        }
+
+        if(!$reciever){
+            return $this->returnError(__('Sorry! user not found !'));
+
+        }
+
         $adv = Report::where('advertisement_id',$request->advertisement_id)->where('sender_id',$request->sender_id)->first();
         $user = Report::where('user_id',$request->user_id)->where('sender_id',$request->sender_id)->first();
+        $sender = User::find($request->sender_id);
         if($adv || $user){
             return $this->returnError(__('Sorry! You cannot report again !'));
         }
 
-          // $advertisment=Advertisement::find($request->advertisement_id);
-        // $reciever=User::find($request->user_id);
+
+
+        $bid = app('firebase.firestore')->database()->collection('auctions')->document($request->advertisement_id)->collection('reports')->document($request->sender_id); // we will replace this value with auction id
+
+            // insert for document
+            $bid->set([
+
+                // 'amount' => $request->price,
+                'image' => (string)$sender->image,
+                'name' => (string)$sender->name,
+                'user_id' => (integer)$sender->id
+            ]);
 
             return $this->store( $request->all() );
 
-            // $bid = app('firebase.firestore')->database()->collection('auctions')->document($request->advertisement_id)->collection('biddings')->document($model->id); // we will replace this value with auction id
 
-            // insert for document
-    //         $bid->set([
-
-    //             // 'amount' => $request->price,
-    //             'image' => (string)$user->image,
-    //             'name' => (string)$user->name,
-    //             'user_id' => (integer)$user->id
-    //         ]);
     }
 
 
