@@ -145,7 +145,6 @@ class UserController extends ApiController
                 ]);
 
             }
-                array_push($notifications, $not);
 
 
         return $this->returnData('data', NotificationResource::collection(Notification::where('user_id',Auth::user()->id)->paginate(10)), __('Get  succesfully'));
