@@ -48,19 +48,19 @@ class ReportController extends ApiController
         }
 
 
-        if( isset( $request->advertisement_id ) ){
-            $bid = app('firebase.firestore')->database()->collection('auctions')->document($request->advertisement_id)->collection('reports')->document($request->sender_id); // we will replace this value with auction id
-        }else{
-            $bid = app('firebase.firestore')->database()->collection('users')->document($request->user_id)->collection('reports')->document($request->sender_id); // we will replace this value with auction id
-        }
-            // insert for document
-            $bid->set([
+        // if( isset( $request->advertisement_id ) ){
+        //     $bid = app('firebase.firestore')->database()->collection('auctions')->document($request->advertisement_id)->collection('reports')->document($request->sender_id); // we will replace this value with auction id
+        // }else{
+        //     $bid = app('firebase.firestore')->database()->collection('users')->document($request->user_id)->collection('reports')->document($request->sender_id); // we will replace this value with auction id
+        // }
+        //     // insert for document
+        //     $bid->set([
 
-                // 'amount' => $request->price,
-                'image' => (string)$sender->image,
-                'name' => (string)$sender->name,
-                'user_id' => (integer)$sender->id
-            ]);
+        //         // 'amount' => $request->price,
+        //         'image' => (string)$sender->image,
+        //         'name' => (string)$sender->name,
+        //         'user_id' => (integer)$sender->id
+        //     ]);
 
             return $this->store( $request->all() );
 
