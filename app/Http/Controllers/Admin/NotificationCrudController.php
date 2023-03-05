@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Notification;
 use App\Http\Requests\Admin\NotificationRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -41,6 +42,39 @@ class NotificationCrudController extends CrudController
     {
         CRUD::column('content');
         CRUD::column('user_id');
+        CRUD::column('content');
+        CRUD::column('user_id');
+        $this->crud->addColumn(['name' => 'view', 'label'=>'View','type'     => 'closure',
+        'function' => function(Notification $entry) {
+            if ($entry->is_read==0) {
+                return "Unread";
+            } else if($entry->is_read==1){
+                return "Read";
+            }
+        }]);
+        CRUD::column('created_at');
+        CRUD::column('updated_at');
+
+        /**
+         * Columns can be defined using the fluent syntax or array syntax:
+         * - CRUD::column('price')->type('number');
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
+         */
+    }
+
+    protected function setupShowOperation()
+    {
+        CRUD::column('content');
+        CRUD::column('user_id');
+        $this->crud->addColumn(['name' => 'view', 'label'=>'View','type'     => 'closure',
+        'function' => function(Notification $entry) {
+            if ($entry->is_read==0) {
+                return "Unread";
+            } else if($entry->is_read==1){
+                return "Read";
+            }
+        }]);
+        CRUD::column('type');
         CRUD::column('created_at');
         CRUD::column('updated_at');
 
