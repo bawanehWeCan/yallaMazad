@@ -129,6 +129,15 @@ class AdvertisementController extends ApiController
 
     }
 
+//it is same the previous but without pagination
+    public function popularAdvertisings()
+    {
+
+        $advertisements =  $this->model->orderByDesc('views')->where('status','approve')->get();
+        return $this->returnData('data', AdvertisementResource::collection($advertisements), __('Succesfully'));
+
+    }
+
     public function pagination($length = 10)
     {
         $advertisements =  $this->model->where('status','approve')->paginate($length);

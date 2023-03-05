@@ -169,6 +169,9 @@ Route::get('my-subscriptions/{user_id}', [SubscriptionController::class, 'mySubs
 
 Route::get('popular-advertisements', [AdvertisementController::class, 'getPopularAdvertisings']);
 
+
+Route::get('allpopular-advertisements', [AdvertisementController::class, 'popularAdvertisings']);
+
 Route::post('advertisements/search', [AdvertisementController::class, 'lookfor']);
 
 //Image
