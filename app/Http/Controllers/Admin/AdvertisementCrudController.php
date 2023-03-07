@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\AdvertisementRequest;
 use App\Models\Advertisement;
+use App\Traits\NotificationTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -15,10 +16,12 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class AdvertisementCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation{
+        update as traitUpdate;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
-
+    use NotificationTrait;
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
      *
@@ -54,7 +57,37 @@ class AdvertisementCrudController extends CrudController
          * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
          */
     }
+    public function update()
+    {
+        $this->insertDataWithValidation('update');
+        $this->crud->hasAccessOrFail('update');
 
+        // execute the FormRequest authorization and validation, if one is required
+        $request = $this->crud->validateRequest();
+
+        // register any Model Events defined on fields
+        $this->crud->registerFieldEvents();
+
+        // update the row in the db
+        $item = $this->crud->update(
+            $request->get($this->crud->model->getKeyName()),
+            $this->crud->getStrippedSaveRequest($request)
+        );
+        $this->data['entry'] = $this->crud->entry = $item;
+        if ($this->data['entry']->status=='approve') {
+            $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Approval',$this->data['entry']->device_token);
+        } else if ($this->data['entry']->status=='rejected'){
+            $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Rejection',$this->data['entry']->device_token);
+        }
+
+        // show a success message
+        \Alert::success(trans('backpack::crud.update_success'))->flash();
+
+        // save the redirect choice for next time
+        $this->crud->setSaveAction();
+
+        return $this->crud->performSaveAction($item->getKey());
+    }
 
     protected function setupShowOperation()
     {
