@@ -14,12 +14,12 @@ class BidResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        return $this;
 
-            'id'=>$this->id,
-            'price'=>(double)$this->price,
-            'user'=>UserResource::make($this->user),
-            'advertisement_id'=>$this->advertisement_id,
-        ];
+            // 'id'=>$this->id,
+            // 'price'=>(double)$this->price,
+            // 'user'=>UserResource::make($this->user),
+            // 'advertisement_id'=>$this->advertisement_id,
+
     }
 }
