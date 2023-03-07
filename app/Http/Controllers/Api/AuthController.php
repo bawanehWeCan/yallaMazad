@@ -224,6 +224,16 @@ class AuthController extends Controller
                     }
                 }
 
+                if (isset($request->phone)) {
+                    $check = User::where('phone', $request->phone)
+                        ->first();
+
+                    if ($check) {
+
+                        return $this->returnError('The phone number is already used!');
+                    }
+                }
+
                 if ($request->has('image')) {
                     $image = $this->userRepositry->insertImage($request->image, $user, true);
                 }
