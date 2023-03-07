@@ -17,7 +17,7 @@ class BidResource extends JsonResource
         return [
 
             'id'=>$this->id,
-            'price'=>$this->price,
+            'price'=>(double)$this->price,
             'user'=>UserResource::make($this->user),
             'advertisement_id'=>$this->advertisement_id,
         ];
