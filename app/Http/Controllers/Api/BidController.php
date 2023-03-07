@@ -92,26 +92,26 @@ class BidController extends ApiController
                         $ads->update(['high_price' => $request->price ]);
 
                // اشعار لصاحب المزاد
-                        $user = User::find($ads->user_id);
+                    //     $user = User::find($ads->user_id);
 
-                        $token = $user->device_token;
-                        if (!empty($token))
-                       {
-                            $this->send('تم إضافة مزايدة جديدة على إعلانك', 'مرحبا ', $token);
+                    //     $token = $user->device_token;
+                    //     if (!empty($token))
+                    //    {
+                    //         $this->send('تم إضافة مزايدة جديدة على إعلانك', 'مرحبا ', $token);
 
-                            $note= new Notification();
-                            $note->content = 'تم إضافة مزايدة جديدة على إعلانك';
-                            $note->user_id = $ads->user_id;
-                            $note->save();
+                    //         $note= new Notification();
+                    //         $note->content = 'تم إضافة مزايدة جديدة على إعلانك';
+                    //         $note->user_id = $ads->user_id;
+                    //         $note->save();
 
-                       }
+                    //    }
                          //   اشعار لجميع المشاركين في المزاد عدا المزايد
 
-                            $user_ids = Bid::where('advertisement_id',$request->advertisement_id)->where('user_id',"!=",$request->user_id)->pluck('user_id')->all();
-                            $FcmToken = User::whereIn('id',$user_ids)->whereNotNull('device_token')
-                            ->pluck('device_token')->all();
+                        //     $user_ids = Bid::where('advertisement_id',$request->advertisement_id)->where('user_id',"!=",$request->user_id)->pluck('user_id')->all();
+                        //     $FcmToken = User::whereIn('id',$user_ids)->whereNotNull('device_token')
+                        //     ->pluck('device_token')->all();
 
-                         $this->send('تم إضافة مزايدة جديدة', 'مرحبا ', $FcmToken, true);
+                        //  $this->send('تم إضافة مزايدة جديدة', 'مرحبا ', $FcmToken, true);
 
 
                             return $this->returnData('data', new $this->resource($model), __('Succesfully'));
@@ -186,16 +186,16 @@ class BidController extends ApiController
                 $fav->save();
 
                  //  اشعار لصاحب المزاد
-                        $user = User::find($ads->user_id);
+                        // $user = User::find($ads->user_id);
 
-                        $token = $user->device_token;
+                        // $token = $user->device_token;
 
-                            $this->send('تم شراء المنتج بشكل مباشر', 'مرحبا ', $token);
+                        //     $this->send('تم شراء المنتج بشكل مباشر', 'مرحبا ', $token);
 
-                            $note= new Notification();
-                            $note->content = 'تم شراء المنتج بشكل مباشر';
-                            $note->user_id = $ads->user_id;
-                            $note->save();
+                        //     $note= new Notification();
+                        //     $note->content = 'تم شراء المنتج بشكل مباشر';
+                        //     $note->user_id = $ads->user_id;
+                        //     $note->save();
 
                 return $this->returnData('data', new $this->resource($model), __('Succesfully'));
 
