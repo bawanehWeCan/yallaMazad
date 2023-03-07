@@ -75,9 +75,9 @@ class BidController extends ApiController
 
                         ]);
 
-                        $model = Favorite::where('advertisement_id',$request->advertisement_id)->where('user_id',$request->user_id)->first();
+                        $fav = Favorite::where('advertisement_id',$request->advertisement_id)->where('user_id',$request->user_id)->first();
 
-                        if(!$model)
+                        if(!$fav)
                         {
                         $fav = new Favorite();
                         $fav->user_id = $request->user_id;
