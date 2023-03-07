@@ -66,8 +66,9 @@ class AdvertisementCrudController extends CrudController
 
         // register any Model Events defined on fields
         $this->crud->registerFieldEvents();
-
-        // update the row in the db
+        $ad = Advertisement::findOrFail(\Route::current()->parameter('id'));
+        if ($ad->status!='approve'||$ad->status!='rejected') {
+                    // update the row in the db
         $item = $this->crud->update(
             $request->get($this->crud->model->getKeyName()),
             $this->crud->getStrippedSaveRequest($request)
@@ -78,6 +79,14 @@ class AdvertisementCrudController extends CrudController
         } else if ($this->data['entry']->status=='rejected'){
             $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Rejection',$this->data['entry']->user->device_token);
         }
+        }else{
+            $item = $this->crud->update(
+                $request->get($this->crud->model->getKeyName()),
+                $this->crud->getStrippedSaveRequest($request)
+            );
+            $this->data['entry'] = $this->crud->entry = $item;
+        }
+
 
         // show a success message
         \Alert::success(trans('backpack::crud.update_success'))->flash();
