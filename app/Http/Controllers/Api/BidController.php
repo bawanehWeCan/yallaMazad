@@ -60,6 +60,7 @@ class BidController extends ApiController
                     $ads->save();
 
                     $model = $this->repositry->save($request->all());
+                    return $model;
 
                     if ($model) {
 
