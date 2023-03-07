@@ -59,7 +59,6 @@ class AdvertisementCrudController extends CrudController
     }
     public function update()
     {
-        $this->insertDataWithValidation('update');
         $this->crud->hasAccessOrFail('update');
 
         // execute the FormRequest authorization and validation, if one is required
