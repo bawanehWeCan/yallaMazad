@@ -52,7 +52,7 @@ class AdvertisementController extends ApiController
 
             if ($advertisement) {
 
-                $bid = app('firebase.firestore')->database()->collection('auctions')->document($advertisement->id)->collection('info')->document($model->id); // we will replace this value with auction id
+                $bid = app('firebase.firestore')->database()->collection('auctions')->document($advertisement->id)->collection('info')->document($advertisement->id); // we will replace this value with auction id
 
                 // insert for decument
                 $bid->set([
