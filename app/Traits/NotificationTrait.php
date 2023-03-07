@@ -58,7 +58,7 @@ trait NotificationTrait
     $msg['data'] = array
         (
         'id' => $id,
-        'status' => $status,
+        'advertisement' => $status,
         'click_action'=> "FLUTTER_NOTIFICATION_CLICK",
     );
 
