@@ -49,6 +49,20 @@ class AdvertisementController extends ApiController
             $request['user_id'] = Auth::user()->id; // cuze mobile
             $advertisement = $this->repositry->save($request->except('images'));
 
+
+            if ($advertisement) {
+
+                $bid = app('firebase.firestore')->database()->collection('auctions')->document($advertisement->id)->collection('info')->document($model->id); // we will replace this value with auction id
+
+                // insert for decument
+                $bid->set([
+                    'status' => $request->status,
+                    'start_date' => $request->start_date,
+                    'start_date' => $request->start_date
+
+                ]);
+            }
+
             // // $ads    = Advertisement::find($advertisement->id);
             // $request['start_date']   =  $advertisement->created_at;
             // $request['end_date']    =  $advertisement->updated_at;
@@ -81,12 +95,38 @@ class AdvertisementController extends ApiController
         }
     }
 
-    public function edit($id, Request $request)
-    {
 
+    public function edit($id,Request $request){
 
-        return $this->update($id, $request->all());
+        $model = $this->repositry->getByID($id);
+        if ($model) {
+            $model = $this->repositry->edit( $id,$request->all() );
+
+            $bid = app('firebase.firestore')->database()->collection('auctions')->document($id)->collection('info')->document($model->id); // we will replace this value with auction id
+
+            // insert for decument
+            $bid->set([
+                'status' => $request->status,
+                'start_date' => $request->start_date,
+                'start_date' => $request->start_date
+
+            ]);
+            return $this->returnData('data', new $this->resource( $model ), __('Updated succesfully'));
+        }
+
+        return $this->returnError(__('Sorry! Failed to get !'));
+
     }
+
+
+
+
+    // public function edit($id, Request $request)
+    // {
+
+
+    //     return $this->update($id, $request->all());
+    // }
 
     public function view($id)
     {
