@@ -106,9 +106,9 @@ class AdvertisementController extends ApiController
 
             // insert for decument
             $bid->set([
-                'status' => $request->status,
-                'start_date' => $request->start_date,
-                'end_date' => $request->end_date
+                'status' => $model->status,
+                'start_date' => $model->start_date,
+                'end_date' => $model->end_date
 
             ]);
             return $this->returnData('data', new $this->resource( $model ), __('Updated succesfully'));
