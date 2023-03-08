@@ -61,6 +61,9 @@ class BidController extends ApiController
 
                     $model = $this->repositry->save($request->all());
 
+                          $user_ids = Bid::where('advertisement_id',$request->advertisement_id)->where('user_id',"!=",$request->user_id)->pluck('user_id')->all();
+                            $tokens[] = User::whereIn('id',$user_ids)->whereNotNull('device_token')
+                            ->pluck('device_token')->all();
 
                     if ($model) {
 
@@ -71,8 +74,8 @@ class BidController extends ApiController
                             'amount' => $request->price,
                             'image' => (string)$user->image,
                             'name' => (string)$user->name,
-                            'user_id' => (integer)$user->id
-
+                            'user_id' => (integer)$user->id,
+                            'device_tokens' => $tokens,
                         ]);
 
                         $fav = Favorite::where('advertisement_id',$request->advertisement_id)->where('user_id',$request->user_id)->first();

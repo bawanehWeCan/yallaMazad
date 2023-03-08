@@ -16,13 +16,33 @@ trait NotificationTrait
             'receiver' => 'Aya',
             'sound' => 'mySound', /*Default sound*/
         );
-        if ($many) {
+    //     if ($many) {
+    //         $fields = array
+    //             (
+    //             'registration_ids' => $token,
+    //             'notification' => $msg,
+
+    //         );
+
+    // public function send($route_id,$type,$content, $title, $token, $many = false)
+    // {
+
+    //     $msg ['body'] = $content;
+    //         $msg['title'] = $title;
+    //        $msg['data'] = [
+    //             'id' => $route_id,
+    //             'type' => $type,
+    //             'click_action'=> "FLUTTER_NOTIFICATION_CLICK",
+    //        ];
+
+                 if ($many) {
             $fields = array
                 (
                 'registration_ids' => $token,
                 'notification' => $msg,
 
             );
+
         } else {
             $fields = array
                 (
