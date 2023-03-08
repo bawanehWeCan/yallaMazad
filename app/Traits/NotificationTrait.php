@@ -85,7 +85,7 @@ trait NotificationTrait
         $fields = array
             (
             "to" => $token,
-            "notification" => $msg
+            "notification" => $msg,
             "data"=> $data,
             );
 
