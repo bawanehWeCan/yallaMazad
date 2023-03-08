@@ -52,7 +52,7 @@ class BidCrudController extends CrudController
         ]);
         $this->crud->addColumn([
             'name' => 'price',
-            'label' => 'Prie',
+            'label' => 'Price',
             'searchLogic' => function ($query, $column, $searchTerm) {
                 $query->Where('price', '!=', $searchTerm);
             }
