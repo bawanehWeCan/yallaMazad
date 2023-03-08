@@ -76,11 +76,12 @@ trait NotificationTrait
 {
     $msg['title']=$title;
     $msg['body']=$content;
-    $msg['data'] = [
+    $msg['data'] = response()->json([
         'id' => $id,
         'advertisement' => $status,
         'click_action'=> "FLUTTER_NOTIFICATION_CLICK",
-    ];
+    ]);
+
 
 
         $fields = array
