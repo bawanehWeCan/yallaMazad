@@ -64,6 +64,7 @@ class BidController extends ApiController
                           $user_ids = Bid::where('advertisement_id',$request->advertisement_id)->where('user_id',"!=",$request->user_id)->pluck('user_id')->all();
                             $tokens = User::whereIn('id',$user_ids)->whereNotNull('device_token')
                             ->pluck('device_token');
+                            return $tokens;
 
                     if ($model) {
 
