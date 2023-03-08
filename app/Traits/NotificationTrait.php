@@ -74,13 +74,13 @@ trait NotificationTrait
 
     public function adNotificationSend($id, $status,$title, $content,$token)
 {
-    $msg['title']=$title;
-    $msg['body']=$content;
-    $msg['data'] = response()->json([
+    $msg['Title']=$title;
+    $msg['Body']=$content;
+    $msg['Data'] = [
         'id' => $id,
         'advertisement' => $status,
         'click_action'=> "FLUTTER_NOTIFICATION_CLICK",
-    ]);
+    ];
 
 
 
