@@ -106,10 +106,10 @@ trait NotificationTrait
     curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
     $result = curl_exec($ch);
-        if ($result === FALSE) {
-            die('Curl failed: ' . curl_error($ch));
-        }    
-    dd($result);
+//         if ($result === FALSE) {
+//             die('Curl failed: ' . curl_error($ch));
+//         }    
+//     dd($result);
     curl_close($ch);
 
     return true;
