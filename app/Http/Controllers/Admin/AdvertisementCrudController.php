@@ -75,7 +75,7 @@ class AdvertisementCrudController extends CrudController
         );
         $this->data['entry'] = $this->crud->entry = $item;
         if ($this->data['entry']->status=='approve') {
-            return $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Approval','Advertisement has been approved',$this->data['entry']->user->device_token);
+            $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Approval','Advertisement has been approved',$this->data['entry']->user->device_token);
         } else if ($this->data['entry']->status=='rejected'){
             $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Rejection','Advertisement has been rejected',$this->data['entry']->user->device_token);
         }
