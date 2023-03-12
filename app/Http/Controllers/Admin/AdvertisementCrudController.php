@@ -100,6 +100,7 @@ class AdvertisementCrudController extends CrudController
     {
         CRUD::column('id')->label('number');
         CRUD::column('name');
+        CRUD::column('user_id');
         CRUD::column('content');
         CRUD::column('start_price');
         CRUD::column('end_date');
