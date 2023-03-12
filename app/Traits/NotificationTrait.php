@@ -86,7 +86,7 @@ trait NotificationTrait
             (
             "to" => $token,
             "notification" => $msg,
-            "data"=> $data,
+           // "data"=> $data,
             );
 
 
