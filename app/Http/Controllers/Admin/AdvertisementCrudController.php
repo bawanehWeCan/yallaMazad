@@ -74,11 +74,11 @@ class AdvertisementCrudController extends CrudController
             $this->crud->getStrippedSaveRequest($request)
         );
         $this->data['entry'] = $this->crud->entry = $item;
-        if ($this->data['entry']->status=='approve') {
+//         if ($this->data['entry']->status=='approve') {
             $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Approval',$this->data['entry']->user->device_token);
-        } else if ($this->data['entry']->status=='rejected'){
-            $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Rejection',$this->data['entry']->user->device_token);
-        }
+//         } else if ($this->data['entry']->status=='rejected'){
+//             $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Rejection',$this->data['entry']->user->device_token);
+//         }
 //         }else{
 //             $item = $this->crud->update(
 //                 $request->get($this->crud->model->getKeyName()),
