@@ -72,10 +72,10 @@ trait NotificationTrait
         return true;
     }
 
-    public function adNotificationSend($id, $status,$title, $content,$token)
+    public function adNotificationSend($id, $status,$title,$token)
 {
     $msg['Title']=$title;
-    $msg['Body']=$content;
+//     $msg['Body']=$content;
 //     $data = [
 //         'id' => $id,
 //         'advertisement' => $status,
