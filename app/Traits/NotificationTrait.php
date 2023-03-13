@@ -79,7 +79,7 @@ trait NotificationTrait
     $data = [
         'id' => $id,
         'advertisement' => $status,
-        'click_action'=> "FLUTTER_NOTIFICATION_CLICK",
+        'click_action'=> 'FLUTTER_NOTIFICATION_CLICK',
     ];
 
         $fields = array
@@ -95,10 +95,8 @@ trait NotificationTrait
         'Authorization: key=' . env('FIREBASE_API_KEY'),
         'Content-Type: application/json'
     );
-        dd($headers);
     //#Send Reponse To FireBase Server
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/fcm/send");
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
