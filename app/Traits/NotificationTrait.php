@@ -92,7 +92,7 @@ trait NotificationTrait
 
     $headers = array
         (
-        'Authorization: key=' . env("FIREBASE_API_KEY"),
+        'Authorization: key=' . env('FIREBASE_API_KEY'),
         'Content-Type: application/json'
     );
     //#Send Reponse To FireBase Server
