@@ -107,7 +107,7 @@ trait NotificationTrait
 //         if ($result === FALSE) {
 //             die('Curl failed: ' . curl_error($ch));
 //         }    
-    dd($result);
+//     dd($result);
     curl_close($ch);
 
     return true;
