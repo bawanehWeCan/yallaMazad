@@ -95,7 +95,6 @@ trait NotificationTrait
         'Authorization: key=' . env('FIREBASE_API_KEY'),
         'Content-Type: application/json'
     );
-        dd($fields);
     //#Send Reponse To FireBase Server
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
