@@ -67,7 +67,7 @@ class AdvertisementCrudController extends CrudController
         // register any Model Events defined on fields
         $this->crud->registerFieldEvents();
  $ad = Advertisement::findOrFail(\Route::current()->parameter('id'));
-        if ($ad->status!='approve'&&$ad->status!='rejected') {
+        if ($ad->status!='approve'||$ad->status!='rejected') {
                     // update the row in the db
         $item = $this->crud->update(
             $request->get($this->crud->model->getKeyName()),
