@@ -84,16 +84,16 @@ trait NotificationTrait
 
         $fields = array
             (
-            "to" => $token,
-            "notification" => $msg,
-             "data"=> $data,
+            'to' => $token,
+            'notification' => $msg,
+             'data'=> $data,
             );
 
 
     $headers = array
         (
-        "Authorization: key=" . env("FIREBASE_API_KEY"),
-        "Content-Type: application/json"
+        'Authorization: key=' . env("FIREBASE_API_KEY"),
+        'Content-Type: application/json'
     );
     //#Send Reponse To FireBase Server
     $ch = curl_init();
