@@ -127,7 +127,7 @@ class PlanCrudController extends CrudController
 
         CRUD::field('price')->type('text');
         CRUD::field('number_of_auction');
-        CRUD::field('time');
+        $this->crud->addField(['name' => 'time', 'type' => 'text','label'=>'Time (In days)' ]);
         CRUD::field('point_one');
         CRUD::field('point_two');
         CRUD::field('point_three');
@@ -159,7 +159,7 @@ class PlanCrudController extends CrudController
 
         CRUD::field('price')->type('text');
         CRUD::field('number_of_auction');
-        CRUD::field('time');
+        $this->crud->addField(['name' => 'time', 'type' => 'text','label'=>'Time (In days)' ]);
         CRUD::field('point_one');
         CRUD::field('point_two');
         CRUD::field('point_three');
