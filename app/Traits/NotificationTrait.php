@@ -74,8 +74,8 @@ trait NotificationTrait
 
     public function adNotificationSend($id, $status,$title,$content,$token)
 {
-    $msg['Title']=$title;
-    $msg['Body']=$content;
+    $msg['title']=$title;
+    $msg['body']=$content;
     $data = [
         'id' => $id,
         'advertisement' => $status,
