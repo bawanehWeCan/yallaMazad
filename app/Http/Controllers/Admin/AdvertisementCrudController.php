@@ -66,7 +66,7 @@ class AdvertisementCrudController extends CrudController
 
         // register any Model Events defined on fields
         $this->crud->registerFieldEvents();
-        $ad = Advertisement::findOrFail(\Route::current()->parameter('id'));
+ $ad = Advertisement::findOrFail(\Route::current()->parameter('id'));
         if ($ad->status!='approve'||$ad->status!='rejected') {
                     // update the row in the db
         $item = $this->crud->update(
@@ -75,9 +75,9 @@ class AdvertisementCrudController extends CrudController
         );
         $this->data['entry'] = $this->crud->entry = $item;
         if ($this->data['entry']->status=='approve') {
-            $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Approval',$this->data['entry']->user->device_token);
+            $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Approval','Advertisement has been approved',$this->data['entry']->user->device_token);
         } else if ($this->data['entry']->status=='rejected'){
-            $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Rejection',$this->data['entry']->user->device_token);
+            $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Rejection','Advertisement has been rejected',$this->data['entry']->user->device_token);
         }
         }else{
             $item = $this->crud->update(
@@ -86,7 +86,6 @@ class AdvertisementCrudController extends CrudController
             );
             $this->data['entry'] = $this->crud->entry = $item;
         }
-
 
         // show a success message
         \Alert::success(trans('backpack::crud.update_success'))->flash();
@@ -101,6 +100,7 @@ class AdvertisementCrudController extends CrudController
     {
         CRUD::column('id')->label('number');
         CRUD::column('name');
+        CRUD::column('user_id');
         CRUD::column('content');
         CRUD::column('start_price');
         CRUD::column('end_date');

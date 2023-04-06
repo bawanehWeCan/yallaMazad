@@ -72,38 +72,42 @@ trait NotificationTrait
         return true;
     }
 
-    public function adNotificationSend($id, $status,$title, $token)
+    public function adNotificationSend($id, $status,$title,$content,$token)
 {
     $msg['title']=$title;
-    $msg['body'] = [
+    $msg['body']=$content;
+    $data = [
         'id' => $id,
-        'advertisement' => $status,
-        'click_action'=> "FLUTTER_NOTIFICATION_CLICK",
+        'status' => 'advertisement',
+        'click_action'=> 'FLUTTER_NOTIFICATION_CLICK',
     ];
 
         $fields = array
             (
-            "to" => $token,
-            "notification" => $msg
-
+            'to' => $token,
+            'notification' => $msg,
+             'data'=> $data,
             );
 
 
     $headers = array
         (
-        "Authorization: key=" . env("FIREBASE_API_KEY"),
-        "Content-Type: application/json"
+        'Authorization: key=' . env('FIREBASE_API_KEY'),
+        'Content-Type: application/json'
     );
     //#Send Reponse To FireBase Server
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/fcm/send");
+    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
     $result = curl_exec($ch);
-    //dd($result);
+//         if ($result === FALSE) {
+//             die('Curl failed: ' . curl_error($ch));
+//         }    
+//     dd($result);
     curl_close($ch);
 
     return true;
