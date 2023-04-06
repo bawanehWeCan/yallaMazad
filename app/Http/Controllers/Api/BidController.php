@@ -147,6 +147,7 @@ class BidController extends ApiController
         try {
 
             $ads = Advertisement::find($request->advertisement_id);
+            return $ads->status;
 
             if( $ads->status == "complete" ){
                 return $this->returnError(__('sorry !! this ads has been end'));
