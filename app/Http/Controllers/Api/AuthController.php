@@ -234,16 +234,11 @@ class AuthController extends Controller
                     }
                 }
 
-                // if ($request->has('image')) {
-                //     $image = $this->userRepositry->insertImage($request->image, $user, true);
-                // }
+                if ($request->has('image')) {
+                    $image = $this->userRepositry->insertImage($request->image, $user, true);
+                }
 
 
-    if ($request->has('image') && $user->has('image')) {
-                $image = $this->repositry->insertImage($request->image,$user,true);
-            }elseif ($request->has('image')) {
-                $image = $this->repositry->insertImage($request->image,$user);
-            }
 
                 $this->userRepositry->edit($request, $user);
 
