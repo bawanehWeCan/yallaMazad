@@ -241,6 +241,7 @@ class AuthController extends Controller
 
 
                 $this->userRepositry->edit($request, $user);
+                return $user;
 
                 return $this->returnData('user', new UserResource($user), 'User updated successfully');
             }
