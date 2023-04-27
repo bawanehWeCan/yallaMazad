@@ -69,7 +69,7 @@ class BidController extends ApiController
 
                         // insert for decument
                         $bid->set([
-                            'amount' => '500',
+                            'amount' => $request->price,
                             'image' => (string)$user->image,
                             'name' => (string)$user->name,
                             'user_id' => (integer)$user->id,
