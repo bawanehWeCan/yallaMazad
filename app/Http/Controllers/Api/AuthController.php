@@ -241,7 +241,7 @@ class AuthController extends Controller
                 $this->userRepositry->edit($request, $user);
 
                 if ($request->has('image')) {
-                    $image = $this->userRepositry->insertImage($request->image, $user, true);
+                    $image = $this->userRepositry->insertImage($request->image, $user);
                 }
                 return $this->returnData('user', new UserResource($user), 'User updated successfully');
             }
@@ -249,7 +249,7 @@ class AuthController extends Controller
 
 
             DB::commit();
-            unset($user->image);
+            // unset($user->image);
 
             return $this->returnError('Sorry! Failed to find user');
         } catch (\Exception $e) {
