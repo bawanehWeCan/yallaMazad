@@ -241,7 +241,7 @@ class AuthController extends Controller
                 $this->userRepositry->edit($request, $user);
 
                 if ($request->has('image')) {
-                    $image = $this->userRepositry->insertImage($request->image, $user);
+                    $image = $this->userRepositry->insertImage($request->image, $user, true);
                 }
                 return $this->returnData('user', new UserResource($user), 'User updated successfully');
             }
