@@ -66,8 +66,8 @@ class UserRepository extends AbstractRepository
     public function edit($data,$user)
     {
 
-        // $user->update($data->except('image'));
-        $user->update($request->all());
+        $user->update($data->except('image'));
+
 
          return $user->fresh();
 
