@@ -249,7 +249,7 @@ class AuthController extends Controller
 
 
             DB::commit();
-            // unset($user->image);
+            unset($user->image);
 
             return $this->returnError('Sorry! Failed to find user');
         } catch (\Exception $e) {
