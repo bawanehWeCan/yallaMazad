@@ -243,12 +243,17 @@ class AuthController extends Controller
                 if ($request->has('image')) {
                     $image = $this->userRepositry->insertImage($request->image, $user, true);
                 }
+
+                DB::commit();
+
                 return $this->returnData('user', new UserResource($user), 'User updated successfully');
+
+
             }
 
 
 
-            DB::commit();
+
             // unset($user->image);
 
             return $this->returnError('Sorry! Failed to find user');
