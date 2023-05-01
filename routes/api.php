@@ -229,4 +229,4 @@ Route::post('send-report', [ReportController::class, 'save']);
 
 
 //myBadgesById
-Route::post('badges-by-id', [UserController::class, 'myBadgesById']);
+Route::get('badges-by-id/{user_id}', [UserController::class, 'myBadgesById']);
