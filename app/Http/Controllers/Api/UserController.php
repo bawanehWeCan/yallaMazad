@@ -124,7 +124,7 @@ class UserController extends ApiController
     }
 
 
-      public function myBadgesById()
+      public function myBadgesById(Request $request)
     {
 
         // $advertisements = Auth::user()->advertisements;
