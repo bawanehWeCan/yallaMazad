@@ -123,6 +123,16 @@ class UserController extends ApiController
 
     }
 
+
+      public function myBadgesById()
+    {
+
+        // $advertisements = Auth::user()->advertisements;
+        $badges = Badge::where('user_id',$request->user_id)->paginate(10) ;
+        return $this->returnData('data',  BadgeResource::collection( $badges ), __('Get  succesfully'));
+
+    }
+
     // public function myNotifications()
     // {
 

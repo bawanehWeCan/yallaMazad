@@ -226,3 +226,7 @@ Route::get('get-time', [BidController::class, 'getTime']);
 
 //send report to user or to adv
 Route::post('send-report', [ReportController::class, 'save']);
+
+
+//myBadgesById
+Route::post('badges-by-id', [UserController::class, 'myBadgesById']);
