@@ -31,13 +31,16 @@ class CategoryController extends ApiController
 
     }
 
+    // 'pending','approve','rejected','complete','current'
+
     public function getAdvByCategory($category_id)
     {
 
         // $category = Category::find( $category_id );
 
         $advertisements = Advertisement::where('category_id', $category_id)
-            ->where('status', 'approve')
+            ->where('status', 'current')
+            ->orWhere('status', 'approve')
             ->orWhere('status', 'complete')
             ->orderBy('status', 'asc')
             ->orderBy('start_date', 'asc')
@@ -47,6 +50,23 @@ class CategoryController extends ApiController
         return $this->returnData('data', AdvertisementResource::collection($advertisements), __('Get  succesfully'));
 
     }
+
+    // public function getAdvByCategory($category_id)
+    // {
+
+    //     // $category = Category::find( $category_id );
+
+    //     $advertisements = Advertisement::where('category_id', $category_id)
+    //         ->where('status', 'approve')
+    //         ->orWhere('status', 'complete')
+    //         ->orderBy('status', 'asc')
+    //         ->orderBy('start_date', 'asc')
+
+    //         ->paginate(10);
+
+    //     return $this->returnData('data', AdvertisementResource::collection($advertisements), __('Get  succesfully'));
+
+    // }
 
     // public function getAdvByCategory($category_id){
 
