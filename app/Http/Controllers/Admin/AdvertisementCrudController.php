@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\AdvertisementRequest;
 use App\Models\Advertisement;
+use App\Models\Notification;
 use App\Traits\NotificationTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -75,8 +76,16 @@ class AdvertisementCrudController extends CrudController
         );
         $this->data['entry'] = $this->crud->entry = $item;
         if ($this->data['entry']->status=='approve') {
+            Notification::create([
+                'content'=>'Advertisement has been approved',
+                'user_id'=>$this->data['entry']->user->id,
+            ]);
             $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Approval','Advertisement has been approved',$this->data['entry']->user->device_token);
         } else if ($this->data['entry']->status=='rejected'){
+                Notification::create([
+                'content'=>'Advertisement has been rejected',
+                'user_id'=>$this->data['entry']->user->id,
+            ]);
             $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Rejection','Advertisement has been rejected',$this->data['entry']->user->device_token);
         }
         }else{
