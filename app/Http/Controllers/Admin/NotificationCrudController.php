@@ -175,6 +175,7 @@ class NotificationCrudController extends CrudController
                 // optional - manually specify the related model and attribute
                 'model'     => "App\Models\User", // related model
                 'attribute' => 'name', // foreign key attribute that is shown to user
+                'allows_null' => true,
 
                 'options'   => (function ($query) {
                     return $query->latest()->get();
