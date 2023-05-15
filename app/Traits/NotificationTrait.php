@@ -84,7 +84,7 @@ trait NotificationTrait
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
     $result = curl_exec($ch);
-    dd(env('FIREBASE_API_KEY'));
+    // dd(env('FIREBASE_API_KEY'));
     curl_close($ch);
 
     return true;
