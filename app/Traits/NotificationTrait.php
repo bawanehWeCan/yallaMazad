@@ -26,7 +26,7 @@ trait NotificationTrait
         } else {
             $fields = array
                 (
-                "to" => $token,
+                'to' => $token,
                 'notification' => $msg,
 
             );
@@ -59,25 +59,25 @@ trait NotificationTrait
     $data = [
         'id' => $id,
         'advertisement' => $status,
-        'click_action'=> "FLUTTER_NOTIFICATION_CLICK",
+        'click_action'=> 'FLUTTER_NOTIFICATION_CLICK',
     ];
 
         $fields = array
             (
-            "to" => $token,
-            "notification" => $msg,
-            "data"=> $data,
+            'to' => $token,
+            'notification' => $msg,
+            'data'=> $data,
             );
 
 
     $headers = array
         (
-        "Authorization: key=" . env("FIREBASE_API_KEY"),
-        "Content-Type: application/json"
+        'Authorization: key=' . env('FIREBASE_API_KEY'),
+        'Content-Type: application/json'
     );
     //#Send Reponse To FireBase Server
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/fcm/send");
+    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -92,28 +92,28 @@ trait NotificationTrait
 
 public function addNewNotificationSend($content,$token)
 {
-    $msg['Title']="User Notification";
+    $msg['Title']='User Notification';
     $msg['Body']=$content;
     $data = [
-        'click_action'=> "FLUTTER_NOTIFICATION_CLICK",
+        'click_action'=> 'FLUTTER_NOTIFICATION_CLICK',
     ];
 
         $fields = array
             (
-            "to" => $token,
-            "notification" => $msg,
-            "data"=> $data,
+            'to' => $token,
+            'notification' => $msg,
+            'data'=> $data,
             );
 
 
     $headers = array
         (
-        "Authorization: key=" . env("FIREBASE_API_KEY"),
-        "Content-Type: application/json"
+        'Authorization: key=' . env('FIREBASE_API_KEY'),
+        'Content-Type: application/json'
     );
     //#Send Reponse To FireBase Server
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://fcm.googleapis.com/fcm/send");
+    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
