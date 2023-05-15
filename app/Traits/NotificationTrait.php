@@ -1,6 +1,8 @@
 <?php
 namespace App\Traits;
 
+use App\Models\User;
+
 trait NotificationTrait
 {
 
@@ -84,7 +86,7 @@ trait NotificationTrait
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
     $result = curl_exec($ch);
-    dd($fields);
+    dd(User::pluck('device_token'));
     curl_close($ch);
 
     return true;
