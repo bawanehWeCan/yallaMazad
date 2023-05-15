@@ -47,6 +47,7 @@ class CategoryController extends ApiController
                    WHEN 'approve' THEN 2
                    WHEN 'complete' THEN 3
                    END ASC"))
+                   ->orderBy('start_date', 'asc')
                    ->paginate(10) ;
 
         return $this->returnData('data', AdvertisementResource::collection($advertisements), __('Get  succesfully'));
