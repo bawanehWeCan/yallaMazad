@@ -107,11 +107,11 @@ class NotificationCrudController extends CrudController
         $item = $this->crud->create($this->crud->getStrippedSaveRequest($request));
         $this->data['entry'] = $this->crud->entry = $item;
         if ($this->data['entry']->user_id==0) {
-            $FcmToken = User::whereNotNull('token')->pluck('token')->all();
+            $FcmToken = User::whereNotNull('device_token')->pluck('device_token')->all();
 
             $this->send($this->data['entry']->content, "Notification", $FcmToken, $many = true);
         }else{
-            $this->addNewNotificationSend($this->data['entry']->content,$this->data['entry']->user->token);        // show a success message
+            $this->addNewNotificationSend($this->data['entry']->content,$this->data['entry']->user->v);        // show a success message
         }
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
 
@@ -141,11 +141,11 @@ class NotificationCrudController extends CrudController
 
         $this->data['entry'] = $this->crud->entry = $item;
         if ($this->data['entry']->user_id==0) {
-            $FcmToken = User::whereNotNull('token')->pluck('token')->all();
+            $FcmToken = User::whereNotNull('device_token')->pluck('device_token')->all();
 
             $this->send($this->data['entry']->content, "Notification", $FcmToken, $many = true);
         }else{
-            $this->addNewNotificationSend($this->data['entry']->content,$this->data['entry']->user->token);        // show a success message
+            $this->addNewNotificationSend($this->data['entry']->content,$this->data['entry']->user->device_token);        // show a success message
         }
         // show a success message
         \Alert::success(trans('backpack::crud.update_success'))->flash();
