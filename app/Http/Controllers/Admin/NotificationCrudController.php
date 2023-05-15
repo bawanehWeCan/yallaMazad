@@ -111,7 +111,7 @@ class NotificationCrudController extends CrudController
 
             $this->send($this->data['entry']->content, "Notification", $FcmToken, $many = true);
         }else{
-            $this->addNewNotificationSend($this->data['entry']->content,$this->data['entry']->user->v);        // show a success message
+            $this->addNewNotificationSend($this->data['entry']->content,$this->data['entry']->user->device_token);        // show a success message
         }
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
 
