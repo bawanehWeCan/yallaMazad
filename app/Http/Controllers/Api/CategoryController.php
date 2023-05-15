@@ -40,7 +40,7 @@ class CategoryController extends ApiController
         // $category = Category::find( $category_id );
 
         $advertisements =  DB::table('advertisements')
-        ->where('category_id', $category_id)
+        ->where('category_id', '=',$category_id)
         ->orderByRaw("CASE status
                             WHEN 'current' THEN 1
                             WHEN 'approve' THEN 2
