@@ -9,6 +9,7 @@ use App\Models\Advertisement;
 use App\Models\Category;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
+use DB;
 
 class CategoryController extends ApiController
 {
