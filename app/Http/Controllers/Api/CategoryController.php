@@ -39,15 +39,13 @@ class CategoryController extends ApiController
 
         // $category = Category::find( $category_id );
 
-        $advertisements =  DB::table('advertisements')
-        ->where('category_id', '=',$category_id)
-        ->orderByRaw("CASE status
-                            WHEN 'current' THEN 1
-                            WHEN 'approve' THEN 2
-                            WHEN 'complete' THEN 3
-                            ELSE 4
-                        END")
-        ->paginate(10);
+          $advertisements = Advertisement::where('category_id',$category_id)->
+        orderByRaw(DB::raw("
+            CASE status WHEN 'current' THEN 1
+                   WHEN 'approve' THEN 2
+                   WHEN 'complete' THEN 3
+                   ELSE 4 END ASC"))
+                   ->paginate(10) ;
 
         return $this->returnData('data', AdvertisementResource::collection($advertisements), __('Get  succesfully'));
 
