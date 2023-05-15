@@ -106,7 +106,7 @@ class NotificationCrudController extends CrudController
         // insert item in the db
         $item = $this->crud->create($this->crud->getStrippedSaveRequest($request));
         $this->data['entry'] = $this->crud->entry = $item;
-        if ($this->data['entry']->user->id==0) {
+        if ($this->data['entry']->user_id==0) {
             $FcmToken = User::whereNotNull('token')->pluck('token')->all();
 
             $this->send($this->data['entry']->content, "Notification", $FcmToken, $many = true);
@@ -140,7 +140,7 @@ class NotificationCrudController extends CrudController
         );
 
         $this->data['entry'] = $this->crud->entry = $item;
-        if ($this->data['entry']->user->id==0) {
+        if ($this->data['entry']->user_id==0) {
             $FcmToken = User::whereNotNull('token')->pluck('token')->all();
 
             $this->send($this->data['entry']->content, "Notification", $FcmToken, $many = true);
