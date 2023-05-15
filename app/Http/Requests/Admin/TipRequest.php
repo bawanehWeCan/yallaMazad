@@ -25,7 +25,8 @@ class TipRequest extends FormRequest
     public function rules()
     {
         return [
-            'note' => 'required|min:5|max:255'
+            'en' => 'required|min:4|max:255',
+            'ar' => 'required|min:4|max:255',
         ];
     }
 
