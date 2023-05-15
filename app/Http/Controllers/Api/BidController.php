@@ -35,6 +35,7 @@ class BidController extends ApiController
             }
 
             if( \Carbon\Carbon::now()->gt( new \Carbon\Carbon( $ads->end_date ) ) ){
+                $ads->update(['status' => "complete"]);
                 return $this->returnError(__('sorry !! this ads has been end'));
             }
 
