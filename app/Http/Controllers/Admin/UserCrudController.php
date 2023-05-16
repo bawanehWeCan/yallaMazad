@@ -67,7 +67,7 @@ class UserCrudController extends CrudController
         $this->crud->addColumn('name');
         $this->crud->addColumn('email');
         $this->crud->addColumn('phone');
-        $this->crud->addColumn('number_of_advs')->label('Number Of Advertisements');
+        $this->crud->addColumn([ 'name' =>'number_of_advs','label' => 'Number Of Advertisements']);
         $this->crud->addColumn([ 'name' =>'image','type' => 'image']);
         $this->crud->addColumn( [
             'name' => 'type', // The db column name
