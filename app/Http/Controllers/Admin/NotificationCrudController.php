@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Notification;
+use App\Traits\NotificationTrait;
 use App\Http\Requests\Admin\NotificationRequest;
+use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -15,10 +17,15 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class NotificationCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation{
+        store as traitStore;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation{
+        update as traitUpdate;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use NotificationTrait;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -42,8 +49,7 @@ class NotificationCrudController extends CrudController
     {
         CRUD::column('content');
         CRUD::column('user_id');
-        CRUD::column('content');
-        CRUD::column('user_id');
+
         $this->crud->addColumn(['name' => 'view', 'label'=>'View','type'     => 'closure',
         'function' => function(Notification $entry) {
             if ($entry->is_read==0) {
@@ -85,6 +91,70 @@ class NotificationCrudController extends CrudController
          */
     }
 
+    public function store()
+    {
+        $this->crud->hasAccessOrFail('create');
+
+        // execute the FormRequest authorization and validation, if one is required
+        $request = $this->crud->validateRequest();
+
+        // register any Model Events defined on fields
+        $this->crud->registerFieldEvents();
+        if ($request->user_id==null) {
+            $request['user_id']=0;
+        }
+        // insert item in the db
+        $item = $this->crud->create($this->crud->getStrippedSaveRequest($request));
+        $this->data['entry'] = $this->crud->entry = $item;
+        if ($this->data['entry']->user_id==0) {
+            $FcmToken = User::whereNotNull('device_token')->pluck('device_token')->all();
+
+            $this->send($this->data['entry']->content, "Notification", $FcmToken, $many = true);
+        }else{
+            $this->addNewNotificationSend($this->data['entry']->content,$this->data['entry']->user->device_token);        // show a success message
+        }
+        \Alert::success(trans('backpack::crud.insert_success'))->flash();
+
+        // save the redirect choice for next time
+        $this->crud->setSaveAction();
+
+        return $this->crud->performSaveAction($item->getKey());
+    }
+
+    public function update()
+    {
+        $this->crud->hasAccessOrFail('update');
+
+        // execute the FormRequest authorization and validation, if one is required
+        $request = $this->crud->validateRequest();
+
+        // register any Model Events defined on fields
+        $this->crud->registerFieldEvents();
+        if ($request->user_id==null) {
+            $request['user_id']=0;
+        }
+        // update the row in the db
+        $item = $this->crud->update(
+            $request->get($this->crud->model->getKeyName()),
+            $this->crud->getStrippedSaveRequest($request)
+        );
+
+        $this->data['entry'] = $this->crud->entry = $item;
+        if ($this->data['entry']->user_id==0) {
+            $FcmToken = User::whereNotNull('device_token')->pluck('device_token')->all();
+
+            $this->send($this->data['entry']->content, "Notification", $FcmToken, $many = true);
+        }else{
+            $this->addNewNotificationSend($this->data['entry']->content,$this->data['entry']->user->device_token);        // show a success message
+        }
+        // show a success message
+        \Alert::success(trans('backpack::crud.update_success'))->flash();
+
+        // save the redirect choice for next time
+        $this->crud->setSaveAction();
+
+        return $this->crud->performSaveAction($item->getKey());
+    }
     /**
      * Define what happens when the Create operation is loaded.
      *
@@ -105,6 +175,7 @@ class NotificationCrudController extends CrudController
                 // optional - manually specify the related model and attribute
                 'model'     => "App\Models\User", // related model
                 'attribute' => 'name', // foreign key attribute that is shown to user
+                'allows_null' => true,
 
                 'options'   => (function ($query) {
                     return $query->latest()->get();

@@ -25,7 +25,7 @@ class NotificationRequest extends FormRequest
     {
         return [
             'content'=>'required|min:4|max:10000',
-            'user_id'=>'required|exists:users,id',
+            'user_id'=>'nullable|exists:users,id',
 
         ];
     }

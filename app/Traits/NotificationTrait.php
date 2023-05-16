@@ -16,37 +16,17 @@ trait NotificationTrait
             'receiver' => 'Aya',
             'sound' => 'mySound', /*Default sound*/
         );
-    //     if ($many) {
-    //         $fields = array
-    //             (
-    //             'registration_ids' => $token,
-    //             'notification' => $msg,
-
-    //         );
-
-    // public function send($route_id,$type,$content, $title, $token, $many = false)
-    // {
-
-    //     $msg ['body'] = $content;
-    //         $msg['title'] = $title;
-    //        $msg['data'] = [
-    //             'id' => $route_id,
-    //             'type' => $type,
-    //             'click_action'=> "FLUTTER_NOTIFICATION_CLICK",
-    //        ];
-
-                 if ($many) {
+        if ($many) {
             $fields = array
                 (
                 'registration_ids' => $token,
                 'notification' => $msg,
 
             );
-
         } else {
             $fields = array
                 (
-                "to" => $token,
+                'to' => $token,
                 'notification' => $msg,
 
             );
@@ -72,13 +52,13 @@ trait NotificationTrait
         return true;
     }
 
-    public function adNotificationSend($id, $status,$title,$content,$token)
+    public function adNotificationSend($id, $status,$title, $content,$token)
 {
-    $msg['title']=$title;
-    $msg['body']=$content;
+    $msg['Title']=$title;
+    $msg['Body']=$content;
     $data = [
         'id' => $id,
-        'status' => 'advertisement',
+        'advertisement' => $status,
         'click_action'=> 'FLUTTER_NOTIFICATION_CLICK',
     ];
 
@@ -86,7 +66,7 @@ trait NotificationTrait
             (
             'to' => $token,
             'notification' => $msg,
-             'data'=> $data,
+            'data'=> $data,
             );
 
 
@@ -104,10 +84,43 @@ trait NotificationTrait
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
     $result = curl_exec($ch);
-//         if ($result === FALSE) {
-//             die('Curl failed: ' . curl_error($ch));
-//         }    
-//     dd($result);
+    // dd(env('FIREBASE_API_KEY'));
+    curl_close($ch);
+
+    return true;
+}
+
+public function addNewNotificationSend($content,$token)
+{
+    $msg['Title']='User Notification';
+    $msg['Body']=$content;
+    $data = [
+        'click_action'=> 'FLUTTER_NOTIFICATION_CLICK',
+    ];
+
+        $fields = array
+            (
+            'to' => $token,
+            'notification' => $msg,
+            'data'=> $data,
+            );
+
+
+    $headers = array
+        (
+        'Authorization: key=' . env('FIREBASE_API_KEY'),
+        'Content-Type: application/json'
+    );
+    //#Send Reponse To FireBase Server
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+    $result = curl_exec($ch);
+    //dd($result);
     curl_close($ch);
 
     return true;
