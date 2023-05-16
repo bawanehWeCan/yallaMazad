@@ -49,7 +49,7 @@ class SubscriptionController extends ApiController
 
        // $user_id = Auth::user()->id;
         // $user=User::find($user_id)->first();
-        $subscriptions = Subscription::where('user_id',$user_id)->where('start_date','=<',date("Y-m-d",strToTime(\Carbon\Carbon::today())))->where('end_date','>',date("Y-m-d",strToTime(\Carbon\Carbon::today())))->paginate(10) ;
+        $subscriptions = Subscription::where('user_id',$user_id)->paginate(10) ;
         return $this->returnData('data',  MySubscriptionResource::collection( $subscriptions ), __('Get  succesfully'));
 
     }
