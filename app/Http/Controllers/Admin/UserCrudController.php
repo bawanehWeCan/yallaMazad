@@ -67,6 +67,7 @@ class UserCrudController extends CrudController
         $this->crud->addColumn('name');
         $this->crud->addColumn('email');
         $this->crud->addColumn('phone');
+        $this->crud->addColumn('number_of_advs')->label('Number Of Advertisements');
         $this->crud->addColumn([ 'name' =>'image','type' => 'image']);
         $this->crud->addColumn( [
             'name' => 'type', // The db column name
@@ -140,6 +141,7 @@ class UserCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+        $this->crud->addField(['name'=>'number_of_advs','type'=>'number','min'=>0]);
     }
 
     public function insertDataWithValidation($update=null)
@@ -165,5 +167,5 @@ class UserCrudController extends CrudController
         $this->crud->setRequest($request);
         $this->crud->unsetValidation(); // Validation has already been run
     }
-   
+
 }
