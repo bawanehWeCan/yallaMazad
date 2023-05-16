@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Subscription;
 use App\Models\User;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 use App\Repositories\Repository;
 use App\Http\Requests\SubscriptionRequest;
@@ -23,6 +24,16 @@ class SubscriptionController extends ApiController
     }
 
     public function save( Request $request ){
+
+
+        $plan=Plan::find($request->plan_id)->number_of_auction;
+
+
+        $user=User::find($request->user_id);
+
+        $user->number_of_advs = $plan ;
+        $user->save();
+
         return $this->store( $request->all() );
     }
 

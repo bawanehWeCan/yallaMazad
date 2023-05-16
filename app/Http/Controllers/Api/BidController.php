@@ -40,11 +40,15 @@ class BidController extends ApiController
             }
 
 
+
+
             $counts=Adv_User::where('user_id',$request->user_id)->where('advertisement_id',"!=",$request->advertisement_id)->get()->count();
+
             $user=User::find($request->user_id);
             if( $request->price > $ads->high_price ){
 
-                $all =( $user->subscriptions?->count()== 0)?1: $user->subscriptions?->last()->plan?->number_of_auction;
+                $all =( $user->subscriptions?->count()== 0)?1: $user->number_of_advs;
+                // $all =( $user->subscriptions?->count()== 0)?1: $user->subscriptions?->last()->plan?->number_of_auction;
                 // echo 'count:' . $counts .'\n';
                 // echo 'all:' . $all .'\n';
                 // return;
@@ -93,6 +97,14 @@ class BidController extends ApiController
                         $adv_user->save();
 
                         $ads->update(['high_price' => $request->price ]);
+
+                        $nums = (int)$user->number_of_advs - 1;
+
+                        $user->number_of_advs = $nums;
+                        $user->save();
+
+
+
 
                // اشعار لصاحب المزاد
                     //     $user = User::find($ads->user_id);

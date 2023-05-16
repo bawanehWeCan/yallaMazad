@@ -147,7 +147,7 @@ class UserController extends ApiController
 
 
 
-        foreach (Notification::where('user_id',Auth::user()->id)->paginate(10) as $not) {
+        foreach (Notification::where('user_id',Auth::user()->id)->orWhere('user_id',0)->paginate(10) as $not) {
 
 
                 $not->update([
@@ -157,7 +157,7 @@ class UserController extends ApiController
             }
 
 
-        return $this->returnData('data', NotificationResource::collection(Notification::where('user_id',Auth::user()->id)->paginate(10)), __('Get  succesfully'));
+        return $this->returnData('data', NotificationResource::collection(Notification::where('user_id',Auth::user()->id)->orWhere('user_id',0)->paginate(10)), __('Get  succesfully'));
     }
 
 
