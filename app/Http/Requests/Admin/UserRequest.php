@@ -32,6 +32,7 @@ class UserRequest extends FormRequest
             'phone' => 'required|min:9|regex:/^([0-9\s\-\+\(\)]*)$/|unique:users,phone,'.$this->id,
             'type' => 'required|in:admin,user',
             'image'=>'required_without:id|mimes:jpg,gif,jpeg,png',
+            'number_of_advs'=>'nullable|numeric'
         ];
     }
 
