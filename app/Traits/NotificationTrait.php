@@ -54,8 +54,8 @@ trait NotificationTrait
 
     public function adNotificationSend($id, $status, $title, $content, $token)
     {
-        $msg['Title'] = $title;
-        $msg['Body'] = $content;
+        $msg['title'] = $title;
+        $msg['body'] = $content;
         $data = [
             'id' => $id,
             'advertisement' => $status,
@@ -91,8 +91,11 @@ trait NotificationTrait
 
     public function addNewNotificationSend($content, $token)
     {
-        $msg['Title'] = 'User Notification';
-        $msg['Body'] = $content;
+         $msg = array
+            (
+            'body' => $content,
+            'title' => 'User Notification',
+             };
         $data = [
             "click_action" => "FLUTTER_NOTIFICATION_CLICK",
         ];
@@ -100,7 +103,7 @@ trait NotificationTrait
         $fields =[
             'to' => $token,
             'notification' => $msg,
-          //  'data' => $data,
+           'data' => $data,
         ];
 
         $headers = array
