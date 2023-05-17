@@ -51,6 +51,8 @@ class AdvertisementResource extends JsonResource
             // 'price_two'=>100,
             // 'price_three'=>150,
             'image'=>(string)$this?->image,
+            'approve_start_diff'=>(string)$this?->approve_start_diff,
+            'approve_end_diff'=>(string)$this?->approve_end_diff,
             'high_price'=>(double)$this?->high_price,
             'user'=>UserResource::make($this->user),
             'category'=>CategoryResource::make($this?->category),
