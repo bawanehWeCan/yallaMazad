@@ -97,12 +97,11 @@ trait NotificationTrait
             "click_action" => "FLUTTER_NOTIFICATION_CLICK",
         ];
 
-        $fields = array
-            (
+        $fields =[
             'to' => $token,
             'notification' => $msg,
-            'data' => $data,
-        );
+          //  'data' => $data,
+        ];
 
         $headers = array
             (
