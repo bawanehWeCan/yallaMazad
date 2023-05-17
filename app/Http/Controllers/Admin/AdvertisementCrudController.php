@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\Admin\AdvertisementRequest;
-use App\Models\Advertisement;
+use Carbon\Carbon;
 use App\Models\Notification;
+use App\Models\Advertisement;
 use App\Traits\NotificationTrait;
+use App\Http\Requests\Admin\AdvertisementRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -76,6 +77,17 @@ class AdvertisementCrudController extends CrudController
         );
         $this->data['entry'] = $this->crud->entry = $item;
         if ($this->data['entry']->status=='approve') {
+            $start1 = Carbon::parse($this->data['entry']->updated_at);
+            $start2 = Carbon::parse($this->data['entry']->start_date);
+            $startdiff = $start1->diff($start2);
+            $end1 = Carbon::parse($this->data['entry']->updated_at);
+            $end2 = Carbon::parse($this->data['entry']->end_date);
+            $enddiff = $end1->diff($end2);
+            dd($this->data['entry']);
+            $this->data['entry']->update([
+                'approve_start_diff'=>$startdiff,
+                'approve_end_diff'=>$enddiff,
+            ]);
             Notification::create([
                 'content'=>'Advertisement has been approved',
                 'user_id'=>$this->data['entry']->user->id,
@@ -83,9 +95,9 @@ class AdvertisementCrudController extends CrudController
             $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Approval','Advertisement has been approved',$this->data['entry']->user->device_token);
         } else if ($this->data['entry']->status=='rejected'){
                 Notification::create([
-                'content'=>'Advertisement has been rejected',
-                'user_id'=>$this->data['entry']->user->id,
-            ]);
+                    'content'=>'Advertisement has been rejected',
+                    'user_id'=>$this->data['entry']->user->id,
+                ]);
             $this->adNotificationSend($this->data['entry']->id,$this->data['entry']->status,'Advertisement Rejection','Advertisement has been rejected',$this->data['entry']->user->device_token);
         }
         }else{
@@ -151,6 +163,7 @@ class AdvertisementCrudController extends CrudController
     {
         CRUD::setValidation(AdvertisementRequest::class);
         $ad = Advertisement::findOrFail(\Route::current()->parameter('id'));
+
         CRUD::field('name')->type('text');
         CRUD::field('content');
         CRUD::field('start_price')->type('text');
