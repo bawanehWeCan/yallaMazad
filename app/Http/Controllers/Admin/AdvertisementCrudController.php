@@ -80,12 +80,23 @@ class AdvertisementCrudController extends CrudController
             $start1 = Carbon::parse($this->data['entry']->updated_at);
             $start2 = Carbon::parse($this->data['entry']->start_date);
             $startdiff = $start1->diff($start2);
+            $sdays = $startdiff->days*24;
+            $shours = $startdiff->h;
+            $sminutes = $startdiff->i;
+            $sseconds = $startdiff->s;
+            $timeSDiff = sprintf('%d:%d:%d', $sdays+$shours, $sminutes, $sseconds);
             $end1 = Carbon::parse($this->data['entry']->updated_at);
             $end2 = Carbon::parse($this->data['entry']->end_date);
             $enddiff = $end1->diff($end2);
+            $edays = $enddiff->days*24;
+            $ehours = $enddiff->h;
+            $eminutes = $enddiff->i;
+            $eseconds = $enddiff->s;
+            $timeEDiff = sprintf('%d:%d:%d', $edays+$ehours, $eminutes, $eseconds);
+            dd($timeEDiff);
             $this->data['entry']->update([
-                'approve_start_diff'=>$startdiff,
-                'approve_end_diff'=>$enddiff,
+                'approve_start_diff'=>$timeSDiff,
+                'approve_end_diff'=>$timeEDiff,
             ]);
             dd($this->data['entry']);
 
