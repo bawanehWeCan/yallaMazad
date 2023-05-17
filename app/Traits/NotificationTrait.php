@@ -91,20 +91,18 @@ trait NotificationTrait
 
     public function addNewNotificationSend($content, $token)
     {
-         $msg = array
-            (
-            'body' => $content,
-            'title' => 'User Notification',
-             );
+        $msg['title'] = 'User Notification';
+        $msg['body'] = $content;
         $data = [
             "click_action" => "FLUTTER_NOTIFICATION_CLICK",
         ];
 
-        $fields =[
+        $fields = array
+            (
             'to' => $token,
             'notification' => $msg,
-           'data' => $data,
-        ];
+            'data' => $data,
+        );
 
         $headers = array
             (
