@@ -83,11 +83,12 @@ class AdvertisementCrudController extends CrudController
             $end1 = Carbon::parse($this->data['entry']->updated_at);
             $end2 = Carbon::parse($this->data['entry']->end_date);
             $enddiff = $end1->diff($end2);
-            dd($this->data['entry']);
             $this->data['entry']->update([
                 'approve_start_diff'=>$startdiff,
                 'approve_end_diff'=>$enddiff,
             ]);
+            dd($this->data['entry']);
+
             Notification::create([
                 'content'=>'Advertisement has been approved',
                 'user_id'=>$this->data['entry']->user->id,
