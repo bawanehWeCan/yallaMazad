@@ -85,8 +85,8 @@ class AdvertisementCrudController extends CrudController
             $sminutes = $startdiff->i;
             $sseconds = $startdiff->s;
             $timeSDiff = sprintf('%d:%d:%d', $sdays+$shours, $sminutes, $sseconds);
-            $end1 = Carbon::parse($this->data['entry']->updated_at);
-            $end2 = Carbon::parse($this->data['entry']->end_date);
+            $end1 = Carbon::parse($this->data['entry']->end_date);
+            $end2 = Carbon::parse($this->data['entry']->updated_at);
             $enddiff = $end1->diff($end2);
             $edays = $enddiff->days*24;
             $ehours = $enddiff->h;
