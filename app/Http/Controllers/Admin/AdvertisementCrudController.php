@@ -97,7 +97,6 @@ class AdvertisementCrudController extends CrudController
                 'approve_start_diff'=>$timeSDiff,
                 'approve_end_diff'=>$timeEDiff,
             ]);
-            dd($this->data['entry']);
 
             Notification::create([
                 'content'=>'Advertisement has been approved',
