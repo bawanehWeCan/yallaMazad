@@ -93,7 +93,6 @@ class AdvertisementCrudController extends CrudController
             $eminutes = $enddiff->i;
             $eseconds = $enddiff->s;
             $timeEDiff = sprintf('%d:%d:%d', $edays+$ehours, $eminutes, $eseconds);
-            dd($timeEDiff);
             $this->data['entry']->update([
                 'approve_start_diff'=>$timeSDiff,
                 'approve_end_diff'=>$timeEDiff,
