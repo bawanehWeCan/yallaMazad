@@ -95,7 +95,7 @@ trait NotificationTrait
             (
             'body' => $content,
             'title' => 'User Notification',
-             };
+             );
         $data = [
             "click_action" => "FLUTTER_NOTIFICATION_CLICK",
         ];
