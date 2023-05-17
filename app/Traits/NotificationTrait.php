@@ -59,7 +59,7 @@ trait NotificationTrait
         $data = [
             'id' => $id,
             'advertisement' => $status,
-            "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+            'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
         ];
 
         $fields = array
@@ -94,7 +94,7 @@ trait NotificationTrait
         $msg['title'] = 'User Notification';
         $msg['body'] = $content;
         $data = [
-            "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+            'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
         ];
 
         $fields = array
