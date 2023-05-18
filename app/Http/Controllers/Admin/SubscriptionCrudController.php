@@ -129,7 +129,6 @@ class SubscriptionCrudController extends CrudController
         $this->data['entry']->user()->update([
             'number_of_advs'=>(int)$this->data['entry']->plan->number_of_auction
         ]);
-           dd($this->data['entry']->user);
 
         // show a success message
         \Alert::success(trans('backpack::crud.update_success'))->flash();
