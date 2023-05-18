@@ -55,7 +55,7 @@ class BidController extends ApiController
                 if($counts==0 || $counts < $all || $user->number_of_advs > 0){
 
 
-
+                    $model = $this->repositry->save($request->all());
 
                     $user = User::find( $request->user_id );
 
@@ -66,7 +66,7 @@ class BidController extends ApiController
                     // }
                     $ads->save();
 
-                    $model = $this->repositry->save($request->all());
+
 
 
 
