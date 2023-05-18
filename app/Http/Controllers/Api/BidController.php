@@ -14,6 +14,7 @@ use App\Http\Controllers\ApiController;
 use App\Models\Advertisement;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Sleep;
 
 class BidController extends ApiController
 {
@@ -67,8 +68,8 @@ class BidController extends ApiController
                     $model = $this->repositry->save($request->all());
 
 
-                    $delay = rand(0, 2);
-                    sleep($delay);
+                    $delay = rand(0, 2000);
+                    Sleep::for($delay);
 
                     if ($model) {
 
