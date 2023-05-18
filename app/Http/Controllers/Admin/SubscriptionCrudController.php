@@ -126,6 +126,7 @@ class SubscriptionCrudController extends CrudController
             $this->crud->getStrippedSaveRequest($request)
         );
         $this->data['entry'] = $this->crud->entry = $item;
+        dd((int)$this->data['entry']->plan->number_of_auction);
         $this->data['entry']->user()->update([
             'number_of_advs'=>(int)$this->data['entry']->plan->number_of_auction
         ]);
