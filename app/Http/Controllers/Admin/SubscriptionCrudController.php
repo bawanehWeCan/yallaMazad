@@ -98,8 +98,8 @@ class SubscriptionCrudController extends CrudController
         // insert item in the db
         $item = $this->crud->create($this->crud->getStrippedSaveRequest($request));
         $this->data['entry'] = $this->crud->entry = $item;
-        $this->data['entry']->user->update([
-            'number_of_advs'=>$this->data['entry']->plan->number_of_auction
+        $this->data['entry']->user()->update([
+            'number_of_advs'=>(int)$this->data['entry']->plan->number_of_auction
         ]);
         // show a success message
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
@@ -126,8 +126,8 @@ class SubscriptionCrudController extends CrudController
             $this->crud->getStrippedSaveRequest($request)
         );
         $this->data['entry'] = $this->crud->entry = $item;
-        $this->data['entry']->user->update([
-            'number_of_advs'=>$this->data['entry']->plan->number_of_auction
+        $this->data['entry']->user()->update([
+            'number_of_advs'=>(int)$this->data['entry']->plan->number_of_auction
         ]);
         // show a success message
         \Alert::success(trans('backpack::crud.update_success'))->flash();
