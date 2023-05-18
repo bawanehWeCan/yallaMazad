@@ -14,7 +14,6 @@ use App\Http\Controllers\ApiController;
 use App\Models\Advertisement;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Sleep;
 
 class BidController extends ApiController
 {
@@ -68,8 +67,8 @@ class BidController extends ApiController
                     $model = $this->repositry->save($request->all());
 
 
-                    $delay = rand(0, 2000);
-                    Sleep::for($delay);
+                    $delay = random_int(0, 2000); // Generate a random number between 0 and 2000 (milliseconds)
+                    usleep($delay * 1000); // Pause the script execution for the randomly generated number of milliseconds
 
                     if ($model) {
 
