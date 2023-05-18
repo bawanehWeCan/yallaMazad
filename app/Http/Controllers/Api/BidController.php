@@ -55,8 +55,6 @@ class BidController extends ApiController
                 if($counts==0 || $counts < $all || $user->number_of_advs > 0){
 
 
-                    // $delay = random_int(500, 5000); // Generate a random number between 0 and 2000 (milliseconds)
-                    usleep($user->id *10000); // Pause the script execution for the randomly generated number of milliseconds
 
 
                     $user = User::find( $request->user_id );
