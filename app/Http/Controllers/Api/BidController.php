@@ -129,8 +129,10 @@ class BidController extends ApiController
                         //  $this->send('تم إضافة مزايدة جديدة', 'مرحبا ', $FcmToken, true);
 
 
-                            sleep(2);
-                            return $this->returnData('data', new $this->resource($model), __('Succesfully'));
+                        $delay = rand(0, 2);
+                        sleep($delay);
+
+                        return $this->returnData('data', new $this->resource($model), __('Succesfully'));
 
 
                     }
