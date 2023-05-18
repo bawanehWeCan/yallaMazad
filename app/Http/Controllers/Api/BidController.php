@@ -52,7 +52,7 @@ class BidController extends ApiController
                 // echo 'count:' . $counts .'\n';
                 // echo 'all:' . $all .'\n';
                 // return;
-                if($counts==0 || $counts < $all){
+                if($counts==0 || $counts < $all || $user->number_of_advs > 0){
 
 
                     $user = User::find( $request->user_id );
