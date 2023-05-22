@@ -94,6 +94,17 @@ class BidController extends ApiController
                         $fav->save();
                         }
 
+
+                        $advuser = Adv_User::where('advertisement_id',$request->advertisement_id)->where('user_id',$request->user_id)->first();
+                        if(!advuser)
+                        {
+                        $nums = (int)$user->number_of_advs - 1;
+
+                        $user->number_of_advs = $nums;
+                        $user->save();
+
+                        }
+
                         $adv_user = new Adv_User();
                         $adv_user->user_id = $request->user_id;
                         $adv_user->advertisement_id = $request->advertisement_id;
@@ -101,10 +112,7 @@ class BidController extends ApiController
 
                         $ads->update(['high_price' => $request->price ]);
 
-                        $nums = (int)$user->number_of_advs - 1;
 
-                        $user->number_of_advs = $nums;
-                        $user->save();
 
 
 
