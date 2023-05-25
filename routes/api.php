@@ -39,7 +39,7 @@ Route::post('/password-otp', [AuthController::class, 'password']);
 
 Route::post('change-password', [AuthController::class, 'changePassword']);
 
-Route::post('delete-user/{id}', [AuthController::class, 'delete']);
+Route::get('delete-user/{id}', [AuthController::class, 'delete']);
 
 Route::post('phone-update/{id}', [AuthController::class, 'updatePhone']);
 
