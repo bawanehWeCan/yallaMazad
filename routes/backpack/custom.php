@@ -30,4 +30,5 @@ Route::group([
     Route::crud('badge', 'BadgeCrudController');
     Route::crud('report', 'ReportCrudController');
     Route::crud('notification', 'NotificationCrudController');
+    Route::crud('transaction', 'TransactionCrudController');
 });
