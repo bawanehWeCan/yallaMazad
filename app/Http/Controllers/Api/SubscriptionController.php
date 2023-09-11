@@ -55,5 +55,16 @@ class SubscriptionController extends ApiController
     }
 
 
+    public function viewSubs($order_number)
+    {
+        $model = Subscription::where('order_number',$order_number)->first();
+
+        if ($model) {
+            return $this->returnData('data', new $this->resource( $model ), __('Get  succesfully'));
+        }
+
+        return $this->returnError(__('Sorry! Failed to get !'));
+    }
+
 
 }
