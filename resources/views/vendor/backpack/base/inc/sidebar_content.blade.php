@@ -16,3 +16,4 @@
 
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('report') }}"><i class="nav-icon la la-question"></i> Reports</a></li>
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('notification') }}"><i class="nav-icon la la-question"></i> Notifications</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ backpack_url('transaction') }}"><i class="nav-icon la la-question"></i> Transactions</a></li>
