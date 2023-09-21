@@ -28,6 +28,28 @@ class BidController extends ApiController
     {
         try {
 
+            $user=User::find($request->user_id);
+            $date = today()->format('Y-m-d');
+
+            $last_sub= Subscription::find($user->subscriptions?->last()->id);
+            if($last_sub->end_date < $date)
+            {
+                return $this->returnError(__('Please, sub plan first'));
+
+            }
+
+           if($user->number_of_advs == $last_sub->plan->number_of_auction)
+           {
+
+            $count_bid=Bid::where('advertisement_id',$request->advertisement_id)->where('user_id',$request->user_id)->get()->count();
+            if($count_bid == 0)
+            {
+                return $this->returnError(__('Soory, you need to renew your subscription in order to participate in the auction.'));
+            }
+
+           }
+
+
             $ads = Advertisement::find($request->advertisement_id);
 
             if( $ads->status == 'complete' ){
@@ -44,7 +66,7 @@ class BidController extends ApiController
 
             $counts=Adv_User::where('user_id',$request->user_id)->where('advertisement_id',"!=",$request->advertisement_id)->get()->count();
 
-            $user=User::find($request->user_id);
+
             if( $request->price > $ads->high_price ){
 
                 $all =( $user->subscriptions?->count()== 0)?1: $user->number_of_advs;
@@ -96,7 +118,7 @@ class BidController extends ApiController
 
 
                         $advuser = Adv_User::where('advertisement_id',$request->advertisement_id)->where('user_id',$request->user_id)->first();
-                        if(!advuser)
+                        if(!$advuser)
                         {
                         $nums = (int)$user->number_of_advs - 1;
 

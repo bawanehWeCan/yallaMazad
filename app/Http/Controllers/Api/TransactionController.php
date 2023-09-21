@@ -43,6 +43,11 @@ class TransactionController extends ApiController
         if($request->status=="success" && $request->type=="sale")
         {
 
+            $plan=Plan::find($array[1])->number_of_auction;
+            $user=User::find($array[0]);
+
+            $user->number_of_advs = $plan ;
+            $user->save();
 
                                     $sub=new Subscription();
                                     $sub->start_date = $array[2];
