@@ -39,7 +39,7 @@ class BidController extends ApiController
 
             }
 
-           if($user->number_of_advs == $last_sub->plan->number_of_auction)
+           if($user->number_of_advs == 0)
            {
 
             $count_bid=Bid::where('advertisement_id',$request->advertisement_id)->where('user_id',$request->user_id)->get()->count();
