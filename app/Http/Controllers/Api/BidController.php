@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Bid;
+use App\Models\Subscription;
 use App\Models\Adv_User;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
