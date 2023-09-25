@@ -45,7 +45,7 @@ class BidController extends ApiController
             $count_bid=Bid::where('advertisement_id',$request->advertisement_id)->where('user_id',$request->user_id)->get()->count();
             if($count_bid == 0)
             {
-                return $this->returnError(__('Soory, you need to renew your subscription in order to participate in the auction.'));
+                return $this->returnError(__('Please, sub plan first'));
             }
 
            }
