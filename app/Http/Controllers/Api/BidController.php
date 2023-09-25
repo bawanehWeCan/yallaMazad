@@ -32,7 +32,7 @@ class BidController extends ApiController
             $date = today()->format('Y-m-d');
 
             $last_sub= Subscription::find($user->subscriptions?->last()->id);
-            if($last_sub->end_date < $date)
+            if($last_sub->end_date < $date || $last_sub->start_date > $date)
             {
                 return $this->returnError(__('Please, sub plan first'));
 
