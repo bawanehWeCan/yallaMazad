@@ -174,7 +174,7 @@ class BidController extends ApiController
 
                 else{
 
-                    return $this->returnError(__('Please, sub plan first'));
+                    return $this->returnError(__('test'));
                 }
             }else{
                 //hight price response
