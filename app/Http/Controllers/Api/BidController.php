@@ -75,7 +75,8 @@ class BidController extends ApiController
                 // echo 'count:' . $counts .'\n';
                 // echo 'all:' . $all .'\n';
                 // return;
-                if($counts==0 || $counts < $all || $user->number_of_advs > 0){
+
+                // if($counts==0 || $counts < $all || $user->number_of_advs > 0){
 
 
                     $model = $this->repositry->save($request->all());
@@ -170,12 +171,12 @@ class BidController extends ApiController
 
                     }
 
-                }
+                // }
 
-                else{
+                // else{
 
-                    return $this->returnError(__('test'));
-                }
+                //     return $this->returnError(__('test'));
+                // }
             }else{
                 //hight price response
                 return $this->returnSuccessMessage(__('The price has already been entered. Please enter a higher price'));
