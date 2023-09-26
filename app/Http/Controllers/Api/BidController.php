@@ -32,6 +32,12 @@ class BidController extends ApiController
             $user=User::find($request->user_id);
             $date = today()->format('Y-m-d');
 
+            if($user->subscriptions?->count()== 0)
+            {
+
+               return $this->returnError(__('Please, sub plan first'));
+            }
+
             $last_sub= Subscription::find($user->subscriptions?->last()->id);
             if($last_sub->end_date < $date || $last_sub->start_date > $date)
             {
@@ -50,11 +56,7 @@ class BidController extends ApiController
 
            }
 
-           if($user->subscriptions?->count()== 0)
-           {
 
-              return $this->returnError(__('Please, sub plan first'));
-           }
 
 
             $ads = Advertisement::find($request->advertisement_id);
