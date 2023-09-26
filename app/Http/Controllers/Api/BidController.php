@@ -50,6 +50,12 @@ class BidController extends ApiController
 
            }
 
+           if($user->subscriptions?->count()== 0)
+           {
+
+              return $this->returnError(__('Please, sub plan first'));
+           }
+
 
             $ads = Advertisement::find($request->advertisement_id);
 
