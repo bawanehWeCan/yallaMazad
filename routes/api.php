@@ -83,7 +83,7 @@ Route::get('advertisement/delete/{id}', [AdvertisementController::class, 'delete
 Route::post('advertisement/edit/{id}', [AdvertisementController::class, 'edit']);
 });
 
-Route::middleware('changeLang')->group(function () {
+Route::middleware(['changeLang','custom'])->group(function () {
 
 
     //Category
