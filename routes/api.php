@@ -76,17 +76,20 @@ Route::middleware(['auth:api','changeLang'])->group(function () {
 
 
 //adv
-Route::get('advertisements', [AdvertisementController::class, 'advs']);
 Route::post('advertisement-create', [AdvertisementController::class, 'save']);
-Route::get('advertisement/{id}', [AdvertisementController::class, 'view']);
 Route::get('advertisement/delete/{id}', [AdvertisementController::class, 'delete']);
 Route::post('advertisement/edit/{id}', [AdvertisementController::class, 'edit']);
+
+
 });
 
 Route::middleware(['changeLang','custom'])->group(function () {
 
-
-    //Category
+//adv
+Route::get('advertisements', [AdvertisementController::class, 'advs']);
+Route::get('advertisement/{id}', [AdvertisementController::class, 'view']);
+    
+//Category
 Route::get('categories', [CategoryController::class, 'pagination']);
 Route::post('category-create', [CategoryController::class, 'save']);
 Route::get('category/{id}', [CategoryController::class, 'view']);
@@ -95,6 +98,12 @@ Route::post('category/edit/{id}', [CategoryController::class, 'edit']);
 
 Route::get( 'advertisement/get-advertisements/{category_id}', [ CategoryController::class, 'getAdvByCategory' ]);
 
+//Bid
+Route::get('bids', [BidController::class, 'pagination']);
+Route::post('bid-create', [BidController::class, 'save']);
+Route::get('bid/{id}', [BidController::class, 'view']);
+Route::get('bid/delete/{id}', [BidController::class, 'delete']);
+Route::post('bid/edit/{id}', [BidController::class, 'edit']);
 
 
 //Introduction
@@ -185,12 +194,7 @@ Route::post('image/edit/{id}', [ImageController::class, 'edit']);
 
 Route::post( 'advertisement/add-image/{advertisement_id}', [ ImageController::class, 'addImageToAdvertising' ]);
 
-//Bid
-Route::get('bids', [BidController::class, 'pagination']);
-Route::post('bid-create', [BidController::class, 'save']);
-Route::get('bid/{id}', [BidController::class, 'view']);
-Route::get('bid/delete/{id}', [BidController::class, 'delete']);
-Route::post('bid/edit/{id}', [BidController::class, 'edit']);
+
 
 //direct sale
 Route::post('direct-sale', [BidController::class, 'directSale']);
