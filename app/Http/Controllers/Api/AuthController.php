@@ -329,9 +329,10 @@ class AuthController extends Controller
         $response = $client->request('POST', 'http://82.212.81.40:8080/websmpp/websms', [
             'form_params' => [
                 'user' => 'Wecan',
-                'pass' => 'Suh12346',
+                'pass' => 'We$Can.22',
                 'sid' => 'Yalla Mazad',
                 'mno' => $phone,
+                'type' => 4,
                 'text' => "Your OTP is " . $otp . " for your account",
                 'respformat' => 'json',
             ],
