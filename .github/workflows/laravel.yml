@@ -19,6 +19,6 @@ jobs:
       with:
         timeout_minutes : 1
         max_attempts : 3
-        server: 148.251.138.157
+        server: 65.109.55.60
         username: alaa@yallamzad.com
         password: 1038138_asd
